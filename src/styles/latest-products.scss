@@ -1,0 +1,83 @@
+@import "../App.scss";
+
+.latest-product {
+    padding-bottom: 20px;
+
+    h1 {
+        color: #000;
+        font-weight: 900;
+        font-size: 27px;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        font-family: 'Roboto', sans-serif;
+
+        @media (min-width: 576px) {
+            font-size: 40px;
+        }
+    }
+
+    .product-slider {
+        position: relative;
+
+        .card {
+            .card-body {
+                padding: 5px;
+                overflow: hidden;
+                height: 280px;
+
+                img {
+                    min-width: 100%;
+                    height: 100%;
+                }
+
+                @media (min-width: 576px) {
+                    height: 340px;
+                }
+
+                // @media (min-width: 768px) {
+                //     height: 400px;
+                // }
+
+                @media (min-width: 1250px) {
+                    height: 400px;
+                }
+            }
+        }
+
+        .prev-btn {
+            position: absolute;
+            top: 43%;
+            left: 8px;
+            padding: 0px 1px;
+            border: 1px solid #000;
+
+            @media (min-width: 576px) {
+                left: -15px;
+            }
+
+            @media (min-width: 992px) {
+                left: -30px;
+            }
+        }
+
+        .next-btn {
+            position: absolute;
+            top: 43%;
+            right: 8px;
+            padding: 0px 1px;
+            border: 1px solid #000;
+
+            @media (min-width: 576px) {
+                right: -15px;
+            }
+
+            @media (min-width: 992px) {
+                right: -30px;
+            }
+        }
+    }
+
+    @media (min-width: 576px) {
+        padding-bottom: 50px;
+    }
+}
