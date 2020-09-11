@@ -1,14 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import '../../styles/slider.scss';
 import Slider from 'react-slick';
-import axios from 'axios';
-import { apiURL } from '../../utils/apiURL';
 import SliderImg from '../../assets/images/banner3.jpg';
 
-const SliderComponent = () => {
+const SliderComponent = ({ sliders }) => {
     const customeSlider = React.useRef()
-    const [sliders, setSliders] = useState([])
-
     const settings = {
         arrows: false,
         dots: true,
@@ -19,20 +15,6 @@ const SliderComponent = () => {
         initialSlide: 0,
         autoplay: true
     }
-
-    useEffect(() => {
-        const fetchSliders = async () => {
-            try {
-                const response = await axios.get(`${apiURL}users`)
-                setSliders(response.data.slice(0, 5))
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        fetchSliders()
-    }, [])
-
 
     return (
         <div className="slider">

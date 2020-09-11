@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import '../../styles/latest-products.scss';
 import Slider from 'react-slick';
 import { Icon } from 'react-icons-kit';
@@ -6,15 +6,11 @@ import {
     ic_keyboard_arrow_left,
     ic_keyboard_arrow_right
 } from 'react-icons-kit/md';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { apiURL } from '../../utils/apiURL';
 import ProductImg from '../../assets/images/product.png';
 
 
-const LatestProductComponent = () => {
+const LatestProductComponent = ({ latestProducts }) => {
     const customeSlider = React.useRef()
-    const [products, setProducts] = useState([])
 
     const next = () => {
         customeSlider.current.slickNext()
@@ -56,20 +52,6 @@ const LatestProductComponent = () => {
         ]
     };
 
-    useEffect(() => {
-        const fetchLatestProducts = async () => {
-            try {
-                const response = await axios.get(`${apiURL}users`)
-                setProducts(response.data)
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        fetchLatestProducts()
-    }, [])
-
-
     return (
         <div className="latest-product">
             <div className="container">
@@ -81,10 +63,22 @@ const LatestProductComponent = () => {
                     {/* Product Slider */}
                     <div className="col-12 product-slider">
                         <Slider ref={customeSlider} {...settings}>
-                            {products.length > 0 && products.map((product, i) =>
+                            {latestProducts.length > 0 && latestProducts.map((product, i) =>
                                 <div className="card rounded-0 border-0" key={i}>
                                     <div className="card-body">
-                                        <img src={ProductImg} className="img-fluid" alt="..." />
+                                        <div className="img-box">
+                                            <img src={ProductImg} className="img-fluid" alt="..." />
+                                        </div>
+                                        <div className="footer border">
+                                            <div className="d-sm-flex">
+                                                <div>
+                                                    <p className="name">Product name goes here</p>
+                                                </div>
+                                                <div className="ml-auto">
+                                                    <p className="price">$500</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             )}

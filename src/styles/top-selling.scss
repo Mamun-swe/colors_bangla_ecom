@@ -1,0 +1,92 @@
+@import "../App.scss";
+
+.top-selling {
+    padding-bottom: 50px;
+
+    h1 {
+        color: #000;
+        font-weight: 900;
+        font-size: 27px;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        font-family: 'Roboto', sans-serif;
+
+        @media (min-width: 576px) {
+            font-size: 40px;
+        }
+    }
+
+    .top-selling-buttons {
+        margin-bottom: 20px;
+
+        .btn {
+            color: #000;
+            background: #dfdfdf;
+            font-weight: 700;
+            font-size: 15px;
+            padding: 6px 25px;
+            border-radius: 20px;
+            text-transform: capitalize;
+            margin: 10px;
+            font-family: 'Roboto', sans-serif;
+            display: inline;
+        }
+    }
+
+    .load-more-btn {
+        display: inline-block;
+        padding: 8px 35px;
+        color: #000;
+        border-radius: 25px;
+        transition: all .3s;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        font-size: 15px;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 700;
+        border: 1px solid #dfdfdf;
+        margin-top: 20px;
+
+        @media (min-width: 576px) {
+            margin-top: 60px;
+        }
+
+        &:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: none;
+            border-radius: 0px;
+            z-index: -2;
+        }
+
+        &:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: $primary-color;
+            transition: all .3s;
+            border-radius: 0px;
+            z-index: -1;
+        }
+
+        &:hover {
+            color: #fff;
+
+            &:before {
+                width: 100%;
+            }
+        }
+    }
+
+    @media (min-width: 576px) {
+        padding-bottom: 80px;
+    }
+}
