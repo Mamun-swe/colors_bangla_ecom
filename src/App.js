@@ -3,6 +3,7 @@ import './App.scss';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import PrivateRoute from './Components/PrivateRoute';
+import ScrollToTop from './Components/ScrollToTop/Index';
 
 import Index from './Pages/Index';
 import CategoryIndex from './Pages/Category/Index';
@@ -15,17 +16,19 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Switch>
-          <Route exact path="/" component={Index} />
-          <Route exact path="/category" component={CategoryIndex} />
-          <Route exact path="/product" component={ProductIndex} />
+        <ScrollToTop>
+          <Switch>
+            <Route exact path="/" component={Index} />
+            <Route exact path="/category" component={CategoryIndex} />
+            <Route exact path="/product" component={ProductIndex} />
 
-          <PrivateRoute>
-            <Route path="/account" component={AccountMaster} />
-          </PrivateRoute>
+            <PrivateRoute>
+              <Route path="/account" component={AccountMaster} />
+            </PrivateRoute>
 
-          <Route path="*" component={FourOFour} />
-        </Switch>
+            <Route path="*" component={FourOFour} />
+          </Switch>
+        </ScrollToTop>
       </Router>
     </div>
   );

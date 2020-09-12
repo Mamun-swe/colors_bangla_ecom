@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { apiURL } from '../utils/apiURL';
 
+import NavbarComponent from '../Components/NavBar/NavBar';
 import SliderComponent from '../Components/Slider/SliderComponent';
 import CategoryComponent from '../Components/Category/CategoryComponent';
 import LatestProductsComponent from '../Components/LatestProducts/LatestProductComponent';
@@ -32,6 +33,7 @@ const Index = () => {
 
     return (
         <div>
+            <NavbarComponent />
             <SliderComponent sliders={sliders} />
             <CategoryComponent categories={categories} />
             <LatestProductsComponent latestProducts={latestProducts} />
