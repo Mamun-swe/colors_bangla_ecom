@@ -16,6 +16,8 @@ import Logo from '../../assets/static/logo.png';
 
 const NavBar = () => {
     const [open, setOpen] = useState(false)
+    const [isShow, setIsShow] = useState(false)
+
     return (
         <div className="custom-navbar">
 
@@ -51,6 +53,7 @@ const NavBar = () => {
                         </div>
                     </div>
                 </div>
+
                 {/* Menu */}
                 <div className={open ? "mobile-menu open-menu" : "mobile-menu"}>
                     <div className="content-header p-3 text-right">
@@ -133,12 +136,25 @@ const NavBar = () => {
                                 <div>
                                     <div className="d-flex">
                                         <div>
-                                            <button type="button" className="btn shadow-none p-0">
+                                            <button
+                                                type="button"
+                                                className="btn shadow-none p-0"
+                                                onClick={() => setIsShow(!isShow)}
+                                            >
                                                 <Icon icon={text_left} size={18} />
                                             </button>
                                         </div>
-                                        <div className="px-2">
+                                        <div className="px-2 category-hover-box">
                                             <p className="mb-0 category-title">Categories</p>
+                                            {isShow ?
+                                                <div className="category-dialog shadow-sm">
+                                                    <Link to="/">man fashion</Link>
+                                                    <Link to="/">women fashion</Link>
+                                                    <Link to="/">baby fashion</Link>
+                                                    <Link to="/">electronics</Link>
+                                                    <Link to="/">mobile</Link>
+                                                </div>
+                                                : null}
                                         </div>
                                         <div className="search-desktop">
                                             <form>
@@ -156,11 +172,11 @@ const NavBar = () => {
                                 </div>
                                 <div className="ml-auto">
                                     <ul>
-                                        <li><a href="#"><Icon icon={user} size={15} /></a></li>
-                                        <li><a href="#"><Icon icon={earth} size={15} /></a></li>
-                                        <li><a href="#"><Icon icon={twitter} size={15} /></a></li>
-                                        <li><a href="#"><Icon icon={facebook} size={15} /></a></li>
-                                        <li><a href="#"><Icon icon={instagram} size={15} /></a></li>
+                                        <li><a href="https://www.facebook.com/"><Icon icon={user} size={15} /></a></li>
+                                        <li><a href="https://www.facebook.com/"><Icon icon={earth} size={15} /></a></li>
+                                        <li><a href="https://www.facebook.com/"><Icon icon={twitter} size={15} /></a></li>
+                                        <li><a href="https://www.facebook.com/"><Icon icon={facebook} size={15} /></a></li>
+                                        <li><a href="https://www.facebook.com/"><Icon icon={instagram} size={15} /></a></li>
                                     </ul>
                                 </div>
                             </div>

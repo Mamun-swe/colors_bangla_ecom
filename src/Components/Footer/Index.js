@@ -20,11 +20,11 @@ const Index = () => {
                         <img src={Logo} className="img-fluid" alt="..." />
                         <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter</p>
                         <ul>
-                            <li><a href="#"><Icon icon={user} size={20} /></a></li>
-                            <li><a href="#"><Icon icon={earth} size={20} /></a></li>
-                            <li><a href="#"><Icon icon={twitter} size={20} /></a></li>
-                            <li><a href="#"><Icon icon={facebook} size={20} /></a></li>
-                            <li><a href="#"><Icon icon={instagram} size={19} /></a></li>
+                            <li><a href="https://www.facebook.com/"><Icon icon={user} size={20} /></a></li>
+                            <li><a href="https://www.facebook.com/"><Icon icon={earth} size={20} /></a></li>
+                            <li><a href="https://www.facebook.com/"><Icon icon={twitter} size={20} /></a></li>
+                            <li><a href="https://www.facebook.com/"><Icon icon={facebook} size={20} /></a></li>
+                            <li><a href="https://www.facebook.com/"><Icon icon={instagram} size={19} /></a></li>
                         </ul>
                     </div>
                     <div className="col-12 col-lg-3 text-center text-lg-left">

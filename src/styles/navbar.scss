@@ -155,14 +155,45 @@
             cursor: pointer;
         }
 
-        .category-title {
-            color: #fff;
-            font-size: 14px;
-            font-weight: 300;
-            padding: 4px 15px;
-            cursor: pointer;
-            border: 1px solid #555;
-            font-family: 'Roboto', sans-serif;
+        .category-hover-box {
+            position: relative;
+
+            .category-title {
+                color: #fff;
+                font-size: 14px;
+                font-weight: 300;
+                padding: 4px 15px;
+                border: 1px solid #555;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            .category-dialog {
+                position: absolute;
+                top: 32px;
+                left: 0;
+                width: 250px;
+                height: auto;
+                background: #fff;
+                z-index: 9;
+
+                a {
+                    width: 100%;
+                    display: block;
+                    color: #555;
+                    font-size: 14px;
+                    padding: 10px;
+                    transition: 0.4s all;
+                    text-decoration: none;
+                    text-transform: capitalize;
+                    border-bottom: 1px solid #dfdfdf;
+                    font-family: 'Roboto', sans-serif;
+                }
+
+                a:hover {
+                    color: #000;
+                    background: #dfdfdf;
+                }
+            }
         }
 
         .search-desktop {
