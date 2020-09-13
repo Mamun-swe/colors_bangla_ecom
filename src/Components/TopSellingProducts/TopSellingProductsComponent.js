@@ -12,10 +12,10 @@ const TopSellingProductsComponent = ({ categories }) => {
     const [modalShow, setModalShow] = useState(false)
     const [modalData, setModalData] = useState({})
     const [loading, setLoading] = useState(false)
-    const [limit, setLimit] = useState(8)
+    const [limit, setLimit] = useState(9)
     const [products, setProducts] = useState([])
     const [id, setId] = useState(1)
-    const productsPerPage = 8
+    const productsPerPage = 9
 
     useEffect(() => {
         const fetchProducts = async () => {

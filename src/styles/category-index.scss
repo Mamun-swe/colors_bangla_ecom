@@ -1,5 +1,132 @@
 @import "../App.scss";
 
-// .category-index{
+.category-index {
+    background: #f2f3f5;
 
-// }
+    .flex-side-menu {
+        .content {
+            width: 280px;
+            background: #fff;
+
+            .custom-dropdown {
+                .dropdown-header {
+                    padding: 10px;
+                    padding-left: 15px;
+                    cursor: pointer;
+                    background: #fff;
+
+                    h6 {
+                        color: #000;
+                        font-weight: 900;
+                        font-size: 16px;
+                        margin-top: 4px;
+                        letter-spacing: 2px;
+                        text-transform: uppercase;
+                        font-family: 'Roboto', sans-serif;
+                    }
+
+                    .angle-icon {
+                        transition: 0.3s all;
+                    }
+
+                    .rotate {
+                        transform: rotate(90deg);
+                    }
+                }
+
+                .dropdown-body {
+                    padding: 10px;
+                    padding-left: 15px;
+                    background: #fff;
+                    transition: 0.4s all;
+
+                    a {
+                        color: #555;
+                        display: block;
+                        padding: 5px 0px;
+                        padding-left: 10px;
+                        margin-bottom: 10px;
+                        text-decoration: none;
+                        font-weight: 200;
+                        font-size: 13px;
+                        border-radius: 3px;
+                        text-transform: uppercase;
+                        font-family: 'Roboto', sans-serif;
+                    }
+
+                    a:hover {
+                        color: #000;
+                        background: #dfdfdf;
+                    }
+
+                    .is-active {
+                        color: #000;
+                        background: #dfdfdf !important;
+                    }
+
+                    .form-check {
+                        .form-check-label {
+                            font-weight: 200;
+                            font-size: 13px;
+                            text-transform: uppercase;
+                            font-family: 'Roboto', sans-serif;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .flex-main-menu {
+        .main-content {
+            .load-more-btn {
+                display: inline-block;
+                padding: 8px 35px;
+                color: #000;
+                border-radius: 25px;
+                transition: all .3s;
+                position: relative;
+                overflow: hidden;
+                z-index: 1;
+                font-size: 15px;
+                font-family: 'Roboto', sans-serif;
+                font-weight: 700;
+                border: 1px solid #dfdfdf;
+                margin-top: 20px;
+
+                &:after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: none;
+                    border-radius: 0px;
+                    z-index: -2;
+                }
+
+                &:before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 0%;
+                    height: 100%;
+                    background-color: $primary-color;
+                    transition: all .3s;
+                    border-radius: 0px;
+                    z-index: -1;
+                }
+
+                &:hover {
+                    color: #fff;
+
+                    &:before {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

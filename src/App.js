@@ -19,7 +19,7 @@ function App() {
         <ScrollToTop>
           <Switch>
             <Route exact path="/" component={Index} />
-            <Route exact path="/category/:id" component={CategoryIndex} />
+            <Route exact path="/category/:categoryId" component={CategoryIndex} />
             <Route exact path="/product" component={ProductIndex} />
 
             <PrivateRoute>

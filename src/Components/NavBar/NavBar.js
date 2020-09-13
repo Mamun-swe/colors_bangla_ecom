@@ -149,7 +149,7 @@ const NavBar = ({ categories }) => {
                                             {isShow ?
                                                 <div className="category-dialog shadow-sm">
                                                     {categories.length > 0 && categories.map((category, i) =>
-                                                        <Link to="/" key={i}>{category.name}</Link>
+                                                        <Link to={`/category/${category.id}`} key={i}>{category.name}</Link>
                                                     )}
                                                 </div>
                                                 : null}
