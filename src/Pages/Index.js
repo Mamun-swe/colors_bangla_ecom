@@ -8,21 +8,35 @@ import CategoryComponent from '../Components/Category/CategoryComponent';
 import LatestProductsComponent from '../Components/LatestProducts/LatestProductComponent';
 import TopSellingProductsComponent from '../Components/TopSellingProducts/TopSellingProductsComponent';
 import FooterComponent from '../Components/Footer/Index';
+import LoadingComponent from '../Components/Loader';
 
 const Index = () => {
+    const [loading, setLoading] = useState(false)
     const [sliders, setSliders] = useState([])
     const [categories, setCategories] = useState([])
     const [latestProducts, setLatestProducts] = useState([])
+    // const [topSellingProducts, setTopSellingProducts] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const sliderResponse = await axios.get(`${apiURL}users`)
-                const categoryResponse = await axios.get(`${apiURL}users`)
-                const latestProductResponse = await axios.get(`${apiURL}users`)
-                setSliders(sliderResponse.data.slice(0, 5))
-                setCategories(categoryResponse.data)
-                setLatestProducts(latestProductResponse.data)
+                setLoading(true)
+                const sliderResponse = await axios.get(`${apiURL}getSliders`)
+                const categoryResponse = await axios.get(`${apiURL}getCategory`)
+                const latestProductResponse = await axios.get(`${apiURL}getLatestProducts`)
+                // const topSellingProductResponse = await axios.get(`${apiURL}getTopSellingProducts`)
+                if (
+                    sliderResponse.status === 200 &&
+                    categoryResponse.status === 200 &&
+                    latestProductResponse.status === 200 
+                    // && topSellingProductResponse.status === 200
+                ) {
+                    setSliders(sliderResponse.data.result)
+                    setCategories(categoryResponse.data.result)
+                    setLatestProducts(latestProductResponse.data.result)
+                    // setTopSellingProducts(topSellingProductResponse.data.result)
+                    setLoading(false)
+                }
             } catch (error) {
                 console.log(error);
             }
@@ -33,12 +47,16 @@ const Index = () => {
 
     return (
         <div>
-            <NavbarComponent />
-            <SliderComponent sliders={sliders} />
-            <CategoryComponent categories={categories} />
-            <LatestProductsComponent latestProducts={latestProducts} />
-            <TopSellingProductsComponent categories={categories} />
-            <FooterComponent />
+            {loading ? <LoadingComponent /> :
+                <div>
+                    <NavbarComponent categories={categories} />
+                    <SliderComponent sliders={sliders} />
+                    <CategoryComponent categories={categories} />
+                    <LatestProductsComponent latestProducts={latestProducts} />
+                    <TopSellingProductsComponent categories={categories} />
+                    <FooterComponent />
+                </div>
+            }
         </div>
     );
 };

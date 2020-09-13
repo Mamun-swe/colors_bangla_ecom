@@ -14,7 +14,7 @@ import { text_left } from 'react-icons-kit/ikons'
 import SearchComponent from '../Search/Index';
 import Logo from '../../assets/static/logo.png';
 
-const NavBar = () => {
+const NavBar = ({ categories }) => {
     const [open, setOpen] = useState(false)
     const [isShow, setIsShow] = useState(false)
 
@@ -89,7 +89,7 @@ const NavBar = () => {
                                             </Link>
                                         </li>
                                         <li><NavLink exact activeClassName="is-active" to="/">home</NavLink></li>
-                                        <li><NavLink exact activeClassName="is-active" to="/category">shop</NavLink></li>
+                                        <li><NavLink exact activeClassName="is-active" to="/shop">shop</NavLink></li>
                                         <li><NavLink exact activeClassName="is-active" to="/sales">sales</NavLink></li>
                                         <li><NavLink exact activeClassName="is-active" to="/new-arrival">new arrival</NavLink></li>
                                         <li><NavLink exact activeClassName="is-active" to="/contact">contact</NavLink></li>
@@ -148,11 +148,9 @@ const NavBar = () => {
                                             <p className="mb-0 category-title">Categories</p>
                                             {isShow ?
                                                 <div className="category-dialog shadow-sm">
-                                                    <Link to="/">man fashion</Link>
-                                                    <Link to="/">women fashion</Link>
-                                                    <Link to="/">baby fashion</Link>
-                                                    <Link to="/">electronics</Link>
-                                                    <Link to="/">mobile</Link>
+                                                    {categories.length > 0 && categories.map((category, i) =>
+                                                        <Link to="/" key={i}>{category.name}</Link>
+                                                    )}
                                                 </div>
                                                 : null}
                                         </div>

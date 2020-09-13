@@ -1,7 +1,6 @@
 import React from 'react';
 import '../../styles/slider.scss';
 import Slider from 'react-slick';
-import SliderImg from '../../assets/images/banner3.jpg';
 
 const SliderComponent = ({ sliders }) => {
     const customeSlider = React.useRef()
@@ -24,9 +23,9 @@ const SliderComponent = ({ sliders }) => {
                         <Slider ref={customeSlider} {...settings}>
                             {sliders.length > 0 && sliders.map((slider, i) =>
                                 <div className="slider-card" key={i}>
-                                    <img src={SliderImg} className="img-fluid" alt="..." />
+                                    <img src={slider.image} className="img-fluid" alt="..." />
                                     <div className="overlay">
-                                        <h1 className="text-uppercase">new collection</h1>
+                                        <h1 className="text-uppercase">{slider.name}</h1>
                                         <button type="button" className="btn rounded-0 shadow-none">Shop Now</button>
                                     </div>
                                 </div>
