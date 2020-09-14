@@ -8,6 +8,7 @@ import { apiURL } from '../../utils/apiURL';
 import { NavLink, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Collapse from 'react-bootstrap/Collapse';
+import moment from 'moment';
 
 import NavBar from '../../Components/NavBar/NavBar';
 import Footer from '../../Components/Footer/Index';
@@ -36,7 +37,7 @@ const Index = () => {
                 if (categoryResponse.status === 200 && categoryProducts.status === 200) {
                     setCategories(categoryResponse.data.result)
                     setCategoryProducts(categoryProducts.data.result)
-                    setLimit(9)
+                    setLimit(8)
                     setLoading(false)
                 }
             } catch (error) {
@@ -51,6 +52,14 @@ const Index = () => {
         setModalShow(true)
         setModalData(data)
     }
+
+    const handleSort = async (event) => {
+        if (event.target.value === 'sort_latest') {
+            const data = categoryProducts.filter(x => moment(x.created_at).startOf('day').fromNow().slice(0, 1) <= 5)
+            setCategoryProducts(data)
+        }
+    }
+
 
     return (
         <div className="category-index">
@@ -76,7 +85,7 @@ const Index = () => {
                                                     onClick={() => setShowCategory(!showCategory)}
                                                 >
                                                     <div className="d-flex">
-                                                        <div><h6 className="mb-0">category</h6></div>
+                                                        <div><h6 className="mb-0">product categories</h6></div>
                                                         <div className="ml-auto">
                                                             <Icon
                                                                 icon={ic_keyboard_arrow_right}
@@ -146,37 +155,48 @@ const Index = () => {
                                         <div className="main-content">
                                             <div className="row">
 
-                                                {categoryProducts.length > 0 && categoryProducts.slice(0, limit).map((product, i) =>
-                                                    <div className="col-6 col-md-4" key={i}>
-                                                        <div className="card rounded-0 product-card">
+                                                {/* Product Sort */}
+                                                <div className="col-12 mb-2 product-sort">
+                                                    <select
+                                                        onChange={handleSort}
+                                                        className="form-control rounded-0 shadow-none"
+                                                    >
+                                                        <option value="sort_all">Sort by All</option>
+                                                        <option value="sort_latest">Sort by Latest</option>
+                                                    </select>
+                                                </div>
+
+                                                <div className="col-12">
+                                                    {categoryProducts.length > 0 && categoryProducts.slice(0, limit).map((product, i) =>
+                                                        <div className="card rounded-0 product-card" key={i}>
                                                             <div className="card-body">
                                                                 <div className="img-box">
                                                                     <img src={product.image} className="img-fluid" alt="..." />
                                                                     <div className="action-buttons text-right">
                                                                         <button
                                                                             type="button"
-                                                                            className="btn rounded-circle shadow-none"
+                                                                            className="btn rounded-circle shadow-none shopping-bag-btn"
                                                                         >
                                                                             <Icon icon={shoppingBag} size={16} />
                                                                         </button>
                                                                         <button
                                                                             type="button"
-                                                                            className="btn rounded-circle shadow-none"
+                                                                            className="btn rounded-circle shadow-none wish-list-btn"
                                                                         >
                                                                             <Icon icon={heartO} size={18} />
                                                                         </button>
                                                                     </div>
                                                                     <div className="overlay">
-                                                                        <div className="flex-center flex-column">
+                                                                        <div className="flex-center flex-column quick-view">
                                                                             <button
                                                                                 type="button"
-                                                                                className="btn rounded-0 shadow-none"
+                                                                                className="btn shadow-none"
                                                                                 onClick={() => handleModal(product)}
                                                                             >Quick View</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div className="footer border">
+                                                                <div className="product-card-footer border">
                                                                     <div className="d-sm-flex">
                                                                         <div>
                                                                             <p className="name">{product.name.slice(0, 15)}</p>
@@ -186,10 +206,12 @@ const Index = () => {
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                )}
+                                                    )}
+                                                </div>
+
 
                                                 {categoryProducts.length <= limit ?
                                                     null :

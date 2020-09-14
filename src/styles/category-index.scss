@@ -5,7 +5,7 @@
 
     .flex-side-menu {
         .content {
-            width: 280px;
+            width: 250px;
             background: #fff;
 
             .custom-dropdown {
@@ -18,9 +18,8 @@
                     h6 {
                         color: #000;
                         font-weight: 900;
-                        font-size: 16px;
+                        font-size: 15px;
                         margin-top: 4px;
-                        letter-spacing: 2px;
                         text-transform: uppercase;
                         font-family: 'Roboto', sans-serif;
                     }
@@ -79,6 +78,25 @@
 
     .flex-main-menu {
         .main-content {
+            .product-sort {
+                padding-left: 25px;
+
+                .form-control {
+                    width: 200px;
+                    color: #000;
+                    font-size: 14px;
+                    font-weight: 700;
+                    padding-left: 5px;
+                    padding-right: 10px;
+                    font-family: 'Roboto', sans-serif;
+                    border: 0;
+                }
+
+                @media (min-width: 992px) {
+                    padding-left: 35px;
+                }
+            }
+
             .load-more-btn {
                 display: inline-block;
                 padding: 8px 35px;

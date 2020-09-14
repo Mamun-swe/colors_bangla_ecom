@@ -5,17 +5,17 @@ import { apiURL } from '../../utils/apiURL';
 import Icon from 'react-icons-kit';
 import { shoppingBag } from 'react-icons-kit/feather';
 import { heartO } from 'react-icons-kit/fa';
-// import Loader from '../../Components/Loader';
+import { spinner2 } from 'react-icons-kit/icomoon';
 import ProductModalComponent from '../Modal/ProductModal';
 
 const TopSellingProductsComponent = ({ categories }) => {
     const [modalShow, setModalShow] = useState(false)
     const [modalData, setModalData] = useState({})
     const [loading, setLoading] = useState(false)
-    const [limit, setLimit] = useState(9)
+    const [limit, setLimit] = useState(10)
     const [products, setProducts] = useState([])
     const [id, setId] = useState(1)
-    const productsPerPage = 9
+    const productsPerPage = 10
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -23,7 +23,7 @@ const TopSellingProductsComponent = ({ categories }) => {
                 setLoading(true)
                 const response = await axios.get(`${apiURL}categoryProducts/${id}`)
                 setProducts(response.data.result)
-                setLimit(8)
+                setLimit(10)
                 setLoading(false)
             } catch (error) {
                 console.log(error);
@@ -66,42 +66,42 @@ const TopSellingProductsComponent = ({ categories }) => {
 
                 {/* Products */}
                 <div className="row products mt-4">
-                    {loading ?
-                        <div className="col-12 py-3 text-center">
-                            {/* <Loader /> */}
-                            <p>Loading...</p>
-                        </div>
-                        : products.length > 0 && products.slice(0, limit).map((product, i) =>
-                            <div className="col-6 col-md-4 col-lg-3" key={i}>
-                                <div className="card rounded-0 product-card">
+
+                    <div className="col-12">
+                        {loading ?
+                            <div className="text-center py-4">
+                                <Icon icon={spinner2} size={25} className="spin" />
+                            </div>
+                            : products.length > 0 && products.slice(0, limit).map((product, i) =>
+                                <div className="card rounded-0 product-card topselling-card" key={i}>
                                     <div className="card-body">
                                         <div className="img-box">
                                             <img src={product.image} className="img-fluid" alt="..." />
                                             <div className="action-buttons text-right">
                                                 <button
                                                     type="button"
-                                                    className="btn rounded-circle shadow-none"
+                                                    className="btn rounded-circle shadow-none shopping-bag-btn"
                                                 >
                                                     <Icon icon={shoppingBag} size={16} />
                                                 </button>
                                                 <button
                                                     type="button"
-                                                    className="btn rounded-circle shadow-none"
+                                                    className="btn rounded-circle shadow-none wish-list-btn"
                                                 >
                                                     <Icon icon={heartO} size={18} />
                                                 </button>
                                             </div>
                                             <div className="overlay">
-                                                <div className="flex-center flex-column">
+                                                <div className="flex-center flex-column quick-view">
                                                     <button
                                                         type="button"
-                                                        className="btn rounded-0 shadow-none"
+                                                        className="btn shadow-none"
                                                         onClick={() => handleModal(product)}
                                                     >Quick View</button>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="footer border">
+                                        <div className="product-card-footer border">
                                             <div className="d-sm-flex">
                                                 <div>
                                                     <p className="name">{product.name.slice(0, 15)}</p>
@@ -113,12 +113,10 @@ const TopSellingProductsComponent = ({ categories }) => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        )
-                    }
+                            )}
+                    </div>
 
-                    {products.length <= limit ?
-                        null :
+                    {products.length <= limit ? null :
                         <div className="col-12 text-center">
                             <button type="button" className="btn shadow-none load-more-btn" onClick={() => setLimit(limit + productsPerPage)}>Load More</button>
                         </div>

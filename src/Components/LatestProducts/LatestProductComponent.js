@@ -25,7 +25,7 @@ const LatestProductComponent = ({ latestProducts }) => {
         dots: false,
         infinite: true,
         speed: 500,
-        slidesToShow: 4,
+        slidesToShow: 5,
         slidesToScroll: 1,
         initialSlide: 0,
         responsive: [
@@ -39,7 +39,7 @@ const LatestProductComponent = ({ latestProducts }) => {
             {
                 breakpoint: 768,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 3,
                     slidesToScroll: 1
                 }
             },
@@ -78,7 +78,7 @@ const LatestProductComponent = ({ latestProducts }) => {
                                                 <div className="flex-center flex-column">
                                                     <button
                                                         type="button"
-                                                        className="btn rounded-0 shadow-none"
+                                                        className="btn shadow-none"
                                                         onClick={() => handleModal(product)}
                                                     >Quick View</button>
                                                 </div>
@@ -107,7 +107,7 @@ const LatestProductComponent = ({ latestProducts }) => {
                             <Icon
                                 size={25}
                                 icon={ic_keyboard_arrow_left}
-                                style={{ color: '#000' }}
+                                style={{ color: '#fff' }}
                             />
                         </button>
 
@@ -119,7 +119,7 @@ const LatestProductComponent = ({ latestProducts }) => {
                             <Icon
                                 size={25}
                                 icon={ic_keyboard_arrow_right}
-                                style={{ color: '#000' }}
+                                style={{ color: '#fff' }}
                             />
                         </button>
                     </div>
