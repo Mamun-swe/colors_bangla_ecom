@@ -7,7 +7,8 @@ import ScrollToTop from './Components/ScrollToTop/Index';
 
 import Index from './Pages/Index';
 import CategoryIndex from './Pages/Category/Index';
-import ProductIndex from './Pages/Product/Index';
+import CartIndex from './Pages/Cart/Index';
+import CheckoutIndex from './Pages/Checkout/Index';
 
 import AccountMaster from './Pages/Account/Master';
 import FourOFour from './Pages/FourOFour/Index';
@@ -20,7 +21,8 @@ function App() {
           <Switch>
             <Route exact path="/" component={Index} />
             <Route exact path="/category/:categoryId" component={CategoryIndex} />
-            <Route exact path="/product" component={ProductIndex} />
+            <Route exact path="/shopping-cart" component={CartIndex} />
+            <Route exact path="/checkout" component={CheckoutIndex} />
 
             <PrivateRoute>
               <Route path="/account" component={AccountMaster} />

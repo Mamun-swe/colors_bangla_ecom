@@ -2,6 +2,7 @@
 
 .custom-navbar {
     background: #fff;
+
     // Mobile Nab
     .mobile-nav {
         .top-nav {
@@ -149,7 +150,7 @@
 
     // Desktop Nav Black
     .desktop-nav-black {
-        background: #000;
+        background: $secondary-color;
 
         .btn {
             color: #fff;
@@ -164,7 +165,7 @@
                 font-size: 14px;
                 font-weight: 300;
                 padding: 4px 15px;
-                border: 1px solid #555;
+                border: 1px solid #fff;
                 font-family: 'Roboto', sans-serif;
             }
 
@@ -208,10 +209,14 @@
                     font-weight: 300;
                     padding: 4px 10px;
                     padding-right: 30px;
-                    border: 1px solid #555;
-                    background: #000;
+                    border: 1px solid #fff;
+                    background: #01028f;
                     font-family: 'Roboto', sans-serif;
                     width: 300px;
+                }
+
+                ::placeholder {
+                    color: #fff;
                 }
 
                 .search-icon {

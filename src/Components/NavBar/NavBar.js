@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState } from 'react';
 import '../../styles/navbar.scss';
 import { Link, NavLink } from 'react-router-dom';
 import { Icon } from 'react-icons-kit';
@@ -17,6 +17,12 @@ import Logo from '../../assets/static/logo.png';
 const NavBar = ({ categories }) => {
     const [open, setOpen] = useState(false)
     const [isShow, setIsShow] = useState(false)
+    // const categoryId = categories[0]
+
+    // useEffect(() => {
+    //     const takeFirstIndex = categories.splice(0,1)
+    //     console.log(takeFirstIndex);
+    // }, [categories])
 
     return (
         <div className="custom-navbar">
@@ -89,7 +95,7 @@ const NavBar = ({ categories }) => {
                                             </Link>
                                         </li>
                                         <li><NavLink exact activeClassName="is-active" to="/">home</NavLink></li>
-                                        <li><NavLink exact activeClassName="is-active" to="/shop">shop</NavLink></li>
+                                        <li><NavLink exact activeClassName="is-active" to={`/shop`}>shop</NavLink></li>
                                         <li><NavLink exact activeClassName="is-active" to="/sales">sales</NavLink></li>
                                         <li><NavLink exact activeClassName="is-active" to="/new-arrival">new arrival</NavLink></li>
                                         <li><NavLink exact activeClassName="is-active" to="/contact">contact</NavLink></li>
@@ -109,7 +115,7 @@ const NavBar = ({ categories }) => {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/">
+                                            <Link to="/shopping-cart">
                                                 <div className="d-flex">
                                                     <div><Icon icon={ic_add_shopping_cart} size={20} color="#000" className="border p-1" /></div>
                                                     <div className="pl-2">
