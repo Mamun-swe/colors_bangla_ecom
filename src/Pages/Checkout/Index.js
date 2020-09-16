@@ -24,7 +24,7 @@ const Index = () => {
                 <form>
                     <div className="row">
                         {/* User Details */}
-                        <div className="col-12 col-lg-8 user-details-column">
+                        <div className="col-12 col-lg-7 user-details-column">
                             <div className="card rounded-0">
                                 <div className="card-body">
                                     <div className="title border-bottom mb-3">
@@ -110,18 +110,63 @@ const Index = () => {
                                         </div>
 
                                     </div>
-
-
-
-
                                 </div>
                             </div>
                         </div>
 
                         {/* Cart Details */}
-                        <div className="col-12 col-lg-4 mt-4 mt-lg-0">
+                        <div className="col-12 col-lg-5 mt-4 mt-lg-0 order-details">
                             <div className="card rounded-0">
-                                <div className="card-body"></div>
+                                <div className="card-body">
+                                    <div className="title border-bottom mb-3">
+                                        <h6 className="mb-2">your order</h6>
+                                    </div>
+
+                                    {/* Cart Produucts */}
+                                    <div className="cart-products">
+
+                                        <div className="product d-flex">
+                                            <div>
+                                                <p>Reference site about Lorem Ipsum.</p>
+                                                <small>Quantity: 10</small>
+                                            </div>
+                                            <div className="ml-auto pl-2">
+                                                <p>900 tk.</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="product d-flex">
+                                            <div>
+                                                <p>Reference site about Lorem Ipsum.</p>
+                                                <small>Quantity: 10</small>
+                                            </div>
+                                            <div className="ml-auto pl-2">
+                                                <p>900 tk.</p>
+                                            </div>
+                                        </div>
+
+                                        <div className="product d-flex">
+                                            <div>
+                                                <p>Reference site about Lorem Ipsum.</p>
+                                                <small>Quantity: 10</small>
+                                            </div>
+                                            <div className="ml-auto pl-2">
+                                                <p>900 tk.</p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    {/* Sub Total */}
+                                    <div className="sub-total border-top d-flex">
+                                        <div>
+                                            <p>Sub Total</p>
+                                        </div>
+                                        <div className="ml-auto pl-2">
+                                            <p>900 tk.</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -48,7 +48,6 @@
                 }
 
                 .form-check {
-
                     .form-check-label {
                         color: #555;
                         font-size: 14px;
@@ -56,6 +55,55 @@
                         font-family: 'Roboto', sans-serif;
                     }
                 }
+            }
+        }
+    }
+
+    // Order Details
+    .order-details {
+        .title {
+            h6 {
+                color: #555;
+                font-size: 13px;
+                font-weight: 700;
+                text-transform: uppercase;
+                font-family: 'Roboto', sans-serif;
+            }
+        }
+
+        // Cart Products
+        .cart-products {
+            .product {
+                padding-top: 8px;
+                padding-bottom: 8px;
+
+                p {
+                    margin-bottom: 0;
+                    color: rgba(85, 85, 85, 0.877);
+                    font-size: 14px;
+                    line-height: 10px;
+                    font-family: 'Roboto', sans-serif;
+                }
+
+                small {
+                    font-size: 11px;
+                    color: rgba(85, 85, 85, 0.877);
+                    font-family: 'Roboto', sans-serif;
+                }
+            }
+        }
+
+        // Sub Total
+        .sub-total {
+            padding-top: 5px;
+            padding-bottom: 8px;
+            margin-top: 10px;
+
+            p {
+                margin-bottom: 0;
+                color: rgba(85, 85, 85, 0.877);
+                font-size: 14px;
+                font-family: 'Roboto', sans-serif;
             }
         }
     }
