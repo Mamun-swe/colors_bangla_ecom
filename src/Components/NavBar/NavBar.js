@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/navbar.scss';
 import { Link, NavLink } from 'react-router-dom';
 import { Icon } from 'react-icons-kit';
@@ -9,20 +9,45 @@ import {
     facebook,
     instagram
 } from 'react-icons-kit/icomoon'
-import { ic_add_shopping_cart, ic_search, ic_dehaze, ic_close } from 'react-icons-kit/md';
-import { text_left } from 'react-icons-kit/ikons'
+import {
+    ic_add_shopping_cart,
+    ic_search,
+    ic_dehaze, ic_close
+} from 'react-icons-kit/md';
+import { text_left } from 'react-icons-kit/ikons';
+import axios from 'axios';
+import { apiURL } from '../../utils/apiURL';
+import { useSelector, useDispatch } from 'react-redux';
+import { productsList } from '../../Redux/Actions/cartAction';
+
 import SearchComponent from '../Search/Index';
 import Logo from '../../assets/static/logo.png';
 
-const NavBar = ({ categories }) => {
+const NavBar = () => {
+    const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
     const [isShow, setIsShow] = useState(false)
-    // const categoryId = categories[0]
+    const [categories, setCategories] = useState([])
+    const [singleCatId, setSingleCatId] = useState()
+    let { cartProducts } = useSelector((state => state.products))
 
-    // useEffect(() => {
-    //     const takeFirstIndex = categories.splice(0,1)
-    //     console.log(takeFirstIndex);
-    // }, [categories])
+    useEffect(() => {
+        dispatch(productsList())
+        const fetchCategories = async () => {
+            try {
+                const categoryResponse = await axios.get(`${apiURL}getCategory`)
+                if (categoryResponse.status === 200) {
+                    setCategories(categoryResponse.data.result)
+                    setSingleCatId(categoryResponse.data.result[0].id)
+                }
+            } catch (error) {
+                if (error) console.log(error)
+            }
+        }
+
+        fetchCategories()
+    }, [dispatch])
+
 
     return (
         <div className="custom-navbar">
@@ -95,7 +120,7 @@ const NavBar = ({ categories }) => {
                                             </Link>
                                         </li>
                                         <li><NavLink exact activeClassName="is-active" to="/">home</NavLink></li>
-                                        <li><NavLink exact activeClassName="is-active" to={`/shop`}>shop</NavLink></li>
+                                        <li><NavLink exact activeClassName="is-active" to={`/category/${singleCatId}`}>shop</NavLink></li>
                                         <li><NavLink exact activeClassName="is-active" to="/sales">sales</NavLink></li>
                                         <li><NavLink exact activeClassName="is-active" to="/new-arrival">new arrival</NavLink></li>
                                         <li><NavLink exact activeClassName="is-active" to="/contact">contact</NavLink></li>
@@ -120,7 +145,11 @@ const NavBar = ({ categories }) => {
                                                     <div><Icon icon={ic_add_shopping_cart} size={20} color="#000" className="border p-1" /></div>
                                                     <div className="pl-2">
                                                         <p className="mb-0">my cart</p>
-                                                        <small>2 items</small>
+                                                        {
+                                                            cartProducts ?
+                                                                <small>{cartProducts.length} items</small>
+                                                                : <small>2 items</small>
+                                                        }
                                                     </div>
                                                 </div>
                                             </Link>

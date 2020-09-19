@@ -17,16 +17,18 @@ import ProductModalComponent from '../../Components/Modal/ProductModal';
 
 
 const Index = () => {
+    const { categoryId } = useParams()
     const [loading, setLoading] = useState(false)
     const [modalShow, setModalShow] = useState(false)
     const [modalData, setModalData] = useState({})
     const [showCategory, setShowCategory] = useState(true)
     const [showPrice, setShowPrice] = useState(true)
+    const [showColor, setShowColor] = useState(true)
     const [categories, setCategories] = useState([])
     const [categoryProducts, setCategoryProducts] = useState([])
     const [limit, setLimit] = useState(8)
     const productsPerPage = 8
-    const { categoryId } = useParams()
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -145,6 +147,36 @@ const Index = () => {
                                                         </div>
                                                     </div>
                                                 </Collapse>
+
+                                                {/* Color Dropdown */}
+                                                <div className="dropdown-header"
+                                                    onClick={() => setShowColor(!showColor)}
+                                                >
+                                                    <div className="d-flex">
+                                                        <div><h6 className="mb-0">color</h6></div>
+                                                        <div className="ml-auto">
+                                                            <Icon
+                                                                icon={ic_keyboard_arrow_right}
+                                                                size={25}
+                                                                style={{ color: '#000' }}
+                                                                className={showColor ? "angle-icon rotate" : "angle-icon"}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <Collapse in={showColor}>
+                                                    <div className="colors">
+                                                        <button type="button" className="btn btn-primary rounded-0 shadow-none"></button>
+                                                        <button type="button" className="btn btn-info rounded-0 shadow-none"></button>
+                                                        <button type="button" className="btn btn-danger rounded-0 shadow-none"></button>
+                                                        <button type="button" className="btn btn-warning rounded-0 shadow-none"></button>
+                                                        <button type="button" className="btn btn-primary rounded-0 shadow-none"></button>
+                                                        <button type="button" className="btn btn-info rounded-0 shadow-none"></button>
+                                                        <button type="button" className="btn btn-danger rounded-0 shadow-none"></button>
+                                                        <button type="button" className="btn btn-warning rounded-0 shadow-none"></button>
+                                                    </div>
+                                                </Collapse>
+
                                             </div>
                                         </div>
                                     </div>

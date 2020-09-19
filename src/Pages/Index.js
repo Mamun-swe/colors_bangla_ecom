@@ -28,7 +28,7 @@ const Index = () => {
                 if (
                     sliderResponse.status === 200 &&
                     categoryResponse.status === 200 &&
-                    latestProductResponse.status === 200 
+                    latestProductResponse.status === 200
                     // && topSellingProductResponse.status === 200
                 ) {
                     setSliders(sliderResponse.data.result)
@@ -38,7 +38,7 @@ const Index = () => {
                     setLoading(false)
                 }
             } catch (error) {
-                console.log(error);
+                console.log(error)
             }
         }
 
@@ -49,7 +49,7 @@ const Index = () => {
         <div>
             {loading ? <LoadingComponent /> :
                 <div>
-                    <NavbarComponent categories={categories} />
+                    <NavbarComponent />
                     <SliderComponent sliders={sliders} />
                     <CategoryComponent categories={categories} />
                     <LatestProductsComponent latestProducts={latestProducts} />
