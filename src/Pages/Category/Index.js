@@ -5,7 +5,7 @@ import { ic_keyboard_arrow_right } from 'react-icons-kit/md';
 import { shoppingBag } from 'react-icons-kit/feather';
 import { heartO } from 'react-icons-kit/fa';
 import { apiURL } from '../../utils/apiURL';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Collapse from 'react-bootstrap/Collapse';
 import moment from 'moment';
@@ -17,6 +17,7 @@ import ProductModalComponent from '../../Components/Modal/ProductModal';
 
 
 const Index = () => {
+    const history = useHistory()
     const { categoryId } = useParams()
     const [loading, setLoading] = useState(false)
     const [modalShow, setModalShow] = useState(false)
@@ -43,7 +44,9 @@ const Index = () => {
                     setLoading(false)
                 }
             } catch (error) {
-                console.log(error);
+                if (error && error.response.status === 500) {
+                    history.push('/')
+                }
             }
         }
 

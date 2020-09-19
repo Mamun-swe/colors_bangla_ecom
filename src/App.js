@@ -27,8 +27,9 @@ function App() {
             <PrivateRoute>
               <Route path="/account" component={AccountMaster} />
             </PrivateRoute>
-
+            {/* <Route exact path="/page-not-found" component={FourOFour} /> */}
             <Route path="*" component={FourOFour} />
+
           </Switch>
         </ScrollToTop>
       </Router>
