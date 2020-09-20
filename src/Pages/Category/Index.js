@@ -51,7 +51,7 @@ const Index = () => {
         }
 
         fetchData()
-    }, [categoryId])
+    }, [categoryId, history])
 
     const handleModal = data => {
         setModalShow(true)
