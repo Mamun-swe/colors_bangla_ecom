@@ -1,0 +1,122 @@
+@import "../../App.scss";
+
+.account-master {
+    // Top Menu Mobile
+    .top-menu-mobile {
+        padding: 10px 15px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #fff;
+
+        p {
+            color: #555;
+            font-size: 15px;
+            margin-top: 7px;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .btn {
+            padding: 4px;
+        }
+    }
+
+    // Drawer
+    .drawer {
+        position: fixed;
+        width: 250px;
+        top: 0;
+        left: -100%;
+        height: 100vh;
+        z-index: 3;
+        background: #fff;
+        transition: 0.4s all;
+        box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
+
+        a, .btn {
+            font-size: 13px;
+            display: block;
+            color: #555;
+            transition: 0.4s all;
+            text-transform: uppercase;
+            font-family: 'Roboto', sans-serif;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-decoration: none;
+            border-bottom: 1px solid #dfdfdf;
+            padding-left: 0;
+
+            @media (max-width: 992px) {
+                padding-left: 15px;
+            }
+        }
+
+        a:hover {
+            color: $danger-color;
+        }
+
+        .is-Active {
+            color: $danger-color;
+        }
+
+        .btn {
+            text-align: left;
+        }
+    }
+
+    // open drawer
+    .open-drawer {
+        left: 0% !important;
+    }
+
+    // Side Menu
+    .side-menu {
+        width: 270px;
+        min-height: 100vh;
+        padding-top: 100px;
+
+        a, .btn {
+            font-size: 13px;
+            display: block;
+            color: #555;
+            transition: 0.4s all;
+            text-transform: uppercase;
+            font-family: 'Roboto', sans-serif;
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-decoration: none;
+            border-bottom: 1px solid #dfdfdf;
+            padding-left: 0;
+
+            @media (max-width: 992px) {
+                padding-left: 15px;
+            }
+        }
+
+        a:hover {
+            color: $danger-color;
+        }
+
+        .is-Active {
+            color: $danger-color;
+        }
+
+        .btn {
+            text-align: left;
+        }
+
+        .btn:hover {
+            color: $danger-color;
+        }
+    }
+
+    // Main Menu
+    .main-menu {
+        padding-top: 60px;
+
+        @media (min-width: 992px) {
+            padding-top: 50px;
+        }
+    }
+}

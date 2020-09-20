@@ -9,6 +9,8 @@ import { NavLink, useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Collapse from 'react-bootstrap/Collapse';
 import moment from 'moment';
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../Redux/Actions/cartAction';
 
 import NavBar from '../../Components/NavBar/NavBar';
 import Footer from '../../Components/Footer/Index';
@@ -29,6 +31,7 @@ const Index = () => {
     const [categoryProducts, setCategoryProducts] = useState([])
     const [limit, setLimit] = useState(8)
     const productsPerPage = 8
+    const dispatch = useDispatch()
 
 
     useEffect(() => {
@@ -63,6 +66,19 @@ const Index = () => {
             const data = categoryProducts.filter(x => moment(x.created_at).startOf('day').fromNow().slice(0, 1) <= 5)
             setCategoryProducts(data)
         }
+    }
+
+    // Add to cart
+    const addToCart = data => {
+        const newData = {
+            id: data.id,
+            name: data.name,
+            price: data.selling_price,
+            stock: data.stock,
+            image: data.image,
+            quantity: 1
+        }
+        dispatch(addProduct(newData))
     }
 
 
@@ -211,6 +227,7 @@ const Index = () => {
                                                                         <button
                                                                             type="button"
                                                                             className="btn rounded-circle shadow-none shopping-bag-btn"
+                                                                            onClick={() => addToCart(product)}
                                                                         >
                                                                             <Icon icon={shoppingBag} size={16} />
                                                                         </button>

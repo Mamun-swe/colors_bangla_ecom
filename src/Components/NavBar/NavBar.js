@@ -98,7 +98,7 @@ const NavBar = () => {
                     <div className="content-body px-4">
                         <Link to="/">home</Link>
                         <Link to="/">shop</Link>
-                        <Link to="/">sales</Link>
+                        {/* <Link to="/">sales</Link> */}
                         <Link to="/">new arrival</Link>
                         <Link to="/">contact</Link>
                         <Link to="/">my account</Link>
@@ -121,7 +121,7 @@ const NavBar = () => {
                                         </li>
                                         <li><NavLink exact activeClassName="is-active" to="/">home</NavLink></li>
                                         <li><NavLink exact activeClassName="is-active" to={`/category/${singleCatId}`}>shop</NavLink></li>
-                                        <li><NavLink exact activeClassName="is-active" to="/sales">sales</NavLink></li>
+                                        {/* <li><NavLink exact activeClassName="is-active" to="/sales">sales</NavLink></li> */}
                                         <li><NavLink exact activeClassName="is-active" to="/new-arrival">new arrival</NavLink></li>
                                         <li><NavLink exact activeClassName="is-active" to="/contact">contact</NavLink></li>
                                     </ul>
@@ -129,7 +129,7 @@ const NavBar = () => {
                                 <div className="ml-auto account-links">
                                     <ul>
                                         <li>
-                                            <Link to="/">
+                                            <Link to="/sign-in">
                                                 <div className="d-flex">
                                                     <div><Icon icon={user} size={20} color="#000" className="border p-1" /></div>
                                                     <div className="pl-2">

@@ -6,6 +6,8 @@ import Icon from 'react-icons-kit';
 import { shoppingBag } from 'react-icons-kit/feather';
 import { heartO } from 'react-icons-kit/fa';
 import { spinner2 } from 'react-icons-kit/icomoon';
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../Redux/Actions/cartAction';
 import ProductModalComponent from '../Modal/ProductModal';
 
 const TopSellingProductsComponent = ({ categories }) => {
@@ -16,6 +18,7 @@ const TopSellingProductsComponent = ({ categories }) => {
     const [products, setProducts] = useState([])
     const [id, setId] = useState(1)
     const productsPerPage = 10
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -37,6 +40,19 @@ const TopSellingProductsComponent = ({ categories }) => {
     const handleModal = data => {
         setModalShow(true)
         setModalData(data)
+    }
+
+    // Add to cart
+    const addToCart = data => {
+        const newData = {
+            id: data.id,
+            name: data.name,
+            price: data.selling_price,
+            stock: data.stock,
+            image: data.image,
+            quantity: 1
+        }
+        dispatch(addProduct(newData))
     }
 
 
@@ -81,6 +97,7 @@ const TopSellingProductsComponent = ({ categories }) => {
                                                 <button
                                                     type="button"
                                                     className="btn rounded-circle shadow-none shopping-bag-btn"
+                                                    onClick={() => addToCart(product)}
                                                 >
                                                     <Icon icon={shoppingBag} size={16} />
                                                 </button>
