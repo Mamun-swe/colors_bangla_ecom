@@ -76,7 +76,7 @@ const Index = () => {
                                 </tbody>
                             </table>
 
-                            <div className="coupon-box">
+                            {/* <div className="coupon-box">
                                 <p className="text-muted">Enter your promotion code</p>
                                 <form>
                                     <div className="input-group mb-2">
@@ -93,7 +93,7 @@ const Index = () => {
                                         </div>
                                     </div>
                                 </form>
-                            </div>
+                            </div> */}
                         </div>
 
                         {/* Cart Total Column */}
