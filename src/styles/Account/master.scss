@@ -9,6 +9,7 @@
         left: 0;
         width: 100%;
         background: #fff;
+        z-index: 99;
 
         p {
             color: #555;
@@ -72,7 +73,7 @@
 
     // Side Menu
     .side-menu {
-        width: 270px;
+        width: 270px !important;
         min-height: 100vh;
         padding-top: 100px;
 

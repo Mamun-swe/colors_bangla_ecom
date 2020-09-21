@@ -39,6 +39,7 @@ const NavBar = () => {
                 if (categoryResponse.status === 200) {
                     setCategories(categoryResponse.data.result)
                     setSingleCatId(categoryResponse.data.result[0].id)
+                    // console.log(categoryResponse.data.result)
                 }
             } catch (error) {
                 if (error) console.log(error)
@@ -47,6 +48,12 @@ const NavBar = () => {
 
         fetchCategories()
     }, [dispatch])
+
+
+    // onChange Filter Handle
+    const onChangeFilter = event => {
+        console.log(event.target.value)
+    }
 
 
     return (
@@ -71,7 +78,11 @@ const NavBar = () => {
                                     className="btn rounded-circle shadow-none cart-btn">
                                     <Icon icon={ic_add_shopping_cart} size={22} />
                                 </Link>
-                                <small>5+</small>
+                                {
+                                    cartProducts ?
+                                        <small>{cartProducts.length}</small>
+                                        : <small>0</small>
+                                }
                             </div>
                         </div>
                         <div>
@@ -97,11 +108,11 @@ const NavBar = () => {
                     </div>
                     <div className="content-body px-4">
                         <Link to="/">home</Link>
-                        <Link to="/">shop</Link>
-                        {/* <Link to="/">sales</Link> */}
+                        <Link to={`/category/${singleCatId}`}>shop</Link>
+                        <Link to="/">categories</Link>
                         <Link to="/">new arrival</Link>
-                        <Link to="/">contact</Link>
-                        <Link to="/">my account</Link>
+                        <Link to="/contact">contact</Link>
+                        <Link to="/sign-in">my account</Link>
                     </div>
                 </div>
             </div>
@@ -121,7 +132,6 @@ const NavBar = () => {
                                         </li>
                                         <li><NavLink exact activeClassName="is-active" to="/">home</NavLink></li>
                                         <li><NavLink exact activeClassName="is-active" to={`/category/${singleCatId}`}>shop</NavLink></li>
-                                        {/* <li><NavLink exact activeClassName="is-active" to="/sales">sales</NavLink></li> */}
                                         <li><NavLink exact activeClassName="is-active" to="/new-arrival">new arrival</NavLink></li>
                                         <li><NavLink exact activeClassName="is-active" to="/contact">contact</NavLink></li>
                                     </ul>
@@ -148,7 +158,7 @@ const NavBar = () => {
                                                         {
                                                             cartProducts ?
                                                                 <small>{cartProducts.length} items</small>
-                                                                : <small>2 items</small>
+                                                                : <small>0 items</small>
                                                         }
                                                     </div>
                                                 </div>
@@ -170,17 +180,14 @@ const NavBar = () => {
                             <div className="d-flex">
                                 <div>
                                     <div className="d-flex">
-                                        <div>
+                                        <div className="category-btn-box pr-2">
                                             <button
                                                 type="button"
-                                                className="btn shadow-none p-0"
+                                                className="btn shadow-none"
                                                 onClick={() => setIsShow(!isShow)}
                                             >
-                                                <Icon icon={text_left} size={18} />
+                                                <Icon icon={text_left} size={18} className="mr-2" />Categories
                                             </button>
-                                        </div>
-                                        <div className="px-2 category-hover-box">
-                                            <p className="mb-0 category-title">Categories</p>
                                             {isShow ?
                                                 <div className="category-dialog shadow-sm">
                                                     {categories.length > 0 && categories.map((category, i) =>
@@ -189,6 +196,7 @@ const NavBar = () => {
                                                 </div>
                                                 : null}
                                         </div>
+
                                         <div className="search-desktop">
                                             <form>
                                                 <div className="form-group mb-0">
@@ -196,6 +204,7 @@ const NavBar = () => {
                                                         type="text"
                                                         className="form-control rounded-0 shadow-none"
                                                         placeholder="Enter Your Keyword"
+                                                        onChange={onChangeFilter}
                                                     />
                                                     <Icon className="search-icon" icon={ic_search} size={20} style={{ color: "#fff" }} />
                                                 </div>

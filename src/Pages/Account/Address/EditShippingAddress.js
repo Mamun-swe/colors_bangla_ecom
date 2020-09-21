@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 
-const EditBillingAddress = () => {
+const EditShippingAddress = () => {
     const { register, handleSubmit, errors } = useForm()
     const [isLoading, setLoading] = useState(false)
 
@@ -9,6 +9,7 @@ const EditBillingAddress = () => {
         setLoading(true)
         console.log(data)
     }
+
 
     return (
         <div className="edit">
@@ -18,7 +19,7 @@ const EditBillingAddress = () => {
 
             <div className="body mb-4">
                 <div className="title">
-                    <h5>Billing Address</h5>
+                    <h5>Shippning Address</h5>
                 </div>
 
 
@@ -228,4 +229,4 @@ const EditBillingAddress = () => {
     );
 };
 
-export default EditBillingAddress;
+export default EditShippingAddress;

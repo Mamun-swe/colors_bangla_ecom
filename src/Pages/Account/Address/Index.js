@@ -42,7 +42,11 @@ const Index = () => {
                                 <h5>shipping address</h5>
                             </div>
                             <div className="ml-auto">
-                                <button type="button" className="btn btn-light rounded-0 shadow-none btn-sm">edit</button>
+                                <Link
+                                    to="/account/addersses/edit/shipping"
+                                    type="button"
+                                    className="btn btn-light rounded-0 shadow-none btn-sm"
+                                >edit</Link>
                             </div>
                         </div>
 

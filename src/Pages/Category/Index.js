@@ -32,6 +32,7 @@ const Index = () => {
     const [limit, setLimit] = useState(8)
     const productsPerPage = 8
     const dispatch = useDispatch()
+    const [subMenu, setSubMenu] = useState()
 
 
     useEffect(() => {
@@ -82,6 +83,7 @@ const Index = () => {
     }
 
 
+
     return (
         <div className="category-index">
             {loading ? <LoadingComponent /> :
@@ -120,14 +122,40 @@ const Index = () => {
                                                 <Collapse in={showCategory}>
                                                     <div className="dropdown-body">
                                                         {categories.length > 0 && categories.map((category, i) =>
-                                                            <NavLink
-                                                                exact
-                                                                to={`/category/${category.id}`}
-                                                                activeClassName="is-active"
-                                                                key={i}
-                                                            >
-                                                                {category.name}
-                                                            </NavLink>
+
+                                                            <div className="menu" key={i}>
+                                                                <button
+                                                                    type="button"
+                                                                    className="btn shadow-none btn-block text-left pr-1"
+                                                                    onClick={() => setSubMenu(i)}
+                                                                >
+                                                                    {category.name}
+                                                                    <Icon
+                                                                        icon={ic_keyboard_arrow_right}
+                                                                        size={20}
+                                                                        style={{ color: '#000' }}
+                                                                        className={subMenu === i ? "float-right text-danger angle-icon rotate" : "float-right angle-icon"}
+                                                                    />
+                                                                </button>
+                                                                {subMenu === i ?
+                                                                    <div className="menu-child">
+                                                                        {category.children.map((child, k) =>
+                                                                            <NavLink
+                                                                                exact
+                                                                                to={`/category/${child.id}`}
+                                                                                activeClassName="is-active"
+                                                                                key={k}
+                                                                            >
+                                                                                <Icon
+                                                                                    icon={ic_keyboard_arrow_right}
+                                                                                    size={20}
+                                                                                    style={{ color: '#000' }}
+                                                                                />{child.name}
+                                                                            </NavLink>
+                                                                        )}
+                                                                    </div>
+                                                                    : null}
+                                                            </div>
                                                         )}
                                                     </div>
                                                 </Collapse>
