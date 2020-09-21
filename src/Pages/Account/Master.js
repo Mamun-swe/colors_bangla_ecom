@@ -7,6 +7,7 @@ import { ic_dehaze, ic_close } from 'react-icons-kit/md';
 import DashboardIndex from './Dashboard/Index';
 import OrderIndex from './Orders/Index';
 import AddressesIndex from './Address/Index';
+import EditBillingAddress from './Address/EditBillingAddress';
 import AccountDetails from './Account-details/Index';
 
 const Master = () => {
@@ -72,6 +73,7 @@ const Master = () => {
                                 <Route exact path="/account/" component={DashboardIndex} />
                                 <Route exact path="/account/orders" component={OrderIndex} />
                                 <Route exact path="/account/addersses" component={AddressesIndex} />
+                                <Route exact path="/account/addersses/edit/billing" component={EditBillingAddress} />
                                 <Route exact path="/account/account-details" component={AccountDetails} />
                             </div>
                         </div>
