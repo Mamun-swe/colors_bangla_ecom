@@ -133,11 +133,12 @@ const TopSellingProductsComponent = ({ categories }) => {
                             )}
                     </div>
 
-                    {products ? products.length <= limit ? null :
-                        <div className="col-12 text-center">
-                            <button type="button" className="btn shadow-none load-more-btn" onClick={() => setLimit(limit + productsPerPage)}>Load More</button>
-                        </div>
-                    }
+                    {products ?
+                        products.length <= limit ? null :
+                            <div className="col-12 text-center">
+                                <button type="button" className="btn shadow-none load-more-btn" onClick={() => setLimit(limit + productsPerPage)}>Load More</button>
+                            </div>
+                        : null}
                 </div>
             </div>
 
