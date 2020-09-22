@@ -88,7 +88,7 @@ const TopSellingProductsComponent = ({ categories }) => {
                             <div className="text-center py-4">
                                 <Icon icon={spinner2} size={25} className="spin" />
                             </div>
-                            : products.length > 0 && products.slice(0, limit).map((product, i) =>
+                            : products && products.length > 0 && products.slice(0, limit).map((product, i) =>
                                 <div className="card rounded-0 product-card topselling-card" key={i}>
                                     <div className="card-body">
                                         <div className="img-box">
@@ -133,12 +133,11 @@ const TopSellingProductsComponent = ({ categories }) => {
                             )}
                     </div>
 
-                    {products ?
-                        products.length <= limit ? null :
-                            <div className="col-12 text-center">
-                                <button type="button" className="btn shadow-none load-more-btn" onClick={() => setLimit(limit + productsPerPage)}>Load More</button>
-                            </div>
-                        : null}
+                    {products && products.length <= limit ? null :
+                        <div className="col-12 text-center">
+                            <button type="button" className="btn shadow-none load-more-btn" onClick={() => setLimit(limit + productsPerPage)}>Load More</button>
+                        </div>
+                    }
                 </div>
             </div>
 
