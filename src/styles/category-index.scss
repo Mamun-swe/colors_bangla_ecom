@@ -102,6 +102,32 @@
     }
 
     .flex-main-menu {
+        .null-content {
+            width: 270px;
+            height: 270px;
+            background: #fff;
+            overflow: hidden;
+            margin: auto;
+
+            @media (min-width: 576px) {
+                width: 350px;
+                height: 350px;
+            }
+
+            img {
+                height: 140px;
+
+                @media (min-width: 576px) {
+                    height: 200px;
+                }
+            }
+
+            .btn {
+                font-size: 14px;
+                background: $secondary-color;
+            }
+        }
+
         .main-content {
             .product-sort {
                 padding-left: 25px;

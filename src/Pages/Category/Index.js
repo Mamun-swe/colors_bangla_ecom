@@ -5,7 +5,7 @@ import { ic_keyboard_arrow_right } from 'react-icons-kit/md';
 import { shoppingBag } from 'react-icons-kit/feather';
 import { heartO } from 'react-icons-kit/fa';
 import { apiURL } from '../../utils/apiURL';
-import { NavLink, useHistory, useParams } from 'react-router-dom';
+import { Link, NavLink, useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Collapse from 'react-bootstrap/Collapse';
 import moment from 'moment';
@@ -17,6 +17,8 @@ import Footer from '../../Components/Footer/Index';
 import LoadingComponent from '../../Components/Loader';
 import ProductModalComponent from '../../Components/Modal/ProductModal';
 
+import EmptyProductsImg from '../../assets/static/empty_shopping_cart.png';
+
 
 const Index = () => {
     const history = useHistory()
@@ -27,6 +29,7 @@ const Index = () => {
     const [showCategory, setShowCategory] = useState(true)
     const [showPrice, setShowPrice] = useState(true)
     const [showColor, setShowColor] = useState(true)
+    const [nullProduct, setNullProduct] = useState(false)
     const [categories, setCategories] = useState([])
     const [categoryProducts, setCategoryProducts] = useState([])
     const [limit, setLimit] = useState(8)
@@ -42,15 +45,22 @@ const Index = () => {
                 const categoryResponse = await axios.get(`${apiURL}getCategory`)
                 const categoryProducts = await axios.get(`${apiURL}categoryProducts/${categoryId}`)
                 if (categoryResponse.status === 200 && categoryProducts.status === 200) {
-                    setCategories(categoryResponse.data.result)
-                    setCategoryProducts(categoryProducts.data.result)
-                    setLimit(8)
-                    setLoading(false)
+                    if (categoryResponse.data.result && categoryProducts.data.result) {
+                        setCategories(categoryResponse.data.result)
+                        setCategoryProducts(categoryProducts.data.result)
+                        setLimit(8)
+                        setLoading(false)
+                    } else {
+                        setLoading(false)
+                        setNullProduct(true)
+                    }
                 }
+
             } catch (error) {
-                if (error && error.response.status === 500) {
-                    history.push('/')
-                }
+                // if (error && error.response.status === 500) {
+                //     history.push('/')
+                // }
+                if (error) console.log(error)
             }
         }
 
@@ -231,81 +241,91 @@ const Index = () => {
 
                                     {/* Main Menu */}
                                     <div className="flex-fill flex-main-menu p-lg-3">
-                                        <div className="main-content">
-                                            <div className="row">
-
-                                                {/* Product Sort */}
-                                                <div className="col-12 mb-2 product-sort">
-                                                    <select
-                                                        onChange={handleSort}
-                                                        className="form-control rounded-0 shadow-none"
-                                                    >
-                                                        <option value="sort_all">Sort by All</option>
-                                                        <option value="sort_latest">Sort by Latest</option>
-                                                    </select>
+                                        {nullProduct ?
+                                            <div className="null-content rounded-circle">
+                                                <div className="flex-center flex-column">
+                                                    <img src={EmptyProductsImg} className="img-fluid" alt="..." />
+                                                    <p className="mb-0">Opps! Products not found !!</p>
+                                                    <Link to="/" type="button" className="btn shadow-none text-white">Back to Home</Link>
                                                 </div>
+                                            </div>
+                                            :
+                                            <div className="main-content">
+                                                <div className="row">
 
-                                                <div className="col-12">
-                                                    {categoryProducts.length > 0 && categoryProducts.slice(0, limit).map((product, i) =>
-                                                        <div className="card rounded-0 product-card" key={i}>
-                                                            <div className="card-body">
-                                                                <div className="img-box">
-                                                                    <img src={product.image} className="img-fluid" alt="..." />
-                                                                    <div className="action-buttons text-right">
-                                                                        <button
-                                                                            type="button"
-                                                                            className="btn rounded-circle shadow-none shopping-bag-btn"
-                                                                            onClick={() => addToCart(product)}
-                                                                        >
-                                                                            <Icon icon={shoppingBag} size={16} />
-                                                                        </button>
-                                                                        <button
-                                                                            type="button"
-                                                                            className="btn rounded-circle shadow-none wish-list-btn"
-                                                                        >
-                                                                            <Icon icon={heartO} size={18} />
-                                                                        </button>
-                                                                    </div>
-                                                                    <div className="overlay">
-                                                                        <div className="flex-center flex-column quick-view">
+                                                    {/* Product Sort */}
+                                                    <div className="col-12 mb-2 product-sort">
+                                                        <select
+                                                            onChange={handleSort}
+                                                            className="form-control rounded-0 shadow-none"
+                                                        >
+                                                            <option value="sort_all">Sort by All</option>
+                                                            <option value="sort_latest">Sort by Latest</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <div className="col-12">
+                                                        {categoryProducts && categoryProducts.length > 0 && categoryProducts.slice(0, limit).map((product, i) =>
+                                                            <div className="card rounded-0 product-card" key={i}>
+                                                                <div className="card-body">
+                                                                    <div className="img-box">
+                                                                        <img src={product.image} className="img-fluid" alt="..." />
+                                                                        <div className="action-buttons text-right">
                                                                             <button
                                                                                 type="button"
-                                                                                className="btn shadow-none"
-                                                                                onClick={() => handleModal(product)}
-                                                                            >Quick View</button>
+                                                                                className="btn rounded-circle shadow-none shopping-bag-btn"
+                                                                                onClick={() => addToCart(product)}
+                                                                            >
+                                                                                <Icon icon={shoppingBag} size={16} />
+                                                                            </button>
+                                                                            <button
+                                                                                type="button"
+                                                                                className="btn rounded-circle shadow-none wish-list-btn"
+                                                                            >
+                                                                                <Icon icon={heartO} size={18} />
+                                                                            </button>
+                                                                        </div>
+                                                                        <div className="overlay">
+                                                                            <div className="flex-center flex-column quick-view">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    className="btn shadow-none"
+                                                                                    onClick={() => handleModal(product)}
+                                                                                >Quick View</button>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
-                                                                <div className="product-card-footer border">
-                                                                    <div className="d-sm-flex">
-                                                                        <div>
-                                                                            <p className="name">{product.name.slice(0, 15)}</p>
-                                                                        </div>
-                                                                        <div className="ml-auto">
-                                                                            <p className="price">${product.selling_price}</p>
+                                                                    <div className="product-card-footer border">
+                                                                        <div className="d-sm-flex">
+                                                                            <div>
+                                                                                <p className="name">{product.name.slice(0, 15)}</p>
+                                                                            </div>
+                                                                            <div className="ml-auto">
+                                                                                <p className="price">${product.selling_price}</p>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
 
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                    )}
-                                                </div>
-
-
-                                                {categoryProducts.length <= limit ?
-                                                    null :
-                                                    <div className="col-12 text-center">
-                                                        <button
-                                                            type="button"
-                                                            className="btn shadow-none load-more-btn"
-                                                            onClick={() => setLimit(limit + productsPerPage)}
-                                                        >Load More</button>
+                                                        )}
                                                     </div>
-                                                }
 
+
+                                                    {categoryProducts.length <= limit ?
+                                                        null :
+                                                        <div className="col-12 text-center">
+                                                            <button
+                                                                type="button"
+                                                                className="btn shadow-none load-more-btn"
+                                                                onClick={() => setLimit(limit + productsPerPage)}
+                                                            >Load More</button>
+                                                        </div>
+                                                    }
+
+                                                </div>
                                             </div>
-                                        </div>
+                                        }
                                     </div>
 
 
