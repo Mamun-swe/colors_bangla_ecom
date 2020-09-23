@@ -62,5 +62,37 @@
                 background: none;
             }
         }
+
+        .card {
+            border: 0;
+
+            .card-header {
+                cursor: pointer;
+                background: #fff;
+                padding: 15px 5px;
+                border-radius: 0;
+                border-bottom: 1px solid #dfdfdf;
+
+                p {
+                    color: #000;
+                    font-size: 14px;
+                    font-weight: 700;
+                    font-family: 'Roboto', sans-serif;
+                }
+            }
+
+            .card-body {
+                padding-left: 5px;
+                padding-right: 5px;
+
+                p {
+                    color: #000;
+                    font-size: 14px;
+                    margin-bottom: 0;
+                    line-height: 1.8rem;
+                    font-family: 'Roboto', sans-serif;
+                }
+            }
+        }
     }
 }
