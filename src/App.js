@@ -17,6 +17,8 @@ import RegisterPage from './Pages/Auth/Register';
 import ResetPage from './Pages/Auth/Reset';
 
 import AccountMaster from './Pages/Account/Master';
+
+import faqIndex from './Pages/FAQ/Index';
 import FourOFour from './Pages/FourOFour/Index';
 
 function App() {
@@ -35,6 +37,8 @@ function App() {
             <Route exact path="/sign-in" component={LoginPage} />
             <Route exact path="/sign-up" component={RegisterPage} />
             <Route exact path="/reset" component={ResetPage} />
+
+            <Route exact path="/faq" component={faqIndex} />
 
             <PrivateRoute>
               <Route path="/account" component={AccountMaster} />
