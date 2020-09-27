@@ -4,6 +4,9 @@ import '../../styles/Account/master.scss';
 import { Icon } from 'react-icons-kit';
 import { ic_dehaze, ic_close } from 'react-icons-kit/md';
 
+// import NavBarComponent from '../../Components/NavBar/NavBar';
+// import FooterComponent from '../../Components/Footer/Index';
+
 import DashboardIndex from './Dashboard/Index';
 import OrderIndex from './Orders/Index';
 import AddressesIndex from './Address/Index';
@@ -22,6 +25,8 @@ const Master = () => {
 
     return (
         <div className="account-master">
+            {/* <NavBarComponent /> */}
+
             <div className="container">
                 <div className="row">
                     <div className="col-12">
@@ -83,6 +88,8 @@ const Master = () => {
                     </div>
                 </div>
             </div>
+
+            {/* <FooterComponent /> */}
         </div>
     );
 };

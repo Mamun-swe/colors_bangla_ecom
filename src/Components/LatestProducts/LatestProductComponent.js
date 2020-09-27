@@ -7,6 +7,7 @@ import {
     ic_keyboard_arrow_right
 } from 'react-icons-kit/md';
 import ProductModalComponent from '../Modal/ProductModal';
+import { Link } from 'react-router-dom';
 
 const LatestProductComponent = ({ latestProducts }) => {
     const [modalShow, setModalShow] = useState(false)
@@ -84,15 +85,17 @@ const LatestProductComponent = ({ latestProducts }) => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="footer border">
-                                            <div className="d-sm-flex">
-                                                <div>
-                                                    <p className="name">{product.name}</p>
+                                        <div className="footer border p-0">
+                                            <Link to={`/product/${product.id}/${product.name}`}>
+                                                <div className="d-sm-flex">
+                                                    <div>
+                                                        <p className="name">{product.name}</p>
+                                                    </div>
+                                                    <div className="ml-auto">
+                                                        <p className="price">${product.selling_price}</p>
+                                                    </div>
                                                 </div>
-                                                <div className="ml-auto">
-                                                    <p className="price">${product.selling_price}</p>
-                                                </div>
-                                            </div>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>

@@ -7,6 +7,8 @@ import ScrollToTop from './Components/ScrollToTop/Index';
 
 import Index from './Pages/Index';
 import CategoryIndex from './Pages/Category/Index';
+import SingleProductIndex from './Pages/SingleProduct/Index';
+
 import ContactIndex from './Pages/Contact/Index';
 
 import CartIndex from './Pages/Cart/Index';
@@ -29,6 +31,8 @@ function App() {
           <Switch>
             <Route exact path="/" component={Index} />
             <Route exact path="/category/:categoryId" component={CategoryIndex} />
+            <Route exact path="/product/:id/:name" component={SingleProductIndex} />
+
             <Route exact path="/contact" component={ContactIndex} />
 
             <Route exact path="/shopping-cart" component={CartIndex} />

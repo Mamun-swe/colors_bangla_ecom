@@ -296,7 +296,7 @@ const Index = () => {
                                                                         </div>
                                                                     </div>
                                                                     <div className="product-card-footer border">
-                                                                        <Link to="/">
+                                                                        <Link to={`/product/${product.id}/${product.name}`}>
                                                                             <div className="d-sm-flex">
                                                                                 <div>
                                                                                     <p className="name">{product.name.slice(0, 15)}</p>
