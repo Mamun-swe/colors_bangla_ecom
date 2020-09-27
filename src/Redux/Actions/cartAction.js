@@ -3,7 +3,9 @@ import {
     CART_PRODUCT_SUCCESS,
     CART_PRODUCT_FAILED,
     PRODUCT_ADD_CART_REQUEST,
-    PRODUCT_REMOVE_FROM_CART
+    PRODUCT_REMOVE_FROM_CART,
+    INCREMENT_PRODUCT_QUANTITY,
+    DECREMENT_PRODUCT_QUANTITY
 } from '../types';
 
 
@@ -42,5 +44,21 @@ export const addProduct = (data) => {
 export const removeProduct = (data) => {
     return async (dispatch) => {
         dispatch({ type: PRODUCT_REMOVE_FROM_CART, payload: data })
+    }
+}
+
+
+// Increment Quantity
+export const incrementQuantity = (data) => {
+    return async (dispatch) => {
+        dispatch({ type: INCREMENT_PRODUCT_QUANTITY, payload: data })
+    }
+}
+
+
+// Decrement Quantity
+export const decrementQuantity = (data) => {
+    return async (dispatch) => {
+        dispatch({ type: DECREMENT_PRODUCT_QUANTITY, payload: data })
     }
 }

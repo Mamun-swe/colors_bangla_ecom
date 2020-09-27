@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import '../../styles/shopping-cart.scss';
+import { Icon } from 'react-icons-kit';
+import { plus, minus } from 'react-icons-kit/ionicons';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { productsList } from '../../Redux/Actions/cartAction';
+import { productsList, removeProduct, incrementQuantity, decrementQuantity } from '../../Redux/Actions/cartAction';
 
 import NavBarComponent from '../../Components/NavBar/NavBar';
 import FooterComponent from '../../Components/Footer/Index';
@@ -23,6 +25,19 @@ const Index = () => {
     useEffect(() => {
         dispatch(productsList())
     }, [dispatch])
+
+    // Add to cart
+    const removeFromCart = data => {
+        const newData = {
+            id: data.id,
+            name: data.name,
+            price: data.selling_price,
+            stock: data.stock,
+            image: data.image,
+            quantity: 1
+        }
+        dispatch(removeProduct(newData))
+    }
 
 
     return (
@@ -58,17 +73,46 @@ const Index = () => {
                                 <tbody>
                                     {cartProducts.length > 0 && cartProducts.map((product, i) =>
                                         <tr key={i}>
+                                            {/* Image */}
                                             <td>
                                                 <div className="img-box">
                                                     <img src={product.image} className="img-fluid" alt="..." />
                                                 </div>
                                             </td>
+                                            {/* Name & Remove from cart */}
                                             <td style={{ minWidth: '150px' }}>
                                                 <p className="mb-1">{product.name}</p>
-                                                <small>Remove</small>
+                                                <small onClick={() => removeFromCart(product)}>Remove</small>
                                             </td>
+                                            {/* Price */}
                                             <td className="text-center">Tk. {product.price}</td>
-                                            <td className="text-center">{product.quantity}</td>
+                                            <td
+                                                className="text-center"
+                                                style={{ minWidth: '145px' }}
+                                            >
+                                                {/* Decrement Quantity */}
+                                                <button
+                                                    type="button"
+                                                    className="btn shadow-none"
+                                                    onClick={() => dispatch(decrementQuantity(product.id))}
+                                                    disabled={product.quantity <= 1 ? true : false}
+                                                >
+                                                    <Icon icon={minus} />
+                                                </button>
+
+                                                {/* Quantity */}
+                                                <button type="button" className="btn shadow-none" disabled>{product.quantity}</button>
+
+                                                {/* Increment Quantity */}
+                                                <button
+                                                    type="button"
+                                                    className="btn shadow-none"
+                                                    onClick={() => dispatch(incrementQuantity(product.id))}
+                                                    disabled={product.quantity >= 5 ? true : false}
+                                                >
+                                                    <Icon icon={plus} />
+                                                </button>
+                                            </td>
                                             <td className="text-center">Tk. {product.price * product.quantity}</td>
                                             <td className="d-none">{subTotal += product.price * product.quantity}</td>
                                         </tr>
@@ -76,7 +120,8 @@ const Index = () => {
                                 </tbody>
                             </table>
 
-                            {/* <div className="coupon-box">
+                            {/* Promotion Code */}
+                            <div className="coupon-box">
                                 <p className="text-muted">Enter your promotion code</p>
                                 <form>
                                     <div className="input-group mb-2">
@@ -93,7 +138,7 @@ const Index = () => {
                                         </div>
                                     </div>
                                 </form>
-                            </div> */}
+                            </div>
                         </div>
 
                         {/* Cart Total Column */}

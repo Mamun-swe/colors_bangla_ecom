@@ -74,6 +74,13 @@
                     small:hover {
                         color: $secondary-color;
                     }
+
+                    .btn {
+                        border-radius: 0;
+                        background: none;
+                        padding: 4px 8px;
+                        border: 1px solid #dfdfdf;
+                    }
                 }
             }
         }

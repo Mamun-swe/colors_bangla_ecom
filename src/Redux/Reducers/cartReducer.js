@@ -3,7 +3,9 @@ import {
     CART_PRODUCT_SUCCESS,
     CART_PRODUCT_FAILED,
     PRODUCT_ADD_CART_REQUEST,
-    PRODUCT_REMOVE_FROM_CART
+    PRODUCT_REMOVE_FROM_CART,
+    INCREMENT_PRODUCT_QUANTITY,
+    DECREMENT_PRODUCT_QUANTITY
 } from '../types';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -67,9 +69,47 @@ export default function (state = initialState, action) {
                 }
             }
 
-        
-            // Product remove
-            // case PRODUCT_REMOVE_FROM_CART:
+
+        // Product remove
+        case PRODUCT_REMOVE_FROM_CART:
+            const items = JSON.parse(localStorage.getItem('products'))
+            const filtered = items.filter(item => item.id !== action.payload.id)
+            localStorage.setItem('products', JSON.stringify(filtered))
+
+            return {
+                ...state,
+                cartProducts: state.cartProducts.filter((product) => product.id !== action.payload.id),
+                add_success: true
+            }
+
+        // Increment Quantity
+        case INCREMENT_PRODUCT_QUANTITY:
+            return {
+                ...state,
+                cartProducts: state.cartProducts.map((product) => {
+                    if (product.id === action.payload) {
+                        product.quantity += 1
+                        localStorage.setItem('products', JSON.stringify(state.cartProducts))
+                    }
+                    return product
+                }),
+                
+                add_success: true
+            }
+
+        // Decrement Quantity
+        case DECREMENT_PRODUCT_QUANTITY:
+            return {
+                ...state,
+                cartProducts: state.cartProducts.map((product) => {
+                    if (product.id === action.payload) {
+                        product.quantity -= 1
+                        localStorage.setItem('products', JSON.stringify(state.cartProducts))
+                    }
+                    return product
+                }),
+                add_success: true
+            }
 
 
         default:
