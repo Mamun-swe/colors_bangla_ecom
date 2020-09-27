@@ -109,8 +109,7 @@ const NavBar = () => {
                     <div className="content-body px-4">
                         <Link to="/">home</Link>
                         <Link to={`/category/${singleCatId}`}>shop</Link>
-                        <Link to="/">categories</Link>
-                        <Link to="/">new arrival</Link>
+                        {/* <Link to={`/category/${singleCatId}`}>new arrival</Link> */}
                         <Link to="/contact">contact</Link>
                         <Link to="/sign-in">my account</Link>
                     </div>
@@ -132,7 +131,7 @@ const NavBar = () => {
                                         </li>
                                         <li><NavLink exact activeClassName="is-active" to="/">home</NavLink></li>
                                         <li><NavLink exact activeClassName="is-active" to={`/category/${singleCatId}`}>shop</NavLink></li>
-                                        <li><NavLink exact activeClassName="is-active" to="/new-arrival">new arrival</NavLink></li>
+                                        {/* <li><NavLink exact activeClassName="is-active" to={`/category/${singleCatId}`}>new arrival</NavLink></li> */}
                                         <li><NavLink exact activeClassName="is-active" to="/contact">contact</NavLink></li>
                                     </ul>
                                 </div>

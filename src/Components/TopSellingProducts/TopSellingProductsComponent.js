@@ -9,6 +9,7 @@ import { spinner2 } from 'react-icons-kit/icomoon';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../Redux/Actions/cartAction';
 import ProductModalComponent from '../Modal/ProductModal';
+import { Link } from 'react-router-dom';
 
 const TopSellingProductsComponent = ({ categories }) => {
     const [modalShow, setModalShow] = useState(false)
@@ -119,14 +120,16 @@ const TopSellingProductsComponent = ({ categories }) => {
                                             </div>
                                         </div>
                                         <div className="product-card-footer border">
-                                            <div className="d-sm-flex">
-                                                <div>
-                                                    <p className="name">{product.name.slice(0, 15)}</p>
+                                            <Link to="/">
+                                                <div className="d-sm-flex">
+                                                    <div>
+                                                        <p className="name">{product.name.slice(0, 15)}</p>
+                                                    </div>
+                                                    <div className="ml-auto">
+                                                        <p className="price">${product.selling_price}</p>
+                                                    </div>
                                                 </div>
-                                                <div className="ml-auto">
-                                                    <p className="price">${product.selling_price}</p>
-                                                </div>
-                                            </div>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>

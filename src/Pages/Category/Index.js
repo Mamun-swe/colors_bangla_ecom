@@ -296,14 +296,16 @@ const Index = () => {
                                                                         </div>
                                                                     </div>
                                                                     <div className="product-card-footer border">
-                                                                        <div className="d-sm-flex">
-                                                                            <div>
-                                                                                <p className="name">{product.name.slice(0, 15)}</p>
+                                                                        <Link to="/">
+                                                                            <div className="d-sm-flex">
+                                                                                <div>
+                                                                                    <p className="name">{product.name.slice(0, 15)}</p>
+                                                                                </div>
+                                                                                <div className="ml-auto">
+                                                                                    <p className="price">${product.selling_price}</p>
+                                                                                </div>
                                                                             </div>
-                                                                            <div className="ml-auto">
-                                                                                <p className="price">${product.selling_price}</p>
-                                                                            </div>
-                                                                        </div>
+                                                                        </Link>
                                                                     </div>
 
                                                                 </div>
