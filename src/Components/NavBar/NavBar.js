@@ -1,24 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import '../../styles/navbar.scss';
-import { Link, NavLink } from 'react-router-dom';
-import { Icon } from 'react-icons-kit';
-import {
-    user,
-    earth,
-    twitter,
-    facebook,
-    instagram
-} from 'react-icons-kit/icomoon'
-import {
-    ic_add_shopping_cart,
-    ic_search,
-    ic_dehaze, ic_close
-} from 'react-icons-kit/md';
-import { text_left } from 'react-icons-kit/ikons';
 import axios from 'axios';
+import { Icon } from 'react-icons-kit';
 import { apiURL } from '../../utils/apiURL';
+import { Link, NavLink } from 'react-router-dom';
+import { text_left } from 'react-icons-kit/ikons';
 import { useSelector, useDispatch } from 'react-redux';
 import { productsList } from '../../Redux/Actions/cartAction';
+import { user, earth, twitter, facebook, instagram } from 'react-icons-kit/icomoon'
+import { ic_add_shopping_cart, ic_dehaze, ic_close } from 'react-icons-kit/md';
 
 import SearchComponent from '../Search/Index';
 import Logo from '../../assets/static/logo.png';
@@ -39,7 +29,6 @@ const NavBar = () => {
                 if (categoryResponse.status === 200) {
                     setCategories(categoryResponse.data.result)
                     setSingleCatId(categoryResponse.data.result[0].id)
-                    // console.log(categoryResponse.data.result)
                 }
             } catch (error) {
                 if (error) console.log(error)
@@ -48,13 +37,6 @@ const NavBar = () => {
 
         fetchCategories()
     }, [dispatch])
-
-
-    // onChange Filter Handle
-    const onChangeFilter = event => {
-        console.log(event.target.value)
-    }
-
 
     return (
         <div className="custom-navbar">
@@ -73,7 +55,7 @@ const NavBar = () => {
                         </div>
                         <div className="pr-2">
                             <div className="cart-box">
-                                <Link to="/"
+                                <Link to="/shopping-cart"
                                     type="button"
                                     className="btn rounded-circle shadow-none cart-btn">
                                     <Icon icon={ic_add_shopping_cart} size={22} />
@@ -197,17 +179,7 @@ const NavBar = () => {
                                         </div>
 
                                         <div className="search-desktop">
-                                            <form>
-                                                <div className="form-group mb-0">
-                                                    <input
-                                                        type="text"
-                                                        className="form-control rounded-0 shadow-none"
-                                                        placeholder="Enter Your Keyword"
-                                                        onChange={onChangeFilter}
-                                                    />
-                                                    <Icon className="search-icon" icon={ic_search} size={20} style={{ color: "#fff" }} />
-                                                </div>
-                                            </form>
+                                            <SearchComponent />
                                         </div>
                                     </div>
                                 </div>

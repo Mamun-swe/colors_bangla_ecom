@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import '../../styles/single-product.scss';
 import ReactImageMagnify from 'react-image-magnify';
 import axios from 'axios';

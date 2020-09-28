@@ -194,35 +194,6 @@
             }
         }
 
-        .search-desktop {
-            .form-group {
-                position: relative;
-
-                .form-control {
-                    color: #fff;
-                    height: 31px;
-                    font-size: 14px;
-                    font-weight: 300;
-                    padding: 4px 10px;
-                    padding-right: 30px;
-                    border: 1px solid #fff;
-                    background: #01028f;
-                    font-family: 'Roboto', sans-serif;
-                    width: 300px;
-                }
-
-                ::placeholder {
-                    color: #fff;
-                }
-
-                .search-icon {
-                    position: absolute;
-                    top: 3px;
-                    right: 5px;
-                }
-            }
-        }
-
         ul {
             padding: 0;
             margin: 0;

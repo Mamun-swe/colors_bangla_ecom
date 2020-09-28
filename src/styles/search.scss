@@ -14,6 +14,19 @@
             height: 34px;
             border: 0;
             padding-right: 35px;
+
+            @media (min-width: 992px) {
+                height: 31px;
+                color: #fff;
+                background: none;
+                border: 1px solid #fff;
+            }
+        }
+
+        ::placeholder {
+            @media (min-width: 992px) {
+                color: #fff;
+            }
         }
 
         .error {
@@ -24,6 +37,11 @@
             position: absolute;
             top: 5px;
             right: 5px;
+            color: #555;
+
+            @media (min-width: 992px) {
+                color: #fff;
+            }
         }
     }
 

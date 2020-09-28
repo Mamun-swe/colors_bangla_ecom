@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import "../../styles/search.scss";
-import { Icon } from 'react-icons-kit';
-import { ic_search, ic_call_made } from 'react-icons-kit/md';
 import axios from 'axios';
+import { Icon } from 'react-icons-kit';
 import { apiURL } from '../../utils/apiURL';
 import { useHistory } from 'react-router-dom';
 import { useForm } from "react-hook-form";
+import { ic_search, ic_call_made } from 'react-icons-kit/md';
 
 const Index = () => {
     const history = useHistory();
@@ -19,12 +19,13 @@ const Index = () => {
         if (event.target.value) {
             setSuggestBox(true)
             setIsSearchLoading(true)
-            axios.get(`${apiURL}comments?postId=${event.target.value}`)
+            axios.get(`${apiURL}searchProducts/${event.target.value}`)
                 .then(res => {
                     if (res.data) {
-                        setResults(res.data)
+                        setResults(res.data.result)
                         setSuggestBox(true)
                         setIsSearchLoading(false)
+                        // console.log(res.data.result);
                     }
                 })
                 .catch(err => {
@@ -40,13 +41,13 @@ const Index = () => {
 
     const handleClick = data => {
         setSuggestBox(false)
-        history.push(`/${data}`)
+        history.push(`/search-results?query=${data}`)
     }
 
     // Submit Search
     const onSubmit = data => {
         setSuggestBox(false)
-        history.push(`/${data.filterdata}`)
+        history.push(`/search-results?query=${data.filterdata}`)
     }
 
     return (
@@ -63,7 +64,7 @@ const Index = () => {
                             required: true
                         })}
                     />
-                    <Icon icon={ic_search} size={25} className="search-icon" style={{ color: '#555' }} />
+                    <Icon icon={ic_search} size={25} className="search-icon" />
                 </form>
 
                 {/* Suggest Box */}
@@ -82,7 +83,7 @@ const Index = () => {
                             : null}
 
                         {results && results.length > 0 ? (results.map((result) =>
-                            <div className="result" key={result.id} onClick={() => handleClick(result.id)}>
+                            <div className="result" key={result.id} onClick={() => handleClick(result.name)}>
                                 <div className="d-flex">
                                     <div><p className="mb-0 pl-0">{result.name}</p></div>
                                     <div className="ml-auto">
