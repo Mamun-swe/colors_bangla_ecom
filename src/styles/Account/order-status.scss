@@ -1,0 +1,67 @@
+@import "../../App.scss";
+
+.order-status {
+    h6 {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    // Short info
+    .short-info {
+        width: 250px;
+        padding: 15px;
+        margin: auto;
+        text-align: center;
+        border: 1px solid #dfdfdf;
+
+        p {
+            color: #000;
+            font-size: 13px;
+            margin-bottom: 3px;
+            font-family: 'Roboto', sans-serif;
+
+            span {
+                color: #555;
+            }
+        }
+
+        @media (min-width: 576px) {
+            width: 300px;
+        }
+    }
+
+    // Message
+    .message {
+        margin-bottom: 15px;
+        padding: 10px 15px;
+
+        p {
+            color: #fff;
+            font-size: 13px;
+            margin-bottom: 0;
+            margin-top: 3px;
+        }
+    }
+
+    // Order Details
+    .order-details {
+        .table {
+            thead {
+                tr {
+                    td {
+                        border-bottom: 1px solid #dfdfdf;
+
+                        p {
+                            font-size: 13px;
+                            font-weight: 700;
+                            margin-bottom: 0;
+                            text-transform: uppercase;
+                            font-family: 'Roboto', sans-serif;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

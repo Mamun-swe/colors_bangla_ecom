@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../../../styles/Account/order.scss';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 // import { apiURL } from '../../../utils/apiURL';
 import LoadingComponent from '../../../Components/Loader';
 
@@ -50,15 +51,16 @@ const Index = () => {
                                     <td><p>sep 15, 2020</p></td>
                                     <td><p>processing</p></td>
                                     <td><p>800 tk.</p></td>
-                                    <td className="text-right">
-                                        <button
+                                    <td className="text-right" style={{ minWidth: '150px' }}>
+                                        <Link
+                                            to={`/account/order/${order.id}/status`}
                                             type="button"
                                             className="btn rounded-0 shadow-none view-btn"
-                                        >view</button>
-                                        <button
+                                        >view</Link>
+                                        <Link
                                             type="button"
                                             className="btn rounded-0 shadow-none btn-light text-dark invoice-btn"
-                                        >invoice</button>
+                                        >invoice</Link>
                                     </td>
                                 </tr>
                             )}
@@ -66,6 +68,8 @@ const Index = () => {
                     </table>
                 </div>
             }
+
+
         </div>
     );
 };
