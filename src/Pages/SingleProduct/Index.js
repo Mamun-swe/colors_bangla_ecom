@@ -30,9 +30,9 @@ const Index = () => {
     const dispatch = useDispatch()
 
 
-    // const magnifiyHandeller = event => {
-    //     setProductImage(event.target.src)
-    // }
+    const magnifiyHandeller = event => {
+        setProductImage(event.target.src)
+    }
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -41,7 +41,7 @@ const Index = () => {
                 const response = await axios.get(`${apiURL}viewProduct/${id}/name`)
                 setProduct(response.data.result)
                 setProductImage(response.data.result.image)
-                // console.log(response.data.result)
+                console.log(response.data.result)
                 setLoading(false)
             } catch (error) {
                 if (error.response) {
@@ -106,13 +106,17 @@ const Index = () => {
                                             enlargedImageContainerStyle: { background: '#fff', zIndex: 9 }
                                         }} />
 
-                                        {/* <div className="img-list text-center my-3">
+                                        <div className="img-list text-center my-3">
                                             <ul>
-                                                <li><img src={image1} className="img-fluid" onClick={magnifiyHandeller} alt="..." /></li>
-                                                <li><img src={image2} className="img-fluid" onClick={magnifiyHandeller} alt="..." /></li>
-                                                <li><img src={image3} className="img-fluid" onClick={magnifiyHandeller} alt="..." /></li>
+                                                {product.images &&
+                                                    product.images.length > 0 ?
+                                                    product.images.map((image, i) =>
+                                                        <li key={i}>
+                                                            <img src={image.path} className="img-fluid" onClick={magnifiyHandeller} alt="..." />
+                                                        </li>
+                                                    ) : null}
                                             </ul>
-                                        </div> */}
+                                        </div>
                                     </div>
 
                                     <div className="col-12 col-lg-4 product-info mt-4 mt-lg-0">
