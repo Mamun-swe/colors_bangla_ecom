@@ -266,10 +266,27 @@ const Index = () => {
 
                                                     <div className="col-12">
                                                         {categoryProducts && categoryProducts.length > 0 && categoryProducts.slice(0, limit).map((product, i) =>
+
                                                             <div className="card rounded-0 product-card" key={i}>
                                                                 <div className="card-body">
-                                                                    <div className="img-box">
-                                                                        <img src={product.image} className="img-fluid" alt="..." />
+                                                                    <Link to={`/product/${product.id}/${product.name}`}>
+                                                                        <div className="img-box">
+                                                                            <img src={product.image} className="img-fluid" alt="..." />
+                                                                        </div>
+                                                                    </Link>
+
+                                                                    <div className="product-card-footer border">
+
+                                                                        {/* Quick View Button */}
+                                                                        <div className="quick-view">
+                                                                            <button
+                                                                                type="button"
+                                                                                className="btn shadow-none"
+                                                                                onClick={() => handleModal(product)}
+                                                                            >Quick View</button>
+                                                                        </div>
+
+                                                                        {/* Action Buttons */}
                                                                         <div className="action-buttons text-right">
                                                                             <button
                                                                                 type="button"
@@ -285,17 +302,7 @@ const Index = () => {
                                                                                 <Icon icon={heartO} size={18} />
                                                                             </button>
                                                                         </div>
-                                                                        <div className="overlay">
-                                                                            <div className="flex-center flex-column quick-view">
-                                                                                <button
-                                                                                    type="button"
-                                                                                    className="btn shadow-none"
-                                                                                    onClick={() => handleModal(product)}
-                                                                                >Quick View</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div className="product-card-footer border">
+
                                                                         <Link to={`/product/${product.id}/${product.name}`}>
                                                                             <div className="d-sm-flex">
                                                                                 <div>
@@ -310,6 +317,7 @@ const Index = () => {
 
                                                                 </div>
                                                             </div>
+
                                                         )}
                                                     </div>
 

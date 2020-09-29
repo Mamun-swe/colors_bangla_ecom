@@ -134,7 +134,11 @@ const Index = () => {
                                                 <div className="pt-2"><h6>SIZE</h6></div>
                                                 <div>
                                                     <ul>
-                                                        <li><p>{product.size}</p></li>
+                                                        {product.size &&
+                                                            product.size.length > 0 ? product.size.map((size, i) =>
+                                                                <li key={i}><p>{size}</p></li>
+                                                            )
+                                                            : null}
                                                     </ul>
                                                 </div>
                                             </div>
@@ -145,7 +149,11 @@ const Index = () => {
                                                 <div className="pt-2"><h6>COLORS</h6></div>
                                                 <div className="ml-3">
                                                     <ul>
-                                                        <li style={{ background: `${product.color}` }}></li>
+                                                        {product.color &&
+                                                            product.color.length > 0 ? product.color.map((color, i) =>
+                                                                <li key={i} style={{ background: `${color}` }}></li>
+                                                            )
+                                                            : null}
                                                     </ul>
                                                 </div>
                                             </div>
@@ -189,11 +197,19 @@ const Index = () => {
                                 <div className="row">
                                     <div className="col-12 description">
                                         <Tabs defaultActiveKey="product_feature">
+                                            {/* Product feature tab */}
                                             <Tab eventKey="product_feature" title="Product Features">
                                                 <p>{product.feature}</p>
                                             </Tab>
+
+                                            {/* Product description tab */}
                                             <Tab eventKey="product_description" title="Product Descriptions">
                                                 <p>{product.description}</p>
+                                            </Tab>
+
+                                            {/* Product review tab */}
+                                            <Tab eventKey="product_reviews" title="Reviews">
+                                                <p>Review</p>
                                             </Tab>
                                         </Tabs>
                                     </div>
@@ -211,8 +227,12 @@ const Index = () => {
                                             {product.relatedProducts.map((product, i) =>
                                                 <div className="card rounded-0 product-card" key={i}>
                                                     <div className="card-body">
-                                                        <div className="img-box">
-                                                            <img src={product.image} className="img-fluid" alt="..." />
+                                                        <Link to={`/product/${product.id}/${product.name}`}>
+                                                            <div className="img-box">
+                                                                <img src={product.image} className="img-fluid" alt="..." />
+                                                            </div>
+                                                        </Link>
+                                                        <div className="product-card-footer border">
                                                             <div className="action-buttons text-right">
                                                                 <button
                                                                     type="button"
@@ -228,8 +248,7 @@ const Index = () => {
                                                                     <Icon icon={heartO} size={18} />
                                                                 </button>
                                                             </div>
-                                                        </div>
-                                                        <div className="product-card-footer border">
+
                                                             <Link to={`/product/${product.id}/${product.name}`}>
                                                                 <div className="d-sm-flex">
                                                                     <div>

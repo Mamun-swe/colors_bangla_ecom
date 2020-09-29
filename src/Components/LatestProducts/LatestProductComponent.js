@@ -73,8 +73,12 @@ const LatestProductComponent = ({ latestProducts }) => {
                             {latestProducts.length > 0 && latestProducts.map((product, i) =>
                                 <div className="card rounded-0 border-0" key={i}>
                                     <div className="card-body">
-                                        <div className="img-box">
-                                            <img src={product.image} className="img-fluid" alt="..." />
+                                        <Link to={`/product/${product.id}/${product.name}`}>
+                                            <div className="img-box">
+                                                <img src={product.image} className="img-fluid" alt="..." />
+                                            </div>
+                                        </Link>
+                                        <div className="footer border p-0">
                                             <div className="overlay">
                                                 <div className="flex-center flex-column">
                                                     <button
@@ -84,8 +88,6 @@ const LatestProductComponent = ({ latestProducts }) => {
                                                     >Quick View</button>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="footer border p-0">
                                             <Link to={`/product/${product.id}/${product.name}`}>
                                                 <div className="d-sm-flex">
                                                     <div>
