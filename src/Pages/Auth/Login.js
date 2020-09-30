@@ -12,11 +12,23 @@ const Login = () => {
     const { register, handleSubmit, errors } = useForm()
     const [isLoading, setLoading] = useState(false)
 
-    const onSubmit = async (data) => {
-        setLoading(true)
-        console.log(data)
-        localStorage.setItem('token', data.email)
-        history.push('/account')
+    const onSubmit = data => {
+        // setLoading(true)
+        // console.log(data)
+        // localStorage.setItem('token', data.email)
+        // history.push('/account')
+
+        const loginData = {
+            username: data.email,
+            password: data.password
+        }
+
+        try {
+            const response = axios.post(`${apiURL}login`, loginData)
+            console.log(response)
+        } catch (error) {
+            if (error) console.log(error.response)
+        }
     }
 
     return (

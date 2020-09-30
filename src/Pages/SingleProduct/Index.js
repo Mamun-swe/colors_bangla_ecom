@@ -80,7 +80,6 @@ const Index = () => {
             return setRatingErr(true)
         }
 
-
         const reviewData = {
             product_id: id,
             rating: rating,
