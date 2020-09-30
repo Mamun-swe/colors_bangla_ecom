@@ -92,8 +92,6 @@ const Index = () => {
         dispatch(addProduct(newData))
     }
 
-
-
     return (
         <div className="category-index">
             {loading ? <LoadingComponent /> :

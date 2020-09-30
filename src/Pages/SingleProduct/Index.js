@@ -32,6 +32,7 @@ const Index = () => {
     const [productImage, setProductImage] = useState('')
     const [quantity, setQuantity] = useState(1)
     const [rating, setRating] = useState()
+    const [ratingErr, setRatingErr] = useState(false)
     const dispatch = useDispatch()
 
 
@@ -46,7 +47,7 @@ const Index = () => {
                 const response = await axios.get(`${apiURL}viewProduct/${id}/name`)
                 setProduct(response.data.result)
                 setProductImage(response.data.result.image)
-                console.log(response.data.result)
+                // console.log(response.data.result)
                 setLoading(false)
             } catch (error) {
                 if (error.response) {
@@ -64,6 +65,7 @@ const Index = () => {
         const newData = {
             id: data.id,
             name: data.name,
+            rating: rating,
             price: data.selling_price,
             stock: data.stock,
             image: data.image,
@@ -74,6 +76,11 @@ const Index = () => {
 
     // Review Submit
     const onSubmit = async (data) => {
+        if (!rating) {
+            return setRatingErr(true)
+        }
+
+
         const reviewData = {
             product_id: id,
             rating: rating,
@@ -218,7 +225,7 @@ const Index = () => {
                                 {/* Product Description */}
                                 <div className="row">
                                     <div className="col-12 description">
-                                        <Tabs defaultActiveKey="product_reviews">
+                                        <Tabs defaultActiveKey="product_feature">
                                             {/* Product feature tab */}
                                             <Tab eventKey="product_feature" title="Product Features">
                                                 <p>{product.feature}</p>
@@ -264,6 +271,7 @@ const Index = () => {
                                                         <form onSubmit={handleSubmit(onSubmit)}>
 
                                                             {/* Ratings */}
+                                                            {ratingErr ? <p className="text-danger mb-1">Rating is required.</p> : <p className="mb-1">Rating</p>}
                                                             <div className="ratings mb-3">
                                                                 <div
                                                                     className={rating === 1 ? "icons color-yellow" : "icons"}
@@ -306,6 +314,7 @@ const Index = () => {
                                                                     <Icon icon={star} size={16} />
                                                                 </div>
                                                             </div>
+
 
                                                             {/* Name */}
                                                             <div className="form-group mb-3">
