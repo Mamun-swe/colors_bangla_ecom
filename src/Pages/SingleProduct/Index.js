@@ -6,6 +6,7 @@ import { apiURL } from '../../utils/apiURL';
 import { Icon } from 'react-icons-kit';
 import { plus, minus } from 'react-icons-kit/ionicons';
 import { ic_access_time, ic_directions_car } from 'react-icons-kit/md';
+import { user_circle } from 'react-icons-kit/ikons/user_circle';
 import { shoppingBag } from 'react-icons-kit/feather';
 import { heartO } from 'react-icons-kit/fa';
 import Tabs from 'react-bootstrap/Tabs';
@@ -13,6 +14,7 @@ import Tab from 'react-bootstrap/Tab';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../Redux/Actions/cartAction';
+import { useForm } from "react-hook-form";
 
 import NavBarComponent from '../../Components/NavBar/NavBar';
 import FooterComponent from '../../Components/Footer/Index';
@@ -21,7 +23,8 @@ import LoadingComponent from '../../Components/Loader';
 import FourOFourImg from '../../assets/static/empty_shopping_cart.png';
 
 const Index = () => {
-    const { id } = useParams()
+    const { register, handleSubmit, errors } = useForm()
+    const { id, name } = useParams()
     const [isLoading, setLoading] = useState(false)
     const [isError, setError] = useState(false)
     const [product, setProduct] = useState({})
@@ -51,7 +54,7 @@ const Index = () => {
             }
         }
         fetchProduct()
-    }, [id])
+    }, [id, name])
 
 
     // Add to cart
@@ -65,6 +68,18 @@ const Index = () => {
             quantity: quantity || 1
         }
         dispatch(addProduct(newData))
+    }
+
+    // Review Submit
+    const onSubmit = async (data) => {
+        const reviewData = {
+            product_id: id,
+            name: data.name,
+            email: data.email,
+            review: data.review
+        }
+
+        console.log(reviewData)
     }
 
     return (
@@ -200,7 +215,7 @@ const Index = () => {
                                 {/* Product Description */}
                                 <div className="row">
                                     <div className="col-12 description">
-                                        <Tabs defaultActiveKey="product_feature">
+                                        <Tabs defaultActiveKey="product_reviews">
                                             {/* Product feature tab */}
                                             <Tab eventKey="product_feature" title="Product Features">
                                                 <p>{product.feature}</p>
@@ -212,8 +227,101 @@ const Index = () => {
                                             </Tab>
 
                                             {/* Product review tab */}
-                                            <Tab eventKey="product_reviews" title="Reviews">
-                                                <p>Review</p>
+                                            <Tab eventKey="product_reviews" title="Reviews" className="reviews">
+                                                <div className="row">
+                                                    <div className="col-12 col-lg-6 mb-4 mb-lg-0">
+                                                        <div className="pb-2 border-bottom mb-3">
+                                                            <h6 className="text-uppercase mb-0">
+                                                                {product.reviews ? <span className="mr-2">{product.reviews.length}</span> : "0"}
+                                                                review {name}</h6>
+                                                        </div>
+
+                                                        {product.reviews &&
+                                                            product.reviews.length > 0 ?
+                                                            product.reviews.map((review, i) =>
+                                                                <div className="d-flex mb-4" key={i}>
+                                                                    <div><Icon icon={user_circle} size={30} className="text-muted" /></div>
+                                                                    <div className="pl-3">
+                                                                        <h5 className="text-capitalize mb-0">{review.name}</h5>
+                                                                        <p className="mb-0">Rating: {review.rating}</p>
+                                                                        <p className="mb-0">{review.details}</p>
+                                                                    </div>
+                                                                </div>
+                                                            ) : null}
+
+                                                    </div>
+                                                    <div className="col-12 col-lg-6">
+
+                                                        <div className="pb-2 border-bottom">
+                                                            <h5 className="mb-0">ADD A REVIEW</h5>
+                                                        </div>
+                                                        <p>Your email address will not be published. Required fields are marked</p>
+
+                                                        {/* Review Form */}
+                                                        <form onSubmit={handleSubmit(onSubmit)}>
+
+                                                            {/* Name */}
+                                                            <div className="form-group mb-3">
+                                                                {errors.name && errors.name.message ? (
+                                                                    <small className="text-danger">{errors.name && errors.name.message}</small>
+                                                                ) : <small>Your name *</small>
+                                                                }
+                                                                <input
+                                                                    type="text"
+                                                                    name="name"
+                                                                    className="form-control shadow-none"
+                                                                    ref={register({
+                                                                        required: "Name is required",
+                                                                    })}
+                                                                />
+                                                            </div>
+
+                                                            {/* E-mail */}
+                                                            <div className="form-group mb-3">
+                                                                {errors.email && errors.email.message ? (
+                                                                    <small className="text-danger">{errors.email && errors.email.message}</small>
+                                                                ) : <small>E-mail *</small>
+                                                                }
+                                                                <input
+                                                                    type="text"
+                                                                    name="email"
+                                                                    className="form-control shadow-none"
+                                                                    ref={register({
+                                                                        required: "E-mail is required",
+                                                                        pattern: {
+                                                                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                                                                            message: "Invalid email address"
+                                                                        }
+                                                                    })}
+                                                                />
+                                                            </div>
+
+                                                            {/* Review */}
+                                                            <div className="form-group mb-3">
+                                                                {errors.review && errors.review.message ? (
+                                                                    <small className="text-danger">{errors.review && errors.review.message}</small>
+                                                                ) : <small>Review *</small>
+                                                                }
+
+                                                                <textarea
+                                                                    type="text"
+                                                                    name="review"
+                                                                    className="form-control shadow-none"
+                                                                    rows="5"
+                                                                    ref={register({
+                                                                        required: "Review is required",
+                                                                    })}
+                                                                />
+                                                            </div>
+
+                                                            <button
+                                                                type="submit"
+                                                                className="btn shadow-none float-right"
+                                                            >Submit Review</button>
+
+                                                        </form>
+                                                    </div>
+                                                </div>
                                             </Tab>
                                         </Tabs>
                                     </div>
