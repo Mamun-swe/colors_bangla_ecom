@@ -28,7 +28,7 @@ const Index = () => {
     const [modalData, setModalData] = useState({})
     const [showCategory, setShowCategory] = useState(true)
     const [showPrice, setShowPrice] = useState(true)
-    const [showColor, setShowColor] = useState(true)
+    // const [showColor, setShowColor] = useState(true)
     const [nullProduct, setNullProduct] = useState(false)
     const [categories, setCategories] = useState([])
     const [categoryProducts, setCategoryProducts] = useState([])
@@ -206,7 +206,7 @@ const Index = () => {
                                                 </Collapse>
 
                                                 {/* Color Dropdown */}
-                                                <div className="dropdown-header"
+                                                {/* <div className="dropdown-header"
                                                     onClick={() => setShowColor(!showColor)}
                                                 >
                                                     <div className="d-flex">
@@ -232,7 +232,7 @@ const Index = () => {
                                                         <button type="button" className="btn btn-danger rounded-0 shadow-none"></button>
                                                         <button type="button" className="btn btn-warning rounded-0 shadow-none"></button>
                                                     </div>
-                                                </Collapse>
+                                                </Collapse> */}
 
                                             </div>
                                         </div>

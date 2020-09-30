@@ -188,6 +188,18 @@
             }
 
             form {
+                .ratings {
+                    .icons {
+                        cursor: pointer;
+                        color: #555;
+                        margin-bottom: 5px;
+                    }
+
+                    .color-yellow {
+                        color: $primary-color;
+                    }
+                }
+
                 small {
                     padding-left: 3px;
                     font-family: 'Roboto', sans-serif;

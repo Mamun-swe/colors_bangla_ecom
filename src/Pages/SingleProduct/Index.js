@@ -9,6 +9,7 @@ import { ic_access_time, ic_directions_car } from 'react-icons-kit/md';
 import { user_circle } from 'react-icons-kit/ikons/user_circle';
 import { shoppingBag } from 'react-icons-kit/feather';
 import { heartO } from 'react-icons-kit/fa';
+import { star } from 'react-icons-kit/ikons/star';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import { Link, useParams } from 'react-router-dom';
@@ -30,6 +31,7 @@ const Index = () => {
     const [product, setProduct] = useState({})
     const [productImage, setProductImage] = useState('')
     const [quantity, setQuantity] = useState(1)
+    const [rating, setRating] = useState()
     const dispatch = useDispatch()
 
 
@@ -74,6 +76,7 @@ const Index = () => {
     const onSubmit = async (data) => {
         const reviewData = {
             product_id: id,
+            rating: rating,
             name: data.name,
             email: data.email,
             review: data.review
@@ -259,6 +262,50 @@ const Index = () => {
 
                                                         {/* Review Form */}
                                                         <form onSubmit={handleSubmit(onSubmit)}>
+
+                                                            {/* Ratings */}
+                                                            <div className="ratings mb-3">
+                                                                <div
+                                                                    className={rating === 1 ? "icons color-yellow" : "icons"}
+                                                                    onClick={() => setRating(1)}
+                                                                >
+                                                                    <Icon icon={star} size={16} />
+                                                                </div>
+                                                                <div
+                                                                    className={rating === 2 ? "icons color-yellow" : "icons"}
+                                                                    onClick={() => setRating(2)}
+                                                                >
+                                                                    <Icon icon={star} size={16} />
+                                                                    <Icon icon={star} size={16} />
+                                                                </div>
+                                                                <div
+                                                                    className={rating === 3 ? "icons color-yellow" : "icons"}
+                                                                    onClick={() => setRating(3)}
+                                                                >
+                                                                    <Icon icon={star} size={16} />
+                                                                    <Icon icon={star} size={16} />
+                                                                    <Icon icon={star} size={16} />
+                                                                </div>
+                                                                <div
+                                                                    className={rating === 4 ? "icons color-yellow" : "icons"}
+                                                                    onClick={() => setRating(4)}
+                                                                >
+                                                                    <Icon icon={star} size={16} />
+                                                                    <Icon icon={star} size={16} />
+                                                                    <Icon icon={star} size={16} />
+                                                                    <Icon icon={star} size={16} />
+                                                                </div>
+                                                                <div
+                                                                    className={rating === 5 ? "icons color-yellow" : "icons"}
+                                                                    onClick={() => setRating(5)}
+                                                                >
+                                                                    <Icon icon={star} size={16} />
+                                                                    <Icon icon={star} size={16} />
+                                                                    <Icon icon={star} size={16} />
+                                                                    <Icon icon={star} size={16} />
+                                                                    <Icon icon={star} size={16} />
+                                                                </div>
+                                                            </div>
 
                                                             {/* Name */}
                                                             <div className="form-group mb-3">
