@@ -3,15 +3,25 @@ import '../../styles/checkout.scss';
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from 'react-redux';
 import { productsList } from '../../Redux/Actions/cartAction';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { apiURL } from '../../utils/apiURL';
 
 import NavBarComponent from '../../Components/NavBar/NavBar';
 import FooterComponent from '../../Components/Footer/Index';
+import OrderStatusModal from '../../Components/Modal/OrderStatusModal';
+
 import EmptyShoppingCartImg from '../../assets/static/empty_shopping_cart.png';
 
+
+
+toast.configure({ autoClose: 2000 })
 const Index = () => {
     let subTotal = 0
     const dispatch = useDispatch()
+    const history = useHistory()
     let { cartProducts } = useSelector((state => state.products))
     const { register, handleSubmit, errors } = useForm()
     const [outSideDhaka, setOutSideDhaka] = useState(false)
@@ -21,6 +31,10 @@ const Index = () => {
     const [loading, setLoading] = useState(false)
     const [shippingErr, setShippingErr] = useState(false)
     const [delivery_charge, setDelivery_charge] = useState()
+    const [isShow, setShow] = useState(false)
+    const [checkResponseOutData, setCheckOutResponseData] = useState()
+    const [orderCode, setOrderCode] = useState()
+
 
     useEffect(() => {
         dispatch(productsList())
@@ -68,9 +82,23 @@ const Index = () => {
             products: cartProducts
         }
 
-        setLoading(true)
-        console.log(checkOutData)
-        localStorage.removeItem('discountPercent')
+        try {
+            setLoading(true)
+            const response = await axios.post(`${apiURL}confirmOrder`, checkOutData)
+            if (response.status === 200) {
+                setCheckOutResponseData(checkOutData)
+                setOrderCode(response.data.result.order_code)
+                setShow(true)
+                localStorage.removeItem('discountPercent')
+            }
+        } catch (error) {
+            if (error) console.log(error.response)
+        }
+    }
+
+    const hideModal = () => {
+        setShow(false)
+        history.push('/')
     }
 
     return (
@@ -197,7 +225,7 @@ const Index = () => {
                                             <div className="form-group mb-3">
                                                 {errors.email && errors.email.message ? (
                                                     <small className="text-danger">{errors.email && errors.email.message}</small>
-                                                ) : <p className="text-muted">Email Address(optional)</p>
+                                                ) : <p className="text-muted">Email Address</p>
                                                 }
 
                                                 <input
@@ -391,6 +419,8 @@ const Index = () => {
                 </div>
             }
             <FooterComponent />
+            {isShow ? <OrderStatusModal data={checkResponseOutData} orderCode={orderCode} hidemodal={hideModal} /> : null}
+
         </div>
     );
 };
