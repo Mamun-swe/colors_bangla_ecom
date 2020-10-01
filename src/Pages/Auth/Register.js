@@ -15,22 +15,21 @@ const Register = () => {
     const { register, handleSubmit, errors } = useForm()
     const [isLoading, setLoading] = useState(false)
 
-    const onSubmit = data => {
-        setLoading(true)
-        axios.post("https://colourbangladev.xyz/api/register", data)
-            .then(res => {
-                if (res.status === 200) {
-                    toast.success("Successfully account created")
-                    setLoading(false)
-                    history.push('/sign-in')
-                }
-            })
-            .catch(err => {
-                if (err && err.response.status !== 200) {
-                    setLoading(false)
-                    toast.warn(err.response.data.message)
-                }
-            })
+    const onSubmit = async (data) => {
+        try {
+            setLoading(true)
+            const response = await axios.post("https://colourbangladev.xyz/api/register", data)
+            if (response.status === 200) {
+                toast.success("Successfully account created")
+                setLoading(false)
+                history.push('/sign-in')
+            }
+        } catch (error) {
+            if (error && error.response.status !== 200) {
+                setLoading(false)
+                toast.warn(error.response.data.message)
+            }
+        }
     }
 
 

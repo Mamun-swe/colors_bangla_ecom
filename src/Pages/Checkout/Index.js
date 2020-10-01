@@ -20,6 +20,7 @@ const Index = () => {
     const [cashOnDelivery, setCashOnDelivery] = useState(true)
     const [loading, setLoading] = useState(false)
     const [shippingErr, setShippingErr] = useState(false)
+    const [delivery_charge, setDelivery_charge] = useState()
 
     useEffect(() => {
         dispatch(productsList())
@@ -30,7 +31,7 @@ const Index = () => {
         setOutSideDhaka(value)
         setInSideDhaka(false)
         setShippingArea(event.target.name)
-        // subTotal = subTotal + event.target.value
+        setDelivery_charge(100)
     }
 
     const onChangeInSideDhaka = event => {
@@ -38,7 +39,12 @@ const Index = () => {
         setOutSideDhaka(false)
         setInSideDhaka(value)
         setShippingArea(event.target.name)
-        // subTotal = subTotal + event.target.value
+        setDelivery_charge(80)
+    }
+
+    const countTotal = () => {
+        const total = subTotal - (subTotal * (localStorage.getItem('discountPercent') ? localStorage.getItem('discountPercent') : 0) / 100)
+        return total
     }
 
     const onSubmit = async (data) => {
@@ -55,11 +61,16 @@ const Index = () => {
             email: data.email,
             shipping_area: shippingArea,
             delivery_method: 'Cash on delivery',
+            total_price: countTotal(),
+            delivery_charge: delivery_charge,
+            coupon_code: localStorage.getItem('discountPercent') ? localStorage.getItem('discountPercent') : null,
+            discount: localStorage.getItem('discountPercent') ? localStorage.getItem('discountPercent') : null,
             products: cartProducts
         }
 
         setLoading(true)
         console.log(checkOutData)
+        localStorage.removeItem('discountPercent')
     }
 
     return (
@@ -241,6 +252,26 @@ const Index = () => {
                                             </div>
                                             <div className="ml-auto pl-2">
                                                 <p>{subTotal} tk.</p>
+                                            </div>
+                                        </div>
+
+                                        {/* Discount */}
+                                        <div className="sub-total d-flex mt-0">
+                                            <div>
+                                                <p>Discount</p>
+                                            </div>
+                                            <div className="ml-auto pl-2">
+                                                <p>{localStorage.getItem('discountPercent') ? localStorage.getItem('discountPercent') : 0} %</p>
+                                            </div>
+                                        </div>
+
+                                        {/* Total */}
+                                        <div className="sub-total border-top d-flex mt-0">
+                                            <div>
+                                                <p className="text-black">Total</p>
+                                            </div>
+                                            <div className="ml-auto pl-2">
+                                                <p>{countTotal()} tk.</p>
                                             </div>
                                         </div>
 

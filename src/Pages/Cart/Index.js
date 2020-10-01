@@ -1,9 +1,14 @@
 import React, { useEffect } from 'react';
 import '../../styles/shopping-cart.scss';
 import { Icon } from 'react-icons-kit';
+import axios from 'axios';
+import { apiURL } from '../../utils/apiURL';
+import { useForm } from "react-hook-form";
 import { plus, minus } from 'react-icons-kit/ionicons';
 import { Link, useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { productsList, removeProduct, incrementQuantity, decrementQuantity } from '../../Redux/Actions/cartAction';
 
 import NavBarComponent from '../../Components/NavBar/NavBar';
@@ -15,10 +20,11 @@ import VisaCardLogo from '../../assets/static/visa-card.png';
 import RocketLogo from '../../assets/static/rocket.jpeg';
 import BkashLogo from '../../assets/static/bkash.jpg';
 
-
+toast.configure({ autoClose: 2000 })
 const Index = () => {
     const history = useHistory()
     const dispatch = useDispatch()
+    const { register, handleSubmit, errors } = useForm()
     let { cartProducts } = useSelector((state => state.products))
     let subTotal = 0
 
@@ -26,7 +32,7 @@ const Index = () => {
         dispatch(productsList())
     }, [dispatch])
 
-    // Add to cart
+    // Remove from cart
     const removeFromCart = data => {
         const newData = {
             id: data.id,
@@ -37,6 +43,23 @@ const Index = () => {
             quantity: 1
         }
         dispatch(removeProduct(newData))
+    }
+
+    // Apply coupon
+    const onSubmit = async (data) => {
+        try {
+            const response = await axios.get(`${apiURL}getCoupon/${data.code}`)
+            if (response.status === 200 && response.data.result.type === 'percent') {
+                localStorage.setItem('discountPercent', response.data.result.discount_percent)
+                toast.info('Coupon applied in you total amount')
+            }
+            if (response.status === 200 && response.data.result.type === 'fixed') {
+                toast.info('Coupon is expired')
+            }
+        } catch (error) {
+            if (error && error.response.status !== 200)
+                toast.warn('Coupon not found')
+        }
     }
 
 
@@ -122,19 +145,27 @@ const Index = () => {
 
                             {/* Promotion Code */}
                             <div className="coupon-box">
-                                <p className="text-muted">Enter your promotion code</p>
-                                <form>
+                                {errors.code && errors.code.message ? (
+                                    <p className="text-danger">{errors.code && errors.code.message}</p>
+                                ) : <p className="text-muted">Enter your coupon code</p>
+                                }
+
+                                <form onSubmit={handleSubmit(onSubmit)}>
                                     <div className="input-group mb-2">
                                         <input
                                             type="text"
+                                            name="code"
                                             className="form-control rounded-0 shadow-none"
                                             placeholder="Coupon code"
+                                            ref={register({
+                                                required: "Coupon code is required*",
+                                            })}
                                         />
                                         <div className="input-group-prepend">
                                             <button
                                                 type="submit"
                                                 className="btn rounded-0 shadow-none"
-                                            >OK</button>
+                                            >APPLY</button>
                                         </div>
                                     </div>
                                 </form>

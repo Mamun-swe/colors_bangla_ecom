@@ -19,27 +19,26 @@ const Login = () => {
         history.push('/account')
     }
 
-    const onSubmit = data => {
+    const onSubmit = async (data) => {
         const loginData = {
             username: data.email,
             password: data.password
         }
 
-        setLoading(true)
-        axios.post("https://colourbangladev.xyz/api/login", loginData)
-            .then(res => {
-                if (res.status === 200) {
-                    localStorage.setItem('token', res.data.access_token)
-                    history.push('/account')
-                    setLoading(false)
-                }
-            })
-            .catch(err => {
-                if (err && err.response.status !== 200) {
-                    setLoading(false)
-                    toast.warn(err.response.data)
-                }
-            })
+        try {
+            setLoading(true)
+            const response = await axios.post("https://colourbangladev.xyz/api/login", loginData)
+            if (response.status === 200) {
+                localStorage.setItem('token', response.data.access_token)
+                history.push('/account')
+                setLoading(false)
+            }
+        } catch (error) {
+            if (error && error.response.status !== 200) {
+                setLoading(false)
+                toast.warn(error.response.data)
+            }
+        }
     }
 
     return (
