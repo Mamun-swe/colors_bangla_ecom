@@ -1,21 +1,36 @@
 import React, { useState } from 'react';
 import '../../styles/auth.scss';
 import axios from 'axios';
-import { apiURL } from '../../utils/apiURL';
+// import { apiURL } from '../../utils/apiURL';
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Logo from '../../assets/static/logo.png';
 
+toast.configure({ autoClose: 2000 })
 const Register = () => {
     const history = useHistory()
     const { register, handleSubmit, errors } = useForm()
     const [isLoading, setLoading] = useState(false)
 
-    const onSubmit = async (data) => {
+    const onSubmit = data => {
         setLoading(true)
-        console.log(data)
-        history.push('/sign-in')
+        axios.post("https://colourbangladev.xyz/api/register", data)
+            .then(res => {
+                if (res.status === 200) {
+                    toast.success("Successfully account created")
+                    setLoading(false)
+                    history.push('/sign-in')
+                }
+            })
+            .catch(err => {
+                if (err && err.response.status !== 200) {
+                    setLoading(false)
+                    toast.warn(err.response.data.message)
+                }
+            })
     }
 
 
@@ -80,6 +95,24 @@ const Register = () => {
                                 />
                             </div>
 
+                            {/* Phone number */}
+                            <div className="form-group mb-3">
+                                {errors.phone_number && errors.phone_number.message ? (
+                                    <small className="text-danger">{errors.phone_number && errors.phone_number.message}</small>
+                                ) : <small>Phone number</small>
+                                }
+
+                                <input
+                                    type="text"
+                                    name="phone_number"
+                                    className="form-control shadow-none"
+                                    placeholder="01*********"
+                                    ref={register({
+                                        required: "Phone number is required"
+                                    })}
+                                />
+                            </div>
+
                             {/* Password */}
                             <div className="form-group mb-3">
                                 {errors.password && errors.password.message ? (
@@ -94,6 +127,10 @@ const Register = () => {
                                     placeholder="*****"
                                     ref={register({
                                         required: "Please enter password",
+                                        minLength: {
+                                            value: 5,
+                                            message: "Minimun length 8 character"
+                                        }
                                     })}
                                 />
                             </div>

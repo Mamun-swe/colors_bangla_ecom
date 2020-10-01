@@ -52,12 +52,11 @@ const Index = () => {
                                     <td><p>processing</p></td>
                                     <td><p>800 tk.</p></td>
                                     <td className="text-right" style={{ minWidth: '150px' }}>
-                                        <Link
-                                            to={`/account/order/${order.id}/status`}
+                                        <Link to={`/account/order/${order.id}/status`}
                                             type="button"
                                             className="btn rounded-0 shadow-none view-btn"
                                         >view</Link>
-                                        <Link
+                                        <Link to={`/account/order/${order.id}/status`}
                                             type="button"
                                             className="btn rounded-0 shadow-none btn-light text-dark invoice-btn"
                                         >invoice</Link>

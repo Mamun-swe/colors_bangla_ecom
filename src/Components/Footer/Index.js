@@ -29,11 +29,11 @@ const Index = () => {
                     </div>
                     <div className="col-12 col-lg-3 text-center text-lg-left">
                         <h5>my account</h5>
-                        <div><Link to="/" type="button" className="btn shadow-none rounded-0">my account</Link></div>
-                        <div><Link to="/" type="button" className="btn shadow-none rounded-0">my wishlist</Link></div>
+                        <div><Link to="/sign-in" type="button" className="btn shadow-none rounded-0">my account</Link></div>
+                        {/* <div><Link to="/" type="button" className="btn shadow-none rounded-0">my wishlist</Link></div> */}
                         {/* <div><Link to="/" type="button" className="btn shadow-none rounded-0">compare</Link></div> */}
-                        <div><Link to="/" type="button" className="btn shadow-none rounded-0">checkout</Link></div>
-                        <div><Link to="/" type="button" className="btn shadow-none rounded-0">login</Link></div>
+                        <div><Link to="/checkout" type="button" className="btn shadow-none rounded-0">checkout</Link></div>
+                        <div><Link to="/sign-in" type="button" className="btn shadow-none rounded-0">login</Link></div>
                     </div>
                     <div className="col-12 col-lg-3 text-center text-lg-left">
                         <h5>customer service</h5>

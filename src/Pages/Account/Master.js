@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, NavLink, useHistory } from 'react-router-dom';
 import '../../styles/Account/master.scss';
+import axios from 'axios';
 
 import NavBarComponent from '../../Components/NavBar/NavBar';
 import FooterComponent from '../../Components/Footer/Index';
@@ -17,8 +18,24 @@ const Master = () => {
     const history = useHistory()
 
     const doLogout = () => {
-        localStorage.removeItem('token')
-        history.push('/')
+        // Header 
+        const header = {
+            headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        }
+
+        axios.get("https://colourbangladev.xyz/api/logout", header)
+            .then(res => {
+                if (res.status === 200) {
+                    localStorage.removeItem('token')
+                    history.push('/')
+                }
+            })
+            .catch(err => {
+                if (err && err.response.status !== 200) {
+                    localStorage.removeItem('token')
+                    history.push('/')
+                }
+            })
     }
 
     return (

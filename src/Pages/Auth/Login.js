@@ -1,34 +1,45 @@
 import React, { useState } from 'react';
 import '../../styles/auth.scss';
 import axios from 'axios';
-import { apiURL } from '../../utils/apiURL';
+// import { apiURL } from '../../utils/apiURL';
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Logo from '../../assets/static/logo.png';
 
+toast.configure({ autoClose: 2000 })
 const Login = () => {
     const history = useHistory()
     const { register, handleSubmit, errors } = useForm()
     const [isLoading, setLoading] = useState(false)
 
-    const onSubmit = data => {
-        // setLoading(true)
-        // console.log(data)
-        // localStorage.setItem('token', data.email)
-        // history.push('/account')
+    if (localStorage.getItem('token')) {
+        history.push('/account')
+    }
 
+    const onSubmit = data => {
         const loginData = {
             username: data.email,
             password: data.password
         }
 
-        try {
-            const response = axios.post(`${apiURL}login`, loginData)
-            console.log(response)
-        } catch (error) {
-            if (error) console.log(error.response)
-        }
+        setLoading(true)
+        axios.post("https://colourbangladev.xyz/api/login", loginData)
+            .then(res => {
+                if (res.status === 200) {
+                    localStorage.setItem('token', res.data.access_token)
+                    history.push('/account')
+                    setLoading(false)
+                }
+            })
+            .catch(err => {
+                if (err && err.response.status !== 200) {
+                    setLoading(false)
+                    toast.warn(err.response.data)
+                }
+            })
     }
 
     return (

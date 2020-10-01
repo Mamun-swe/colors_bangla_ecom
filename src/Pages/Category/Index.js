@@ -8,7 +8,6 @@ import { apiURL } from '../../utils/apiURL';
 import { Link, NavLink, useHistory, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Collapse from 'react-bootstrap/Collapse';
-import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../Redux/Actions/cartAction';
 
@@ -28,14 +27,15 @@ const Index = () => {
     const [modalData, setModalData] = useState({})
     const [showCategory, setShowCategory] = useState(true)
     const [showPrice, setShowPrice] = useState(true)
-    // const [showColor, setShowColor] = useState(true)
     const [nullProduct, setNullProduct] = useState(false)
     const [categories, setCategories] = useState([])
     const [categoryProducts, setCategoryProducts] = useState([])
+    const [filteredData, setFilteredData] = useState(categoryProducts)
     const [limit, setLimit] = useState(8)
     const productsPerPage = 8
     const dispatch = useDispatch()
     const [subMenu, setSubMenu] = useState()
+    const [isChecked, setChecked] = useState()
 
 
     useEffect(() => {
@@ -48,6 +48,7 @@ const Index = () => {
                     if (categoryResponse.data.result && categoryProducts.data.result) {
                         setCategories(categoryResponse.data.result)
                         setCategoryProducts(categoryProducts.data.result)
+                        setFilteredData(categoryProducts.data.result)
                         setLimit(8)
                         setLoading(false)
                     } else {
@@ -57,9 +58,6 @@ const Index = () => {
                 }
 
             } catch (error) {
-                // if (error && error.response.status === 500) {
-                //     history.push('/')
-                // }
                 if (error) console.log(error)
             }
         }
@@ -72,11 +70,18 @@ const Index = () => {
         setModalData(data)
     }
 
-    const handleSort = async (event) => {
-        if (event.target.value === 'sort_latest') {
-            const data = categoryProducts.filter(x => moment(x.created_at).startOf('day').fromNow().slice(0, 1) <= 5)
-            setCategoryProducts(data)
+    // On change price handeller
+    const priceFilter = data => {
+        setChecked(data)
+        if (data === 1) {
+            const filtereData = categoryProducts.filter(x => x.selling_price < 1000)
+            return setFilteredData(filtereData)
+        } else if (data === 2) {
+            const filtereData = categoryProducts.filter(x => x.selling_price > 1000 && x.selling_price < 10000)
+            return setFilteredData(filtereData)
         }
+        const filtereData = categoryProducts.filter(x => x.selling_price > 10000)
+        return setFilteredData(filtereData)
     }
 
     // Add to cart
@@ -187,50 +192,21 @@ const Index = () => {
                                                 <Collapse in={showPrice}>
                                                     <div className="dropdown-body mb-3">
                                                         <div className="form-check mb-3">
-                                                            <input type="checkbox" className="form-check-input" id="price-ckeck-1" />
+                                                            <input type="checkbox" className="form-check-input" id="price-ckeck-1" checked={isChecked === 1} onChange={() => priceFilter(1)} />
                                                             <label className="form-check-label" htmlFor="price-ckeck-1">0 - 1000</label>
                                                         </div>
 
                                                         <div className="form-check mb-3">
-                                                            <input type="checkbox" className="form-check-input" id="price-ckeck-2" />
+                                                            <input type="checkbox" className="form-check-input" id="price-ckeck-2" checked={isChecked === 2} onChange={() => priceFilter(2)} />
                                                             <label className="form-check-label" htmlFor="price-ckeck-2">1000 - 10000</label>
                                                         </div>
 
                                                         <div className="form-check mb-3">
-                                                            <input type="checkbox" className="form-check-input" id="price-ckeck-3" />
+                                                            <input type="checkbox" className="form-check-input" id="price-ckeck-3" checked={isChecked === 3} onChange={() => priceFilter(3)} />
                                                             <label className="form-check-label" htmlFor="price-ckeck-3">10000 - above</label>
                                                         </div>
                                                     </div>
                                                 </Collapse>
-
-                                                {/* Color Dropdown */}
-                                                {/* <div className="dropdown-header"
-                                                    onClick={() => setShowColor(!showColor)}
-                                                >
-                                                    <div className="d-flex">
-                                                        <div><h6 className="mb-0">color</h6></div>
-                                                        <div className="ml-auto">
-                                                            <Icon
-                                                                icon={ic_keyboard_arrow_right}
-                                                                size={25}
-                                                                style={{ color: '#000' }}
-                                                                className={showColor ? "angle-icon rotate" : "angle-icon"}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <Collapse in={showColor}>
-                                                    <div className="colors">
-                                                        <button type="button" className="btn btn-primary rounded-0 shadow-none"></button>
-                                                        <button type="button" className="btn btn-info rounded-0 shadow-none"></button>
-                                                        <button type="button" className="btn btn-danger rounded-0 shadow-none"></button>
-                                                        <button type="button" className="btn btn-warning rounded-0 shadow-none"></button>
-                                                        <button type="button" className="btn btn-primary rounded-0 shadow-none"></button>
-                                                        <button type="button" className="btn btn-info rounded-0 shadow-none"></button>
-                                                        <button type="button" className="btn btn-danger rounded-0 shadow-none"></button>
-                                                        <button type="button" className="btn btn-warning rounded-0 shadow-none"></button>
-                                                    </div>
-                                                </Collapse> */}
 
                                             </div>
                                         </div>
@@ -251,76 +227,74 @@ const Index = () => {
                                             <div className="main-content">
                                                 <div className="row">
 
-                                                    {/* Product Sort */}
-                                                    <div className="col-12 mb-2 product-sort">
-                                                        <select
-                                                            onChange={handleSort}
-                                                            className="form-control rounded-0 shadow-none"
-                                                        >
-                                                            <option value="sort_all">Sort by All</option>
-                                                            <option value="sort_latest">Sort by Latest</option>
-                                                        </select>
-                                                    </div>
-
                                                     <div className="col-12">
-                                                        {categoryProducts && categoryProducts.length > 0 && categoryProducts.slice(0, limit).map((product, i) =>
+                                                        {filteredData && filteredData.length > 0 ?
+                                                            filteredData.slice(0, limit).map((product, i) =>
 
-                                                            <div className="card rounded-0 product-card" key={i}>
-                                                                <div className="card-body">
-                                                                    <Link to={`/product/${product.id}/${product.name}`}>
-                                                                        <div className="img-box">
-                                                                            <img src={product.image} className="img-fluid" alt="..." />
-                                                                        </div>
-                                                                    </Link>
-
-                                                                    <div className="product-card-footer border">
-
-                                                                        {/* Quick View Button */}
-                                                                        <div className="quick-view">
-                                                                            <button
-                                                                                type="button"
-                                                                                className="btn shadow-none"
-                                                                                onClick={() => handleModal(product)}
-                                                                            >Quick View</button>
-                                                                        </div>
-
-                                                                        {/* Action Buttons */}
-                                                                        <div className="action-buttons text-right">
-                                                                            <button
-                                                                                type="button"
-                                                                                className="btn rounded-circle shadow-none shopping-bag-btn"
-                                                                                onClick={() => addToCart(product)}
-                                                                            >
-                                                                                <Icon icon={shoppingBag} size={16} />
-                                                                            </button>
-                                                                            <button
-                                                                                type="button"
-                                                                                className="btn rounded-circle shadow-none wish-list-btn"
-                                                                            >
-                                                                                <Icon icon={heartO} size={18} />
-                                                                            </button>
-                                                                        </div>
-
+                                                                <div className="card rounded-0 product-card" key={i}>
+                                                                    <div className="card-body">
                                                                         <Link to={`/product/${product.id}/${product.name}`}>
-                                                                            <div className="d-sm-flex">
-                                                                                <div>
-                                                                                    <p className="name">{product.name.slice(0, 15)}</p>
-                                                                                </div>
-                                                                                <div className="ml-auto">
-                                                                                    <p className="price">${product.selling_price}</p>
-                                                                                </div>
+                                                                            <div className="img-box">
+                                                                                <img src={product.image} className="img-fluid" alt="..." />
                                                                             </div>
                                                                         </Link>
-                                                                    </div>
 
+                                                                        <div className="product-card-footer border">
+
+                                                                            {/* Quick View Button */}
+                                                                            <div className="quick-view">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    className="btn shadow-none"
+                                                                                    onClick={() => handleModal(product)}
+                                                                                >Quick View</button>
+                                                                            </div>
+
+                                                                            {/* Action Buttons */}
+                                                                            <div className="action-buttons text-right">
+                                                                                <button
+                                                                                    type="button"
+                                                                                    className="btn rounded-circle shadow-none shopping-bag-btn"
+                                                                                    onClick={() => addToCart(product)}
+                                                                                >
+                                                                                    <Icon icon={shoppingBag} size={16} />
+                                                                                </button>
+                                                                                <button
+                                                                                    type="button"
+                                                                                    className="btn rounded-circle shadow-none wish-list-btn"
+                                                                                >
+                                                                                    <Icon icon={heartO} size={18} />
+                                                                                </button>
+                                                                            </div>
+
+                                                                            <Link to={`/product/${product.id}/${product.name}`}>
+                                                                                <div className="d-sm-flex">
+                                                                                    <div>
+                                                                                        <p className="name">{product.name.slice(0, 15)}</p>
+                                                                                    </div>
+                                                                                    <div className="ml-auto">
+                                                                                        <p className="price">${product.selling_price}</p>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </Link>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+
+                                                            ) :
+                                                            // No product 
+                                                            <div className="null-content rounded-circle">
+                                                                <div className="flex-center flex-column text-center">
+                                                                    <img src={EmptyProductsImg} className="img-fluid" alt="..." />
+                                                                    <p className="mb-0">Opps! Products not available on <br /> this price range !! </p>
                                                                 </div>
                                                             </div>
-
-                                                        )}
+                                                        }
                                                     </div>
 
 
-                                                    {categoryProducts.length <= limit ?
+                                                    {filteredData.length <= limit ?
                                                         null :
                                                         <div className="col-12 text-center">
                                                             <button
