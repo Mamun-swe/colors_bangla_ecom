@@ -32,6 +32,7 @@ const Login = () => {
                 localStorage.setItem('token', response.data.access_token)
                 history.push('/account')
                 setLoading(false)
+                console.log(response);
             }
         } catch (error) {
             if (error && error.response.status !== 200) {

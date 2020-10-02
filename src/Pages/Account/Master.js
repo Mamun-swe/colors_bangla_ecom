@@ -8,7 +8,6 @@ import FooterComponent from '../../Components/Footer/Index';
 
 import DashboardIndex from './Dashboard/Index';
 import OrderIndex from './Orders/Index';
-import OrderStatus from './Orders/OrderStatus';
 import AddressesIndex from './Address/Index';
 import EditBillingAddress from './Address/EditBillingAddress';
 import EditShippingAddress from './Address/EditShippingAddress';
@@ -77,7 +76,6 @@ const Master = () => {
                             <div className="main-menu flex-fill px-lg-3">
                                 <Route exact path="/account/" component={DashboardIndex} />
                                 <Route exact path="/account/orders" component={OrderIndex} />
-                                <Route exact path="/account/order/:id/status" component={OrderStatus} />
                                 <Route exact path="/account/addersses" component={AddressesIndex} />
                                 <Route exact path="/account/addersses/edit/billing" component={EditBillingAddress} />
                                 <Route exact path="/account/addersses/edit/shipping" component={EditShippingAddress} />

@@ -62,6 +62,14 @@ const Index = () => {
     }
 
     const onSubmit = async (data) => {
+        // Header 
+        const header = {
+            headers:
+            {
+                Authorization: "Bearer " + localStorage.getItem("token")
+            }
+        }
+
         if (!shippingArea) {
             return setShippingErr(true)
         }
@@ -84,7 +92,7 @@ const Index = () => {
 
         try {
             setLoading(true)
-            const response = await axios.post(`${apiURL}confirmOrder`, checkOutData)
+            const response = await axios.post(`${apiURL}confirmOrder`, checkOutData, header)
             if (response.status === 200) {
                 setCheckOutResponseData(checkOutData)
                 setOrderCode(response.data.result.order_code)
@@ -234,6 +242,7 @@ const Index = () => {
                                                     className="form-control shadow-none"
                                                     placeholder="example@gmail.com"
                                                     ref={register({
+                                                        required: "E-mail is required*",
                                                         pattern: {
                                                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                                                             message: "Invalid email address"

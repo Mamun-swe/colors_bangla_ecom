@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from 'react';
 import '../../../styles/Account/order.scss';
-import axios from 'axios';
 import { Link } from 'react-router-dom';
-// import { apiURL } from '../../../utils/apiURL';
+import moment from 'moment';
+import { useDispatch, useSelector } from 'react-redux';
+import { ordersList } from '../../../Redux/Actions/ordersAction';
+
 import LoadingComponent from '../../../Components/Loader';
+import OrderViewModal from '../../../Components/Modal/OrderView';
+import EmptyImage from '../../../assets/static/empty_shopping_cart.png';
 
 const Index = () => {
-    const [isLoading, setLoading] = useState(false)
-    const [orders, setOrders] = useState([])
+    const dispatch = useDispatch()
+    const [show, setShow] = useState(false)
+    const [singleOrder, setSingleOrder] = useState({})
+    let { orders, loading, error } = useSelector((state => state.orders))
 
     useEffect(() => {
-        const fetchOrders = async () => {
-            try {
-                setLoading(true)
-                const response = await axios.get('http://jsonplaceholder.typicode.com/users')
-                setOrders(response.data)
-                setLoading(false)
-            } catch (error) {
-                if (error) console.log(error)
-            }
-        }
+        dispatch(ordersList())
+    }, [dispatch])
 
-        fetchOrders()
-    }, [])
+    const handleModal = data => {
+        setSingleOrder(data)
+        setShow(true)
+    }
+
+    const hideModal = () => {
+        setShow(false)
+    }
 
     return (
         <div className="order-index">
@@ -30,45 +34,53 @@ const Index = () => {
                 <h5>my orders</h5>
             </div>
 
-
-            {isLoading ? <LoadingComponent /> :
-                <div className="body mb-4">
-                    <table className="table table-sm table-borderless table-responsive-sm">
-                        <thead>
-                            <tr>
-                                <td>order</td>
-                                <td>date</td>
-                                <td>status</td>
-                                <td>total</td>
-                                <td className="text-right">action</td>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            {orders.length > 0 && orders.map((order, i) =>
-                                <tr key={i}>
-                                    <td><p>#10194</p></td>
-                                    <td><p>sep 15, 2020</p></td>
-                                    <td><p>processing</p></td>
-                                    <td><p>800 tk.</p></td>
-                                    <td className="text-right" style={{ minWidth: '150px' }}>
-                                        <Link to={`/account/order/${order.id}/status`}
-                                            type="button"
-                                            className="btn rounded-0 shadow-none view-btn"
-                                        >view</Link>
-                                        <Link to={`/account/order/${order.id}/status`}
-                                            type="button"
-                                            className="btn rounded-0 shadow-none btn-light text-dark invoice-btn"
-                                        >invoice</Link>
-                                    </td>
+            {loading ? <LoadingComponent /> :
+                error ?
+                    <div className="empty-box text-center mb-4 py-0">
+                        <img src={EmptyImage} className="img-fluid" alt="..." />
+                        <h5>You have no orders !!</h5>
+                        <Link to="/" className="btn shadow-none">Back to Shopping</Link>
+                    </div> :
+                    <div className="body mb-4">
+                        <table className="table table-sm table-borderless table-responsive-md">
+                            <thead>
+                                <tr>
+                                    <td>order code</td>
+                                    <td>date</td>
+                                    <td>status</td>
+                                    <td>total</td>
+                                    <td className="text-right">action</td>
                                 </tr>
-                            )}
-                        </tbody>
-                    </table>
-                </div>
+                            </thead>
+
+                            <tbody>
+
+                                {orders.length > 0 && orders.map((order, i) =>
+                                    <tr key={i}>
+                                        <td><p>{order.order_code}</p></td>
+                                        <td><p>{moment(order.created_at).format('d MMM, YYYY')}</p></td>
+                                        <td><p>{order.status}</p></td>
+                                        <td><p>{order.total_price} tk.</p></td>
+                                        <td className="text-right">
+                                            <button
+                                                type="button"
+                                                className="btn rounded-0 shadow-none view-btn"
+                                                onClick={() => handleModal(order)}
+                                            >view
+                                            </button>
+                                            {/* <Link to={`/account/order/${order.id}/status`}
+                                                type="button"
+                                                className="btn rounded-0 shadow-none btn-light text-dark invoice-btn"
+                                            >invoice</Link> */}
+                                        </td>
+                                    </tr>
+                                )}
+                            </tbody>
+                        </table>
+                    </div>
             }
 
-
+            {show ? <OrderViewModal data={singleOrder} hidemodal={hideModal} /> : null}
         </div>
     );
 };
