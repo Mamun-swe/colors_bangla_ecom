@@ -1,6 +1,6 @@
 @import "../../App.scss";
 
-.account-details {
+.account-details, .password-cahnge {
     .header {
         margin-bottom: 16px;
 
@@ -46,6 +46,64 @@
 
                 .card-body {
                     padding: 35px;
+                }
+            }
+
+            .box {
+                .flex-box {
+                    width: 240px;
+                    margin: auto;
+                }
+
+                .img-box {
+                    width: 120px;
+                    height: 120px;
+                    overflow: hidden;
+
+                    img {
+                        min-width: 100%;
+                        min-height: 100%;
+                    }
+                }
+
+                .danger-border {
+                    border: 1px solid brown;
+                }
+
+                .fileUpload {
+                    color: #fff;
+                    overflow: hidden;
+                    position: relative;
+                    width: 120px;
+                    height: 120px;
+                    cursor: pointer;
+                }
+
+                .fileUpload input.upload {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    margin: 0;
+                    padding: 0;
+                    font-size: 20px;
+                    cursor: pointer;
+                    opacity: 0;
+                    filter: alpha(opacity = 0);
+                    width: 120px;
+                    height: 120px;
+                }
+
+                input[type="file"] {
+                    position: fixed;
+                    right: 100%;
+                    bottom: 100%;
+                }
+
+                .custom-file-upload {
+                    border: 1px solid #ccc;
+                    display: inline-block;
+                    padding: 6px 12px;
+                    cursor: pointer;
                 }
             }
 

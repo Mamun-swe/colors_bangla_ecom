@@ -1,14 +1,79 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../../styles/Account/account-details.scss';
 import { useForm } from "react-hook-form";
+import Icon from 'react-icons-kit';
+import { ic_perm_media } from 'react-icons-kit/md';
+import axios from 'axios';
+import { apiURL } from '../../../utils/apiURL';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+import LoadingComponent from '../../../Components/Loader';
+
+toast.configure({ autoClose: 2000 })
 const Index = () => {
     const { register, handleSubmit, errors } = useForm()
     const [isLoading, setLoading] = useState(false)
+    const [user, setUser] = useState({})
+    const [selectedFile, setSelectedFile] = useState(null)
+    const [previewURL, setPreviewURL] = useState(null)
+    const [fileErr, setFileErr] = useState(false)
+    const [saveLoading, setSaveLoading] = useState(false)
+
+    // Header 
+    const header = {
+        headers:
+        {
+            Authorization: "Bearer " + localStorage.getItem("token")
+        }
+    }
+
+    // Image onChange
+    const imageChangeHandeller = event => {
+        let file = event.target.files[0]
+        if (file) {
+            setSelectedFile(file)
+            setPreviewURL(URL.createObjectURL(event.target.files[0]))
+        }
+    }
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                setLoading(true)
+                const response = await axios.get(`${apiURL}user`, header)
+                if (response.status === 200) {
+                    setUser(response.data.result)
+                    setLoading(false)
+                }
+            } catch (error) {
+                if (error) console.log(error.response)
+            }
+        }
+
+        fetchUser()
+    }, [])
 
     const onSubmit = async (data) => {
-        setLoading(true)
-        console.log(data)
+        if (!selectedFile) {
+            return setFileErr(true)
+        }
+
+        let formData = new FormData()
+        formData.append('name', data.name)
+        formData.append('phone_number', data.phone_number)
+        formData.append('image', selectedFile)
+
+        try {
+            setSaveLoading(true)
+            const response = await axios.post(`${apiURL}updateProfile`, formData, header)
+            if (response.status === 200) {
+                setSaveLoading(false)
+                toast.success('Profile successfully updated.')
+            }
+        } catch (error) {
+            if (error) console.log(error.response)
+        }
     }
 
 
@@ -18,179 +83,108 @@ const Index = () => {
                 <h5>account details</h5>
             </div>
 
-            <div className="body mb-4">
-                <form onSubmit={handleSubmit(onSubmit)}>
+            {isLoading ? <LoadingComponent /> :
+                <div className="body mb-4">
+                    <form onSubmit={handleSubmit(onSubmit)}>
 
-                    <div className="row">
-                        {/* First Name */}
-                        <div className="col-12 col-lg-6">
-                            <div className="form-group mb-3">
-                                {errors.firstname && errors.firstname.message ? (
-                                    <p className="text-danger">{errors.firstname && errors.firstname.message}</p>
-                                ) : <p className="text-muted">First name*</p>
-                                }
+                        <div className="row">
+                            {/* Name */}
+                            <div className="col-12 col-lg-6">
+                                <div className="form-group mb-3">
+                                    {errors.name && errors.name.message ? (
+                                        <p className="text-danger">{errors.name && errors.name.message}</p>
+                                    ) : <p className="text-muted">Name*</p>
+                                    }
 
-                                <input
-                                    type="text"
-                                    name="firstname"
-                                    className="form-control rounded-0 shadow-none"
-                                    ref={register({
-                                        required: "First name is required*",
-                                        minLength: {
-                                            value: 5,
-                                            message: "Minimun length 5 character"
-                                        }
-                                    })}
-                                />
-                            </div>
-                        </div>
-
-                        {/* Last Name */}
-                        <div className="col-12 col-lg-6">
-                            <div className="form-group mb-3">
-                                {errors.lastname && errors.lastname.message ? (
-                                    <p className="text-danger">{errors.lastname && errors.lastname.message}</p>
-                                ) : <p className="text-muted">Last name*</p>
-                                }
-
-                                <input
-                                    type="text"
-                                    name="lastname"
-                                    className="form-control rounded-0 shadow-none"
-                                    ref={register({
-                                        required: "Last name is required*",
-                                        minLength: {
-                                            value: 5,
-                                            message: "Minimun length 5 character"
-                                        }
-                                    })}
-                                />
-                            </div>
-                        </div>
-
-                        {/* Display name */}
-                        <div className="col-12">
-                            <div className="form-group mb-3">
-                                {errors.display_name && errors.display_name.message ? (
-                                    <p className="text-danger">{errors.display_name && errors.display_name.message}</p>
-                                ) : <p className="text-muted">Display name*</p>
-                                }
-
-                                <input
-                                    type="text"
-                                    name="display_name"
-                                    className="form-control rounded-0 shadow-none"
-                                    ref={register({
-                                        required: "Display name is required",
-                                        minLength: {
-                                            value: 5,
-                                            message: "Minimun length 5 character"
-                                        }
-                                    })}
-                                />
-                                <p className="mb-0 text-muted"><i>This will be how ypur name will be displayed in the account section and in reviews</i></p>
-                            </div>
-                        </div>
-
-                        {/* E-mail */}
-                        <div className="col-12">
-                            <div className="form-group mb-3">
-                                {errors.email && errors.email.message ? (
-                                    <p className="text-danger">{errors.email && errors.email.message}</p>
-                                ) : <p className="text-muted">E-mail address*</p>
-                                }
-
-                                <input
-                                    type="text"
-                                    name="email"
-                                    className="form-control rounded-0 shadow-none"
-                                    ref={register({
-                                        required: "E-mail address is required",
-                                        pattern: {
-                                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                                            message: "Invalid email address"
-                                        }
-                                    })}
-                                />
-                            </div>
-                        </div>
-
-                        {/* Password Change */}
-                        <div className="col-12 mt-3 mb-4">
-                            <div className="card rounded-0">
-                                <div className="title">
-                                    <p className="mb-0">password change</p>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        defaultValue={user.name}
+                                        className="form-control rounded-0 shadow-none"
+                                        ref={register({
+                                            required: "Name is required*",
+                                            minLength: {
+                                                value: 5,
+                                                message: "Minimun length 5 character"
+                                            }
+                                        })}
+                                    />
                                 </div>
-                                <div className="card-body">
+                            </div>
 
-                                    {/* Current Password */}
-                                    <div className="form-group mb-3">
-                                        {errors.current_password && errors.current_password.message ? (
-                                            <p className="text-danger">{errors.current_password && errors.current_password.message}</p>
-                                        ) : <p className="text-muted">Current password (leave blank to leave unchanged)*</p>
+                            {/* Phone */}
+                            <div className="col-12 col-lg-6">
+                                <div className="form-group mb-3">
+                                    {errors.phone_number && errors.phone_number.message ? (
+                                        <p className="text-danger">{errors.phone_number && errors.phone_number.message}</p>
+                                    ) : <p className="text-muted">Phone number*</p>
+                                    }
+
+                                    <input
+                                        type="number"
+                                        name="phone_number"
+                                        defaultValue={user.phone_number}
+                                        className="form-control rounded-0 shadow-none"
+                                        ref={register({
+                                            required: "Phone number is required*"
+                                        })}
+                                    />
+                                </div>
+                            </div>
+
+                            {/* E-mail */}
+                            <div className="col-12">
+                                <div className="form-group mb-3">
+                                    <p className="text-muted">E-mail</p>
+                                    <input
+                                        type="text"
+                                        name="email"
+                                        defaultValue={user.email}
+                                        className="form-control rounded-0 shadow-none"
+                                        readOnly
+                                    />
+                                </div>
+                            </div>
+
+
+                            {/* Image Box */}
+                            <div className="col-12 text-center my-4 pb-2">
+                                <div className="box">
+
+                                    <div className="d-flex flex-box">
+                                        {user.image ?
+                                            <div className="img-box rounded-circle">
+                                                <img src={user.image} className="img-fluid" alt="..." />
+                                            </div> : null}
+
+                                        {selectedFile ?
+                                            <div className="img-box rounded-circle">
+                                                <img src={previewURL} className="img-fluid" alt="..." />
+                                            </div>
+                                            :
+                                            <div className={fileErr ? "fileUpload rounded-circle danger-border" : "fileUpload rounded-circle border"}>
+                                                <div className="flex-center flex-column">
+                                                    <input type="file" className="upload" onChange={imageChangeHandeller} />
+                                                    <span><Icon icon={ic_perm_media} size={50} style={{ color: "#555" }} /></span>
+                                                </div>
+                                            </div>
                                         }
-
-                                        <input
-                                            type="password"
-                                            name="current_password"
-                                            className="form-control rounded-0 shadow-none"
-                                            ref={register({
-                                                required: "Current password is required"
-                                            })}
-                                        />
-                                    </div>
-
-                                    {/* New Password */}
-                                    <div className="form-group mb-3">
-                                        {errors.new_password && errors.new_password.message ? (
-                                            <p className="text-danger">{errors.new_password && errors.new_password.message}</p>
-                                        ) : <p className="text-muted">New password (leave blank to leave unchanged)*</p>
-                                        }
-
-                                        <input
-                                            type="password"
-                                            name="new_password"
-                                            className="form-control rounded-0 shadow-none"
-                                            ref={register({
-                                                required: "New password is required"
-                                            })}
-                                        />
-                                    </div>
-
-                                    {/* Confirm New Password */}
-                                    <div className="form-group mb-0">
-                                        {errors.confirm_password && errors.confirm_password.message ? (
-                                            <p className="text-danger">{errors.confirm_password && errors.confirm_password.message}</p>
-                                        ) : <p className="text-muted">Confirm New Password*</p>
-                                        }
-
-                                        <input
-                                            type="password"
-                                            name="confirm_password"
-                                            className="form-control rounded-0 shadow-none"
-                                            ref={register({
-                                                required: "Confirm password is required"
-                                            })}
-                                        />
                                     </div>
 
                                 </div>
                             </div>
+
+                            <div className="col-12 text-center">
+                                <button type="submit" className="btn rounded-0 shadow-none">
+                                    {saveLoading ? <span>saving...</span> : <span>save changes</span>}
+                                </button>
+                            </div>
+
+
                         </div>
-
-
-                        <div className="col-12">
-                            <button type="submit" className="btn rounded-0 shadow-none">
-                                {isLoading ? <span>saving...</span> : <span>save changes</span>}
-                            </button>
-                        </div>
-
-
-                    </div>
-
-
-                </form>
-            </div>
+                    </form>
+                </div>
+            }
         </div>
     );
 };
