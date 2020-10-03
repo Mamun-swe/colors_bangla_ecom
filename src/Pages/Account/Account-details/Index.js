@@ -52,7 +52,7 @@ const Index = () => {
         }
 
         fetchUser()
-    }, [])
+    }, [header])
 
     const onSubmit = async (data) => {
         if (!selectedFile) {

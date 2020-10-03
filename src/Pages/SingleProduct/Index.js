@@ -16,6 +16,8 @@ import { Link, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../Redux/Actions/cartAction';
 import { useForm } from "react-hook-form";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import NavBarComponent from '../../Components/NavBar/NavBar';
 import FooterComponent from '../../Components/Footer/Index';
@@ -23,10 +25,12 @@ import LoadingComponent from '../../Components/Loader';
 
 import FourOFourImg from '../../assets/static/empty_shopping_cart.png';
 
+toast.configure({ autoClose: 2000 })
 const Index = () => {
     const { register, handleSubmit, errors } = useForm()
     const { id, name } = useParams()
     const [isLoading, setLoading] = useState(false)
+    const [reviewLoading, setReviewLoading] = useState(false)
     const [isError, setError] = useState(false)
     const [product, setProduct] = useState({})
     const [productImage, setProductImage] = useState('')
@@ -47,7 +51,6 @@ const Index = () => {
                 const response = await axios.get(`${apiURL}viewProduct/${id}/name`)
                 setProduct(response.data.result)
                 setProductImage(response.data.result.image)
-                // console.log(response.data.result)
                 setLoading(false)
             } catch (error) {
                 if (error.response) {
@@ -85,10 +88,20 @@ const Index = () => {
             rating: rating,
             name: data.name,
             email: data.email,
-            review: data.review
+            details: data.review
         }
 
-        console.log(reviewData)
+        try {
+            setReviewLoading(true)
+            const response = await axios.post(`${apiURL}review`, reviewData)
+            if (response.status === 200) {
+                setReviewLoading(false)
+                toast.success('Your review submitted.')
+            }
+        } catch (error) {
+            setReviewLoading(false)
+            if (error) console.log(error.response)
+        }
     }
 
     return (
@@ -245,6 +258,7 @@ const Index = () => {
                                                                 review {name}</h6>
                                                         </div>
 
+                                                        {/* Reviews */}
                                                         {product.reviews &&
                                                             product.reviews.length > 0 ?
                                                             product.reviews.map((review, i) =>
@@ -252,7 +266,35 @@ const Index = () => {
                                                                     <div><Icon icon={user_circle} size={30} className="text-muted" /></div>
                                                                     <div className="pl-3">
                                                                         <h5 className="text-capitalize mb-0">{review.name}</h5>
-                                                                        <p className="mb-0">Rating: {review.rating}</p>
+                                                                        {parseInt(review.rating) === 1 ?
+                                                                            <Icon icon={star} size={16} className="yellow" />
+                                                                            : parseInt(review.rating) === 2 ?
+                                                                                <div>
+                                                                                    <Icon icon={star} size={16} className="yellow" />
+                                                                                    <Icon icon={star} size={16} className="yellow" />
+                                                                                </div>
+                                                                                : parseInt(review.rating) === 3 ?
+                                                                                    <div>
+                                                                                        <Icon icon={star} size={16} className="yellow" />
+                                                                                        <Icon icon={star} size={16} className="yellow" />
+                                                                                        <Icon icon={star} size={16} className="yellow" />
+                                                                                    </div>
+                                                                                    : parseInt(review.rating) === 4 ?
+                                                                                        <div>
+                                                                                            <Icon icon={star} size={16} className="yellow" />
+                                                                                            <Icon icon={star} size={16} className="yellow" />
+                                                                                            <Icon icon={star} size={16} className="yellow" />
+                                                                                            <Icon icon={star} size={16} className="yellow" />
+                                                                                        </div>
+                                                                                        : parseInt(review.rating) === 5 ?
+                                                                                            <div>
+                                                                                                <Icon icon={star} size={16} className="yellow" />
+                                                                                                <Icon icon={star} size={16} className="yellow" />
+                                                                                                <Icon icon={star} size={16} className="yellow" />
+                                                                                                <Icon icon={star} size={16} className="yellow" />
+                                                                                                <Icon icon={star} size={16} className="yellow" />
+                                                                                            </div>
+                                                                                            : null}
                                                                         <p className="mb-0">{review.details}</p>
                                                                     </div>
                                                                 </div>
@@ -372,7 +414,9 @@ const Index = () => {
                                                             <button
                                                                 type="submit"
                                                                 className="btn shadow-none float-right"
-                                                            >Submit Review</button>
+                                                            >
+                                                                {reviewLoading ? <span>Submitting...</span> : <span>Submit Review</span>}
+                                                            </button>
 
                                                         </form>
                                                     </div>
@@ -443,7 +487,7 @@ const Index = () => {
                     <FooterComponent />
                 </div>
             }
-        </div>
+        </div >
     );
 };
 

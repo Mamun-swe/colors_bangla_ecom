@@ -6,6 +6,7 @@ import { apiURL } from '../../../utils/apiURL';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+toast.configure({ autoClose: 2000 })
 const PasswordChange = () => {
     const { register, handleSubmit, errors } = useForm()
     const [isLoading, setLoading] = useState(false)
