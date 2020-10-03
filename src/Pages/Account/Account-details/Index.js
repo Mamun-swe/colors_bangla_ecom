@@ -47,12 +47,15 @@ const Index = () => {
                     setLoading(false)
                 }
             } catch (error) {
-                if (error) console.log(error.response)
+                if (error) {
+                    setLoading(false)
+                    console.log(error.response)
+                }
             }
         }
 
         fetchUser()
-    }, [header])
+    }, [])
 
     const onSubmit = async (data) => {
         if (!selectedFile) {
