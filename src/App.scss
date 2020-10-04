@@ -56,11 +56,11 @@ $danger-color: brown;
             }
 
             @media (min-width: 700px) {
-                height: 230px;
+                height: 300px;
             }
 
             @media (min-width: 992px) {
-                height: 250px;
+                height: 350px;
             }
         }
 
@@ -89,7 +89,7 @@ $danger-color: brown;
                     }
 
                     @media (min-width: 992px) {
-                        top: -130px;
+                        top: -180px;
                     }
                 }
             }
@@ -164,35 +164,44 @@ $danger-color: brown;
     }
 
     @media (min-width: 576px) {
-        padding: 15px;
+        padding: 10px;
         width: 33.33%;
     }
 
     @media (min-width: 768px) {
         padding: 10px;
-        width: 25%;
-    }
-
-    @media (min-width: 992px) {
-        padding: 20px;
         width: 33.33%;
     }
 
-    @media (min-width: 1150px) {
-        padding: 20px;
+    @media (min-width: 992px) {
+        padding: 10px;
         width: 25%;
     }
 
     @media (min-width: 1450px) {
-        padding: 20px;
-        width: 20%;
+        padding: 10px;
+        width: 16.66%;
     }
 }
 
 .topselling-card {
     @media (min-width: 1150px) {
-        padding: 20px;
-        width: 20%;
+        padding: 10px;
+        width: 25%;
+    }
+}
+
+.related-product-card {
+    @media (min-width: 1450px) {
+        padding: 10px;
+        width: 25%;
+    }
+}
+
+.search-product-card {
+    @media (min-width: 1450px) {
+        padding: 10px;
+        width: 25%;
     }
 }
 

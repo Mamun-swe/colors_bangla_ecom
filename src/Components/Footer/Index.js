@@ -37,7 +37,7 @@ const Index = () => {
                     </div>
                     <div className="col-12 col-lg-3 text-center text-lg-left">
                         <h5>customer service</h5>
-                        <div><Link to="/" type="button" className="btn shadow-none rounded-0">about us</Link></div>
+                        <div><Link to="/about-us" type="button" className="btn shadow-none rounded-0">about us</Link></div>
                         {/* <div><Link to="/" type="button" className="btn shadow-none rounded-0">shipping & return</Link></div> */}
                         {/* <div><Link to="/" type="button" className="btn shadow-none rounded-0">shipping guide</Link></div> */}
                         <div><Link to="/faq" type="button" className="btn shadow-none rounded-0">faq</Link></div>

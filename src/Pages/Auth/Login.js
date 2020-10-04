@@ -106,7 +106,7 @@ const Login = () => {
 
                         <div className="text-right mt-1">
                             <p className="mb-1">Have no account ? <Link to="/sign-up">Sign-up</Link></p>
-                            <p>Forgot password ? <a href="https://colourbangladev.xyz/password/reset">Reset</a></p>
+                            <p>Forgot password ? <Link to="/reset">Reset</Link></p>
                         </div>
                     </div>
                 </div>

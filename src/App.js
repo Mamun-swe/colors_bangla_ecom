@@ -22,6 +22,7 @@ import ResetPage from './Pages/Auth/Reset';
 import AccountMaster from './Pages/Account/Master';
 
 import faqIndex from './Pages/FAQ/Index';
+import AboutIndex from './Pages/About/Index';
 import FourOFour from './Pages/FourOFour/Index';
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
             <Route exact path="/reset" component={ResetPage} />
 
             <Route exact path="/faq" component={faqIndex} />
+            <Route exact path="/about-us" component={AboutIndex} />
 
             <PrivateRoute>
               <Route path="/account" component={AccountMaster} />

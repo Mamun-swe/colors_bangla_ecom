@@ -125,112 +125,116 @@ const Index = () => {
                                 <div className="row mb-4">
 
                                     {/* Product Magnify */}
-                                    <div className="col-12 col-lg-8">
-                                        <ReactImageMagnify {...{
-                                            smallImage: {
-                                                alt: 'Product',
-                                                src: productImage,
-                                                width: window.innerWidth > 992 ? 410 : 250,
-                                                height: window.innerWidth > 992 ? 450 : 300
-                                            },
-                                            style: { margin: 'auto' },
-                                            imageClassName: 'magnifiySmallImage',
-                                            largeImage: {
-                                                src: productImage,
-                                                width: 1200,
-                                                height: 1800
-                                            },
-                                            enlargedImageContainerStyle: { background: '#fff', zIndex: 9 }
-                                        }} />
+                                    <div className="col-12">
+                                        <div className="d-lg-flex">
+                                            <div>
+                                                <ReactImageMagnify {...{
+                                                    smallImage: {
+                                                        alt: 'Product',
+                                                        src: productImage,
+                                                        width: window.innerWidth > 992 ? 480 : 300,
+                                                        height: window.innerWidth > 992 ? 520 : 350
+                                                    },
+                                                    style: { margin: 'auto' },
+                                                    imageClassName: 'magnifiySmallImage',
+                                                    largeImage: {
+                                                        src: productImage,
+                                                        width: 1200,
+                                                        height: 1800
+                                                    },
+                                                    enlargedImageContainerStyle: { background: '#fff', zIndex: 9 }
+                                                }} />
 
-                                        <div className="img-list text-center my-3">
-                                            <ul>
-                                                {product.images &&
-                                                    product.images.length > 0 ?
-                                                    product.images.map((image, i) =>
-                                                        <li key={i}>
-                                                            <img src={image.path} className="img-fluid" onClick={magnifiyHandeller} alt="..." />
-                                                        </li>
-                                                    ) : null}
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-12 col-lg-4 product-info mt-4 mt-lg-0">
-                                        <h4>{product.name}</h4>
-                                        <h6>SKU: {product.sku}</h6>
-
-                                        <div className="price_policy">
-                                            <div className="d-flex">
-                                                <div><h3>{product.selling_price}<span>TK</span></h3></div>
-                                                <div className="pl-4">
-                                                    <p><Icon icon={ic_access_time} size={20} className="mr-2" />30 days return*</p>
-                                                    <p><Icon icon={ic_directions_car} size={20} className="mr-2" />Delivary anywhere in banglades</p>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="sizes">
-                                            <div className="d-flex">
-                                                <div className="pt-2"><h6>SIZE</h6></div>
-                                                <div>
+                                                <div className="img-list text-center my-3">
                                                     <ul>
-                                                        {product.size &&
-                                                            product.size.length > 0 ? product.size.map((size, i) =>
-                                                                <li key={i}><p>{size}</p></li>
-                                                            )
-                                                            : null}
+                                                        {product.images &&
+                                                            product.images.length > 0 ?
+                                                            product.images.map((image, i) =>
+                                                                <li key={i}>
+                                                                    <img src={image.path} className="img-fluid" onClick={magnifiyHandeller} alt="..." />
+                                                                </li>
+                                                            ) : null}
                                                     </ul>
                                                 </div>
                                             </div>
-                                        </div>
 
-                                        <div className="colors">
-                                            <div className="d-flex">
-                                                <div className="pt-2"><h6>COLORS</h6></div>
-                                                <div className="ml-3">
-                                                    <ul>
-                                                        {product.color &&
-                                                            product.color.length > 0 ? product.color.map((color, i) =>
-                                                                <li key={i} style={{ background: `${color}` }}></li>
-                                                            )
-                                                            : null}
-                                                    </ul>
+                                            <div className="product-info mt-4 mt-lg-0 px-3 px-lg-4">
+                                                <h4>{product.name}</h4>
+                                                <h6>SKU: {product.sku}</h6>
+
+                                                <div className="price_policy">
+                                                    <div className="d-flex">
+                                                        <div><h3>{product.selling_price}<span>TK</span></h3></div>
+                                                        <div className="pl-4">
+                                                            <p><Icon icon={ic_access_time} size={20} className="mr-2" />30 days return*</p>
+                                                            <p><Icon icon={ic_directions_car} size={20} className="mr-2" />Delivary anywhere in banglades</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
+
+                                                <div className="sizes">
+                                                    <div className="d-flex">
+                                                        <div className="pt-2"><h6>SIZE</h6></div>
+                                                        <div>
+                                                            <ul>
+                                                                {product.size &&
+                                                                    product.size.length > 0 ? product.size.map((size, i) =>
+                                                                        <li key={i}><p>{size}</p></li>
+                                                                    )
+                                                                    : null}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="colors">
+                                                    <div className="d-flex">
+                                                        <div className="pt-2"><h6>COLORS</h6></div>
+                                                        <div className="ml-3">
+                                                            <ul>
+                                                                {product.color &&
+                                                                    product.color.length > 0 ? product.color.map((color, i) =>
+                                                                        <li key={i} style={{ background: `${color}` }}></li>
+                                                                    )
+                                                                    : null}
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div className="cart-option">
+                                                    <div className="d-flex">
+                                                        <div>
+                                                            <button
+                                                                type="button"
+                                                                className="btn rounded-0 shadow-none"
+                                                                onClick={() => setQuantity(quantity - 1)}
+                                                                disabled={quantity <= 1 ? true : false}
+                                                            >
+                                                                <Icon icon={minus} />
+                                                            </button>
+                                                            <button type="button" className="btn rounded-0 shadow-none" disabled>{quantity}</button>
+                                                            <button
+                                                                type="button"
+                                                                className="btn rounded-0 shadow-none"
+                                                                onClick={() => setQuantity(quantity + 1)}
+                                                                disabled={quantity >= 5 ? true : false}
+                                                            >
+                                                                <Icon icon={plus} />
+                                                            </button>
+                                                        </div>
+                                                        <div className="pl-2">
+                                                            <button
+                                                                type="button"
+                                                                className="btn shadow-none rounded-0 border-0 cart-btn"
+                                                                onClick={() => addToCart(product)}
+                                                            >Add to Cart</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
-
-                                        <div className="cart-option">
-                                            <div className="d-flex">
-                                                <div>
-                                                    <button
-                                                        type="button"
-                                                        className="btn rounded-0 shadow-none"
-                                                        onClick={() => setQuantity(quantity - 1)}
-                                                        disabled={quantity <= 1 ? true : false}
-                                                    >
-                                                        <Icon icon={minus} />
-                                                    </button>
-                                                    <button type="button" className="btn rounded-0 shadow-none" disabled>{quantity}</button>
-                                                    <button
-                                                        type="button"
-                                                        className="btn rounded-0 shadow-none"
-                                                        onClick={() => setQuantity(quantity + 1)}
-                                                        disabled={quantity >= 5 ? true : false}
-                                                    >
-                                                        <Icon icon={plus} />
-                                                    </button>
-                                                </div>
-                                                <div className="pl-2">
-                                                    <button
-                                                        type="button"
-                                                        className="btn shadow-none rounded-0 border-0 cart-btn"
-                                                        onClick={() => addToCart(product)}
-                                                    >Add to Cart</button>
-                                                </div>
-                                            </div>
-                                        </div>
-
                                     </div>
                                 </div>
 
@@ -436,7 +440,7 @@ const Index = () => {
                                         <div className="col-12">
 
                                             {product.relatedProducts.map((product, i) =>
-                                                <div className="card rounded-0 product-card" key={i}>
+                                                <div className="card rounded-0 product-card related-product-card" key={i}>
                                                     <div className="card-body">
                                                         <Link to={`/product/${product.id}/${product.name}`}>
                                                             <div className="img-box">

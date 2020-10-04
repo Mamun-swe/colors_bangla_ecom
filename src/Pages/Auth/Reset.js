@@ -3,17 +3,29 @@ import '../../styles/auth.scss';
 import axios from 'axios';
 import { apiURL } from '../../utils/apiURL';
 import { useForm } from "react-hook-form";
-
-import Logo from '../../assets/static/logo.png';
 import { Link } from 'react-router-dom';
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+import Logo from '../../assets/static/logo.png';
+
+toast.configure({ autoClose: 2000 })
 const Reset = () => {
     const { register, handleSubmit, errors } = useForm()
     const [isLoading, setLoading] = useState(false)
 
     const onSubmit = async (data) => {
-        setLoading(true)
-        console.log(data)
+        try {
+            setLoading(true)
+            const response = await axios.post(`${apiURL}passwordReset`, data.email)
+            console.log(response)
+        } catch (error) {
+            if (error) {
+                setLoading(false)
+                toast.warn(error.response.data.message)
+            }
+        }
     }
 
     return (
