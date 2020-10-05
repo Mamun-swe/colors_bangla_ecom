@@ -101,7 +101,10 @@ const Index = () => {
                 localStorage.removeItem('products')
             }
         } catch (error) {
-            if (error) console.log(error.response)
+            if (error) {
+                setLoading(false)
+                console.log(error.response)
+            }
         }
     }
 
