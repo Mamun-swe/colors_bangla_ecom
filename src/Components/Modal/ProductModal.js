@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../styles/modal.scss';
 import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../Redux/Actions/cartAction';
+import { Icon } from 'react-icons-kit';
+import { ic_done } from 'react-icons-kit/md';
 
 const ProductModal = (props) => {
     const dispatch = useDispatch()
+    const [slectedSize, setSelectedSize] = useState({})
+    const [selectedColor, setSelectedColor] = useState({})
+
+    useEffect(() => {
+        setSelectedSize(props.productinfo.size ? props.productinfo.size[0] : '')
+        setSelectedColor(props.productinfo.color ? props.productinfo.color[0] : '')
+    }, [props])
 
     // Add to cart
     const addToCart = data => {
@@ -15,7 +24,9 @@ const ProductModal = (props) => {
             price: data.selling_price,
             stock: data.stock,
             image: data.image,
-            quantity: 1
+            quantity: 1,
+            size: slectedSize,
+            color: selectedColor
         }
         dispatch(addProduct(newData))
     }
@@ -41,6 +52,67 @@ const ProductModal = (props) => {
                             <p className="mb-0">Price: {props.productinfo.selling_price} tk</p>
                             <p className="mb-2">Available Quantity: {props.productinfo.stock}</p>
                             <p>{props.productinfo.description}</p>
+
+                            {/* Sizes */}
+                            <div className="sizes">
+                                <div className="d-flex">
+                                    <div>
+                                        <h6>Sizes</h6>
+                                    </div>
+                                    <div>
+                                        <ul>
+                                            {props.productinfo.size ?
+                                                props.productinfo.size.map((size, i) =>
+                                                    <li
+                                                        key={i}
+                                                        onClick={() => setSelectedSize(size)}
+                                                    >
+                                                        <div className="flex-center flex-column">
+                                                            <p>{size}</p>
+                                                        </div>
+                                                        {slectedSize === size ?
+                                                            <div className="overlay">
+                                                                <div className="flex-center flex-column">
+                                                                    <p>{size}</p>
+                                                                </div>
+                                                            </div>
+                                                            : null}
+                                                    </li>
+                                                ) : null}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Colors */}
+                            <div className="colors">
+                                <div className="d-flex">
+                                    <div>
+                                        <h6>Colors</h6>
+                                    </div>
+                                    <div>
+                                        <ul>
+                                            {props.productinfo.color ?
+                                                props.productinfo.color.map((color, i) =>
+                                                    <li
+                                                        key={i}
+                                                        style={{ background: `${color}` }}
+                                                    >
+                                                        {selectedColor === color ?
+                                                            <div className="overlay">
+                                                                <div className="flex-center flex-column">
+                                                                    <Icon icon={ic_done} size={20} style={{ color: '#fff' }} />
+                                                                </div>
+                                                            </div>
+                                                            : null}
+                                                    </li>
+                                                ) : null}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <button
                                 type="button"
                                 className="btn btn-block shadow-none"

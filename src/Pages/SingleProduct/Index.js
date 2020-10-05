@@ -5,7 +5,7 @@ import axios from 'axios';
 import { apiURL } from '../../utils/apiURL';
 import { Icon } from 'react-icons-kit';
 import { plus, minus } from 'react-icons-kit/ionicons';
-import { ic_access_time, ic_directions_car } from 'react-icons-kit/md';
+import { ic_access_time, ic_directions_car, ic_done } from 'react-icons-kit/md';
 import { user_circle } from 'react-icons-kit/ikons/user_circle';
 import { shoppingBag } from 'react-icons-kit/feather';
 import { heartO } from 'react-icons-kit/fa';
@@ -35,6 +35,8 @@ const Index = () => {
     const [product, setProduct] = useState({})
     const [productImage, setProductImage] = useState('')
     const [quantity, setQuantity] = useState(1)
+    const [slectedSize, setSelectedSize] = useState('')
+    const [selectedColor, setSelectedColor] = useState('')
     const [rating, setRating] = useState()
     const [ratingErr, setRatingErr] = useState(false)
     const dispatch = useDispatch()
@@ -51,7 +53,10 @@ const Index = () => {
                 const response = await axios.get(`${apiURL}viewProduct/${id}/name`)
                 setProduct(response.data.result)
                 setProductImage(response.data.result.image)
+                setSelectedSize(response.data.result.size[0])
+                setSelectedColor(response.data.result.color[0])
                 setLoading(false)
+                console.log(response.data.result)
             } catch (error) {
                 if (error.response) {
                     setLoading(false)
@@ -72,7 +77,9 @@ const Index = () => {
             price: data.selling_price,
             stock: data.stock,
             image: data.image,
-            quantity: quantity || 1
+            quantity: quantity || 1,
+            colour: selectedColor,
+            size: slectedSize
         }
         dispatch(addProduct(newData))
     }
@@ -179,7 +186,20 @@ const Index = () => {
                                                             <ul>
                                                                 {product.size &&
                                                                     product.size.length > 0 ? product.size.map((size, i) =>
-                                                                        <li key={i}><p>{size}</p></li>
+                                                                        <li key={i}
+                                                                            onClick={() => setSelectedSize(size)}
+                                                                        >
+                                                                            <div className="flex-center flex-column">
+                                                                                <p>{size}</p>
+                                                                                {size === slectedSize ?
+                                                                                    <div className="overlay">
+                                                                                        <div className="flex-center flex-column">
+                                                                                            <p>{size}</p>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    : null}
+                                                                            </div>
+                                                                        </li>
                                                                     )
                                                                     : null}
                                                             </ul>
@@ -194,7 +214,19 @@ const Index = () => {
                                                             <ul>
                                                                 {product.color &&
                                                                     product.color.length > 0 ? product.color.map((color, i) =>
-                                                                        <li key={i} style={{ background: `${color}` }}></li>
+                                                                        <li
+                                                                            key={i}
+                                                                            style={{ background: `${color}` }}
+                                                                            onClick={() => setSelectedColor(color)}
+                                                                        >
+                                                                            {color === selectedColor ?
+                                                                                <div className="overlay">
+                                                                                    <div className="flex-center flex-column">
+                                                                                        <Icon icon={ic_done} size={20} style={{ color: '#fff' }} />
+                                                                                    </div>
+                                                                                </div>
+                                                                                : null}
+                                                                        </li>
                                                                     )
                                                                     : null}
                                                             </ul>
