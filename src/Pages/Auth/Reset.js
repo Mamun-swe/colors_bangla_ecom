@@ -4,7 +4,6 @@ import axios from 'axios';
 import { apiURL } from '../../utils/apiURL';
 import { useForm } from "react-hook-form";
 import { Link } from 'react-router-dom';
-
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -18,8 +17,11 @@ const Reset = () => {
     const onSubmit = async (data) => {
         try {
             setLoading(true)
-            const response = await axios.post(`${apiURL}passwordReset`, data.email)
-            console.log(response)
+            const response = await axios.post(`${apiURL}passwordReset`, data)
+            if (response.status === 200) {
+                setLoading(false)
+                toast.success(response.data.message)
+            }
         } catch (error) {
             if (error) {
                 setLoading(false)
