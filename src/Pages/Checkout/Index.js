@@ -98,6 +98,7 @@ const Index = () => {
                 setOrderCode(response.data.result.order_code)
                 setShow(true)
                 localStorage.removeItem('discountPercent')
+                localStorage.removeItem('products')
             }
         } catch (error) {
             if (error) console.log(error.response)
