@@ -56,11 +56,14 @@ const Index = () => {
             if (response.status === 200 && response.data.result.type === 'fixed') {
                 toast.info('Coupon is expired')
             }
+
+            console.log(response.data);
         } catch (error) {
             if (error && error.response.status !== 200) {
                 console.log(error.response)
                 toast.warn('Coupon not found')
             }
+            console.log(error.response);
         }
     }
 
