@@ -55,6 +55,7 @@ const Index = () => {
             }
             if (response.status === 200 && response.data.result.type === 'fixed') {
                 toast.info('Coupon is expired')
+                localStorage.removeItem('discountPercent')
             }
 
             console.log(response.data);
@@ -62,6 +63,7 @@ const Index = () => {
             if (error && error.response.status !== 200) {
                 console.log(error.response)
                 toast.warn('Coupon not found')
+                localStorage.removeItem('discountPercent')
             }
             console.log(error.response);
         }
