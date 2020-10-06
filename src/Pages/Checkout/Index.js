@@ -91,7 +91,6 @@ const Index = () => {
         }
 
         try {
-            console.log(checkOutData)
             setLoading(true)
             const response = await axios.post(`${apiURL}confirmOrder`, checkOutData, header)
             if (response.status === 200) {
