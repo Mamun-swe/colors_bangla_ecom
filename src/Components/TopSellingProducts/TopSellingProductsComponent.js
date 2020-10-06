@@ -51,7 +51,9 @@ const TopSellingProductsComponent = ({ categories }) => {
             price: data.selling_price,
             stock: data.stock,
             image: data.image,
-            quantity: 1
+            quantity: 1,
+            size: data.size ? data.size[0] : null,
+            color: data.color ? data.color[0] : null
         }
         dispatch(addProduct(newData))
     }

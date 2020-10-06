@@ -97,6 +97,7 @@ const ProductModal = (props) => {
                                                     <li
                                                         key={i}
                                                         style={{ background: `${color}` }}
+                                                        onClick={() => setSelectedColor(color)}
                                                     >
                                                         {selectedColor === color ?
                                                             <div className="overlay">
