@@ -34,10 +34,17 @@ const Index = () => {
     const [isShow, setShow] = useState(false)
     const [checkResponseOutData, setCheckOutResponseData] = useState()
     const [orderCode, setOrderCode] = useState()
+    const [couponInfo, setCouponInfo] = useState({})
 
 
     useEffect(() => {
         dispatch(productsList())
+        const getCoupon = async () => {
+            const coupon = await JSON.parse(localStorage.getItem('couponData'))
+            setCouponInfo(coupon)
+        }
+
+        getCoupon()
     }, [dispatch])
 
     const onChangeOutSideDhaka = event => {
@@ -57,8 +64,16 @@ const Index = () => {
     }
 
     const countTotal = () => {
-        const total = subTotal - (subTotal * (localStorage.getItem('discountPercent') ? localStorage.getItem('discountPercent') : 0) / 100)
-        return total
+        if (couponInfo && couponInfo.type === 'percent') {
+            const total = subTotal - (subTotal * (couponInfo.percent) / 100)
+            return total
+        } else if (couponInfo && couponInfo.type === 'fixed') {
+            const total = subTotal - couponInfo.amount
+            return total
+        } else {
+            return subTotal
+        }
+
     }
 
     const onSubmit = async (data) => {
@@ -85,8 +100,8 @@ const Index = () => {
             delivery_method: 'Cash on delivery',
             total_price: countTotal(),
             delivery_charge: delivery_charge,
-            coupon_code: localStorage.getItem('discountPercent') ? localStorage.getItem('discountPercent') : null,
-            discount: localStorage.getItem('discountPercent') ? localStorage.getItem('discountPercent') : null,
+            coupon_code: couponInfo ? couponInfo.code : null,
+            discount: couponInfo && couponInfo.type === 'percent' ? couponInfo.percent : couponInfo && couponInfo.type === 'fixed' ? couponInfo.amount : null,
             products: cartProducts
         }
 
@@ -97,12 +112,13 @@ const Index = () => {
                 setCheckOutResponseData(checkOutData)
                 setOrderCode(response.data.result.order_code)
                 setShow(true)
-                localStorage.removeItem('discountPercent')
+                localStorage.removeItem('couponData')
                 localStorage.removeItem('products')
             }
         } catch (error) {
             if (error) {
                 setLoading(false)
+                localStorage.removeItem('couponData')
                 console.log(error.response)
             }
         }
@@ -297,14 +313,23 @@ const Index = () => {
                                         </div>
 
                                         {/* Discount */}
-                                        <div className="sub-total d-flex mt-0">
-                                            <div>
-                                                <p>Discount</p>
+                                        {couponInfo ?
+                                            <div className="sub-total d-flex mt-0">
+                                                <div>
+                                                    <p>Discount</p>
+                                                </div>
+                                                <div className="ml-auto pl-2">
+                                                    {
+                                                        couponInfo.type === 'percent' ?
+                                                            <p>{couponInfo.percent} %</p>
+                                                            : couponInfo.type === 'fixed' ?
+                                                                <p>{couponInfo.amount} tk.</p>
+                                                                : null
+
+                                                    }
+                                                </div>
                                             </div>
-                                            <div className="ml-auto pl-2">
-                                                <p>{localStorage.getItem('discountPercent') ? localStorage.getItem('discountPercent') : 0} %</p>
-                                            </div>
-                                        </div>
+                                            : null}
 
                                         {/* Total */}
                                         <div className="sub-total border-top d-flex mt-0">

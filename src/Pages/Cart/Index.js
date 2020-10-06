@@ -49,23 +49,22 @@ const Index = () => {
     const onSubmit = async (data) => {
         try {
             const response = await axios.get(`${apiURL}getCoupon/${data.code}`)
-            if (response.status === 200 && response.data.result.type === 'percent') {
-                localStorage.setItem('discountPercent', response.data.result.discount_percent)
+            if (response.status === 200) {
+                const couponData = {
+                    code: response.data.result.code,
+                    type: response.data.result.type,
+                    amount: parseInt(response.data.result.discount_amount),
+                    percent: parseInt(response.data.result.discount_percent)
+                }
+
+                localStorage.setItem('couponData', JSON.stringify(couponData))
                 toast.info('Coupon applied in you total amount')
             }
-            if (response.status === 200 && response.data.result.type === 'fixed') {
-                toast.info('Coupon is expired')
-                localStorage.removeItem('discountPercent')
-            }
-
-            console.log(response.data);
         } catch (error) {
             if (error && error.response.status !== 200) {
-                console.log(error.response)
                 toast.warn('Coupon not found')
-                localStorage.removeItem('discountPercent')
+                localStorage.removeItem('couponData')
             }
-            console.log(error.response);
         }
     }
 
