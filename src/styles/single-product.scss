@@ -201,6 +201,48 @@
             font-family: 'Roboto', sans-serif;
         }
 
+        .product-feature {
+            h6 {
+                font-size: 17px;
+                font-weight: 700;
+                margin-bottom: 10px;
+                font-family: 'Roboto', sans-serif;
+            }
+
+            table {
+                tbody {
+                    tr {
+                        td {
+                            min-width: 100px;
+                            padding-bottom: 5px;
+
+                            p {
+                                color: #000;
+                                font-size: 13px;
+                                font-weight: 600;
+                                margin-bottom: 0;
+                                font-family: 'Roboto', sans-serif;
+                            }
+
+                            span {
+                                font-size: 14px;
+                                margin-bottom: 0;
+                                font-family: 'Roboto', sans-serif;
+                            }
+
+                            .size-box {
+                                color: #000;
+                                font-size: 13px;
+                                margin-bottom: 0;
+                                font-weight: 900;
+                                font-family: 'Roboto', sans-serif;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
         .reviews {
             h5 {
                 font-size: 15px;

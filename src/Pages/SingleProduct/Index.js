@@ -276,7 +276,57 @@ const Index = () => {
                                         <Tabs defaultActiveKey="product_feature">
                                             {/* Product feature tab */}
                                             <Tab eventKey="product_feature" title="Product Features">
-                                                <p>{product.feature}</p>
+                                                <div className="product-feature">
+                                                    <h6>{product.name}</h6>
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><p>Brand</p></td>
+                                                                <td><span>{product.brand}</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><p>SKU</p></td>
+                                                                <td><span>{product.sku}</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><p>MRP</p></td>
+                                                                <td><span>{product.mrp}</span></td>
+                                                            </tr>
+                                                            {product.color ?
+                                                                <tr>
+                                                                    <td className="py-2"><p>Colors</p></td>
+                                                                    <td className="py-2">
+
+                                                                        {product.color.map((color, i) =>
+                                                                            <span className="color-box px-3 py-1 mr-1" key={i} style={{ background: color }}></span>
+                                                                        )}
+                                                                    </td>
+                                                                </tr>
+                                                                : null}
+                                                            <tr>
+                                                                <td><p>Sizes</p></td>
+                                                                <td>
+                                                                    {product.size ?
+                                                                        product.size.map((size, i) =>
+                                                                            <span className="size-box border px-2 py-1 mr-1" key={i}>{size}</span>
+                                                                        ) : null}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><p>Available</p></td>
+                                                                <td><span>{product.quantity}</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><p>Selling Price</p></td>
+                                                                <td><span>{product.selling_price} tk.</span></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><p>Tags</p></td>
+                                                                <td><span className="font-weight-bold">{product.tags}</span></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
                                             </Tab>
 
                                             {/* Product description tab */}
