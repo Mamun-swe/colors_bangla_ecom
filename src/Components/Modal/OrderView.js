@@ -81,6 +81,8 @@ const OrderView = ({ data, hidemodal }) => {
                                             <thead>
                                                 <tr>
                                                     <td><p>product</p></td>
+                                                    <td className="text-center"><p>size</p></td>
+                                                    <td className="text-center"><p>color</p></td>
                                                     <td className="text-right"><p>quantity</p></td>
                                                     <td className="text-right"><p>total</p></td>
                                                 </tr>
@@ -91,6 +93,13 @@ const OrderView = ({ data, hidemodal }) => {
                                                     data.products.map((product, i) =>
                                                         <tr className="boder" key={i}>
                                                             <td><p>{product.name}</p></td>
+                                                            <td className="text-center">
+                                                                <p className="size">{product.pivot.size}</p>
+                                                            </td>
+                                                            <td className="text-center">
+                                                                <div className="colour-box"
+                                                                    style={{ background: product.pivot.colour, width: 20, height: 20, margin: 'auto' }}></div>
+                                                            </td>
                                                             <td className="text-right"><p>{product.pivot.quantity}</p></td>
                                                             <td className="text-right"><p>{product.pivot.total} tk.</p></td>
                                                         </tr>
@@ -133,19 +142,33 @@ const OrderView = ({ data, hidemodal }) => {
                                                 {/* Name */}
                                                 <tr>
                                                     <td><p>Name:</p></td>
-                                                    <td className="text-right text-capitalize"><p>golam rabby</p></td>
+                                                    <td className="text-right text-capitalize"><p>{data.name}</p></td>
                                                 </tr>
 
                                                 {/* District */}
                                                 <tr>
                                                     <td><p>District:</p></td>
-                                                    <td className="text-right text-capitalize"><p>noter</p></td>
+                                                    <td className="text-right text-capitalize"><p>{data.district}</p></td>
                                                 </tr>
 
                                                 {/* Courier */}
                                                 <tr>
                                                     <td><p>Courier:</p></td>
-                                                    <td className="text-right"><p>সুন্দরবন কুরিয়ার</p></td>
+                                                    <td className="text-right">
+                                                        <p>{
+                                                            data.courier_name && data.courier_name === 'sundarban_courier' ?
+                                                                <span>সুন্দরবন কুরিয়ার</span>
+                                                                : data.courier_name && data.courier_name === 'kartua_courier' ?
+                                                                    <span>করতোয়া কুরিয়ার</span>
+                                                                    : data.courier_name && data.courier_name === 'janani_courier' ?
+                                                                        <span>জননী কুরিয়ার</span>
+                                                                        : data.courier_name && data.courier_name === 'dhaka_home_delivery' ?
+                                                                            <span>ঢাকা হোম ডেলিভারি</span>
+                                                                            : data.courier_name && data.courier_name === 's_a_paribahan' ?
+                                                                                <span>এস এ পরিবহন</span>
+                                                                                : null
+                                                        }</p>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>

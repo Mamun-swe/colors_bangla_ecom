@@ -37,7 +37,7 @@ const OrderStatusModal = ({ data, orderCode, hidemodal }) => {
                                 <div className="col-12 col-lg-6">
                                     <p>{data.name ?? null}</p>
                                     <p>{data.phone ?? null}</p>
-                                    <p>{data.email ?? null}</p>
+                                    <p className="text-lowercase">{data.email ?? null}</p>
                                     <p>order code: {orderCode ?? null}</p>
                                 </div>
                                 <div className="col-12 col-lg-6 mt-3 mt-lg-0">
@@ -47,6 +47,19 @@ const OrderStatusModal = ({ data, orderCode, hidemodal }) => {
                                     <p>delivery method: {data.delivery_method ?? null}</p>
                                     <p>delivery address: {data.delivery_address ?? null}</p>
                                     <p>shipping area: {data.shipping_area ?? null}</p>
+                                    <p>courier: {
+                                        data.courier && data.courier === 'sundarban_courier' ?
+                                            <span>সুন্দরবন কুরিয়ার</span>
+                                            : data.courier && data.courier === 'kartua_courier' ?
+                                                <span>করতোয়া কুরিয়ার</span>
+                                                : data.courier && data.courier === 'janani_courier' ?
+                                                    <span>জননী কুরিয়ার</span>
+                                                    : data.courier && data.courier === 'dhaka_home_delivery' ?
+                                                        <span>ঢাকা হোম ডেলিভারি</span>
+                                                        : data.courier && data.courier === 's_a_paribahan' ?
+                                                            <span>এস এ পরিবহন</span>
+                                                            : null
+                                    }</p>
                                 </div>
                             </div>
 
@@ -56,7 +69,9 @@ const OrderStatusModal = ({ data, orderCode, hidemodal }) => {
                                         <thead>
                                             <tr>
                                                 <td><p>Name</p></td>
-                                                <td className="text-right"><p>Quantity</p></td>
+                                                <td className="text-center"><p>Size</p></td>
+                                                <td className="text-center"><p>Color</p></td>
+                                                <td className="text-center"><p>Quantity</p></td>
                                                 <td className="text-right"><p>Price</p></td>
                                             </tr>
                                         </thead>
@@ -66,8 +81,12 @@ const OrderStatusModal = ({ data, orderCode, hidemodal }) => {
                                                 data.products.map((product, i) =>
                                                     <tr key={i}>
                                                         <td><p>{product.name}</p></td>
-                                                        <td className="text-right"><p>{product.quantity}</p></td>
-                                                        <td className="text-right"><p>{product.price}</p></td>
+                                                        <td className="text-center"><p>{product.size}</p></td>
+                                                        <td className="text-center">
+                                                            <div style={{ background: product.color, width: 20, height: 20, margin: 'auto' }}></div>
+                                                        </td>
+                                                        <td className="text-center"><p>{product.quantity}</p></td>
+                                                        <td className="text-right"><p>{product.price} tk.</p></td>
                                                     </tr>
                                                 ) : null}
                                         </tbody>

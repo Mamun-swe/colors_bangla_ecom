@@ -105,6 +105,9 @@ const Index = () => {
             products: cartProducts
         }
 
+        setCheckOutResponseData(checkOutData)
+        setShow(true)
+
         try {
             setLoading(true)
             const response = await axios.post(`${apiURL}confirmOrder`, checkOutData, header)
