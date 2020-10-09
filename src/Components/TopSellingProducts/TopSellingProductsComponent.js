@@ -43,6 +43,10 @@ const TopSellingProductsComponent = ({ categories }) => {
         setModalData(data)
     }
 
+    const hideModal = () => {
+        setModalShow(false)
+    }
+
     // Add to cart
     const addToCart = data => {
         const newData = {
@@ -158,6 +162,7 @@ const TopSellingProductsComponent = ({ categories }) => {
             <ProductModalComponent
                 productinfo={modalData}
                 show={modalShow}
+                hidemodal={hideModal}
                 onHide={() => setModalShow(false)}
             />
         </div>

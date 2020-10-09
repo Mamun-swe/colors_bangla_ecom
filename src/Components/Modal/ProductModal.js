@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../Redux/Actions/cartAction';
 import { Icon } from 'react-icons-kit';
-import { ic_done } from 'react-icons-kit/md';
+import { ic_done, ic_close } from 'react-icons-kit/md';
 
 const ProductModal = (props) => {
     const dispatch = useDispatch()
@@ -29,6 +29,7 @@ const ProductModal = (props) => {
             color: selectedColor
         }
         dispatch(addProduct(newData))
+        props.hidemodal()
     }
 
     return (
@@ -40,7 +41,15 @@ const ProductModal = (props) => {
                 centered
                 className="custom-product-modal"
             >
-                <Modal.Header closeButton className="pt-2 pb-0 border-0" />
+                <Modal.Header className="pt-2 px-1 pb-0 border-0">
+                    <button
+                        type="button"
+                        className="btn rounded-0 shadow-none ml-auto"
+                        onClick={() => props.hidemodal()}
+                    >
+                        <Icon icon={ic_close} size={28} />
+                    </button>
+                </Modal.Header>
 
                 <Modal.Body>
                     <div className="row">

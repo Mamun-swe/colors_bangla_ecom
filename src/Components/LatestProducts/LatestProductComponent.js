@@ -59,6 +59,10 @@ const LatestProductComponent = ({ latestProducts }) => {
         setModalData(data)
     }
 
+    const hideModal = () => {
+        setModalShow(false)
+    }
+
     return (
         <div className="latest-product">
             <div className="container">
@@ -135,6 +139,7 @@ const LatestProductComponent = ({ latestProducts }) => {
             <ProductModalComponent
                 productinfo={modalData}
                 show={modalShow}
+                hidemodal={hideModal}
                 onHide={() => setModalShow(false)}
             />
         </div>

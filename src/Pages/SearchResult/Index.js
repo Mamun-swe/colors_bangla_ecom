@@ -45,6 +45,10 @@ const Index = (props) => {
         setModalData(data)
     }
 
+    const hideModal = () => {
+        setModalShow(false)
+    }
+
     // Add to cart
     const addToCart = data => {
         const newData = {
@@ -142,6 +146,7 @@ const Index = (props) => {
                     <ProductModalComponent
                         productinfo={modalData}
                         show={modalShow}
+                        hidemodal={hideModal}
                         onHide={() => setModalShow(false)}
                     />
 

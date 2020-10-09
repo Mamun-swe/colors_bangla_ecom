@@ -70,6 +70,10 @@ const Index = () => {
         setModalData(data)
     }
 
+    const hideModal = () => {
+        setModalShow(false)
+    }
+
     // On change price handeller
     const priceFilter = data => {
         setChecked(data)
@@ -324,6 +328,7 @@ const Index = () => {
                     <ProductModalComponent
                         productinfo={modalData}
                         show={modalShow}
+                        hidemodal={hideModal}
                         onHide={() => setModalShow(false)}
                     />
                 </div>
