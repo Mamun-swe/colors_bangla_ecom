@@ -261,7 +261,7 @@ const Index = () => {
                                                                 type="button"
                                                                 className="btn rounded-0 shadow-none"
                                                                 onClick={() => setQuantity(quantity + 1)}
-                                                                disabled={quantity >= 5 ? true : false}
+                                                                disabled={quantity >= product.quantity ? true : false}
                                                             >
                                                                 <Icon icon={plus} />
                                                             </button>
