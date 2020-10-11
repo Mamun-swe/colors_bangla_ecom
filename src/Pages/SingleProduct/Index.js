@@ -81,7 +81,7 @@ const Index = () => {
             stock: data.stock,
             image: data.image,
             quantity: quantity || 1,
-            colour: selectedColor,
+            color: selectedColor,
             size: slectedSize
         }
         dispatch(addProduct(newData))

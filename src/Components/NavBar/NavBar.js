@@ -93,6 +93,7 @@ const NavBar = () => {
                         <Link to={`/category/${singleCatId}`}>shop</Link>
                         {/* <Link to={`/category/${singleCatId}`}>new arrival</Link> */}
                         <Link to="/contact">contact</Link>
+                        <Link to="/contact">showroom</Link>
                         <Link to="/sign-in">my account</Link>
                     </div>
                 </div>
@@ -115,6 +116,7 @@ const NavBar = () => {
                                         <li><NavLink exact activeClassName="is-active" to={`/category/${singleCatId}`}>shop</NavLink></li>
                                         {/* <li><NavLink exact activeClassName="is-active" to={`/category/${singleCatId}`}>new arrival</NavLink></li> */}
                                         <li><NavLink exact activeClassName="is-active" to="/contact">contact</NavLink></li>
+                                        <li><NavLink exact activeClassName="is-active" to="/showroom">showroom</NavLink></li>
                                     </ul>
                                 </div>
                                 <div className="ml-auto account-links">

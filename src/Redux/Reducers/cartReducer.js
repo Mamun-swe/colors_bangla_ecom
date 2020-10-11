@@ -47,7 +47,7 @@ export default function (state = initialState, action) {
             let productAlreadyExists = state.cartProducts.find(x =>
                 x.id === action.payload.id &&
                 x.size === action.payload.size &&
-                x.colour === action.payload.colour
+                x.color === action.payload.color
             )
             if (productAlreadyExists) {
                 toast.success('One product added into cart')
