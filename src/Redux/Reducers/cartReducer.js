@@ -57,7 +57,8 @@ export default function (state = initialState, action) {
                         if (
                             product.id === action.payload.id &&
                             product.size === action.payload.size &&
-                            product.color === action.payload.color
+                            product.color === action.payload.color &&
+                            product.quantity < product.available_quantity
                         ) {
                             product.quantity += action.payload.quantity || 1
                             localStorage.setItem('products', JSON.stringify(state.cartProducts))
