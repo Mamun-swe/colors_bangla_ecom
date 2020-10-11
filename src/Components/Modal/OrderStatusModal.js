@@ -86,7 +86,7 @@ const OrderStatusModal = ({ data, orderCode, hidemodal }) => {
                                                             <div style={{ background: product.color, width: 20, height: 20, margin: 'auto' }}></div>
                                                         </td>
                                                         <td className="text-center"><p>{product.quantity}</p></td>
-                                                        <td className="text-right"><p>{product.price} tk.</p></td>
+                                                        <td className="text-right"><p>{product.quantity * product.price} tk.</p></td>
                                                     </tr>
                                                 ) : null}
                                         </tbody>
