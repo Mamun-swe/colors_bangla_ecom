@@ -68,21 +68,36 @@ export default function (state = initialState, action) {
                     add_success: true
                 }
             } else {
-                let products = []
 
-                if (localStorage.getItem('products')) {
-                    products = JSON.parse(localStorage.getItem('products'))
+                let noAvailable = state.cartProducts.find(x =>
+                    x.id === action.payload.id &&
+                    x.size !== action.payload.size &&
+                    x.color !== action.payload.color &&
+                    product.quantity < product.available_quantity
+                )
+
+                if (!noAvailable) {
+                    let products = []
+
+                    if (localStorage.getItem('products')) {
+                        products = JSON.parse(localStorage.getItem('products'))
+                    }
+
+                    products.push(action.payload)
+                    localStorage.setItem('products', JSON.stringify(products))
+                    toast.success('One product added into cart')
+
+                    return {
+                        ...state,
+                        cartProducts: [...state.cartProducts, action.payload],
+                        add_success: true
+                    }
                 }
-
-                products.push(action.payload)
-                localStorage.setItem('products', JSON.stringify(products))
-                toast.success('One product added into cart')
 
                 return {
-                    ...state,
-                    cartProducts: [...state.cartProducts, action.payload],
-                    add_success: true
+                    ...state
                 }
+
             }
 
 
