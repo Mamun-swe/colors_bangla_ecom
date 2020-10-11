@@ -146,7 +146,7 @@ const Index = () => {
                                                     type="button"
                                                     className="btn shadow-none"
                                                     onClick={() => dispatch(incrementQuantity(product.cartId))}
-                                                    disabled={product.quantity >= 5 ? true : false}
+                                                    disabled={product.quantity >= product.available_quantity ? true : false}
                                                 >
                                                     <Icon icon={plus} />
                                                 </button>

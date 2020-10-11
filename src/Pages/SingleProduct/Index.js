@@ -59,6 +59,7 @@ const Index = () => {
                 setSelectedColor(response.data.result.color[0])
                 setLoading(false)
                 setTags(response.data.result.tags.split(','))
+                console.log(response.data.result)
             } catch (error) {
                 if (error.response) {
                     setLoading(false)
@@ -81,6 +82,7 @@ const Index = () => {
             stock: data.stock,
             image: data.image,
             quantity: quantity || 1,
+            available_quantity: parseInt(data.quantity),
             color: selectedColor,
             size: slectedSize
         }

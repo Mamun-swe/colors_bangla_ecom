@@ -44,6 +44,7 @@ export default function (state = initialState, action) {
 
         // Product Add To Cart
         case PRODUCT_ADD_CART_REQUEST:
+            console.log(action.payload);
             let productAlreadyExists = state.cartProducts.find(x =>
                 x.id === action.payload.id &&
                 x.size === action.payload.size &&
