@@ -120,7 +120,7 @@ const Index = () => {
                                             <td className="text-center font-weight-bold text-dark">{product.size}</td>
                                             {/* Colour */}
                                             <td className="text-center">
-                                                <div style={{ width: 25, height: 20, margin: 'auto', background: product.colour }}></div>
+                                                <div style={{ width: 25, height: 20, margin: 'auto', background: product.color }}></div>
                                             </td>
                                             {/* Price */}
                                             <td className="text-center">Tk. {product.price}</td>
