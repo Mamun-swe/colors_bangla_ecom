@@ -108,23 +108,24 @@ const Index = () => {
         setCheckOutResponseData(checkOutData)
         setShow(true)
 
-        try {
-            setLoading(true)
-            const response = await axios.post(`${apiURL}confirmOrder`, checkOutData, header)
-            if (response.status === 200) {
-                setCheckOutResponseData(checkOutData)
-                setOrderCode(response.data.result.order_code)
-                setShow(true)
-                localStorage.removeItem('couponData')
-                localStorage.removeItem('products')
-            }
-        } catch (error) {
-            if (error) {
-                setLoading(false)
-                localStorage.removeItem('couponData')
-                console.log(error.response)
-            }
-        }
+        // try {
+        //     console.log(checkOutData)
+        //     setLoading(true)
+        //     const response = await axios.post(`${apiURL}confirmOrder`, checkOutData, header)
+        //     if (response.data.success === true) {
+        //         setCheckOutResponseData(checkOutData)
+        //         setOrderCode(response.data.result.order_code)
+        //         setShow(true)
+        //         localStorage.removeItem('couponData')
+        //         localStorage.removeItem('products')
+        //     }
+        // } catch (error) {
+        //     if (error) {
+        //         setLoading(false)
+        //         localStorage.removeItem('couponData')
+        //         console.log(error.response)
+        //     }
+        // }
     }
 
     const hideModal = () => {

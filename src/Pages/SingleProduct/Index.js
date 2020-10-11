@@ -12,7 +12,7 @@ import { heartO } from 'react-icons-kit/fa';
 import { star } from 'react-icons-kit/ikons/star';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../Redux/Actions/cartAction';
 import { useForm } from "react-hook-form";
@@ -27,6 +27,7 @@ import FourOFourImg from '../../assets/static/empty_shopping_cart.png';
 
 toast.configure({ autoClose: 2000 })
 const Index = () => {
+    const history = useHistory()
     const { register, handleSubmit, errors } = useForm()
     const { id, name } = useParams()
     const [isLoading, setLoading] = useState(false)
@@ -39,6 +40,7 @@ const Index = () => {
     const [selectedColor, setSelectedColor] = useState('')
     const [rating, setRating] = useState()
     const [ratingErr, setRatingErr] = useState(false)
+    const [tags, setTags] = useState([])
     const dispatch = useDispatch()
 
 
@@ -56,7 +58,7 @@ const Index = () => {
                 setSelectedSize(response.data.result.size[0])
                 setSelectedColor(response.data.result.color[0])
                 setLoading(false)
-                console.log(response.data.result.tags.split(','))
+                setTags(response.data.result.tags.split(','))
             } catch (error) {
                 if (error.response) {
                     setLoading(false)
@@ -110,6 +112,12 @@ const Index = () => {
             setReviewLoading(false)
             if (error) console.log(error.response)
         }
+    }
+
+
+    // Search by tag
+    const searchByTag = (data) => {
+        history.push(`/search-results?query=${data}`)
     }
 
     return (
@@ -279,54 +287,80 @@ const Index = () => {
                                             <Tab eventKey="product_feature" title="Product Features">
                                                 <div className="product-feature">
                                                     <h6>{product.name}</h6>
-                                                    <table>
-                                                        <tbody>
-                                                            <tr>
-                                                                <td><p>Brand</p></td>
-                                                                <td><span>{product.brand}</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><p>SKU</p></td>
-                                                                <td><span>{product.sku}</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><p>MRP</p></td>
-                                                                <td><span>{product.mrp}</span></td>
-                                                            </tr>
-                                                            {product.color ?
-                                                                <tr>
-                                                                    <td className="py-2"><p>Colors</p></td>
-                                                                    <td className="py-2">
 
-                                                                        {product.color.map((color, i) =>
-                                                                            <span className="color-box px-3 py-1 mr-1" key={i} style={{ background: color }}></span>
-                                                                        )}
-                                                                    </td>
-                                                                </tr>
-                                                                : null}
-                                                            <tr>
-                                                                <td><p>Sizes</p></td>
-                                                                <td>
-                                                                    {product.size ?
-                                                                        product.size.map((size, i) =>
-                                                                            <span className="size-box border px-2 py-1 mr-1" key={i}>{size}</span>
-                                                                        ) : null}
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><p>Available</p></td>
-                                                                <td><span>{product.quantity}</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><p>Selling Price</p></td>
-                                                                <td><span>{product.selling_price} tk.</span></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><p>Tags</p></td>
-                                                                <td><span className="font-weight-bold">{product.tags}</span></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                    {/* Barnd */}
+                                                    <div className="d-flex">
+                                                        <div className="box-1"><p>Brand</p></div>
+                                                        <div className="flex-fill"><p>{product.brand}</p></div>
+                                                    </div>
+
+                                                    {/* SKU */}
+                                                    <div className="d-flex">
+                                                        <div className="box-1"><p>SKU</p></div>
+                                                        <div className="flex-fill"><p>{product.sku}</p></div>
+                                                    </div>
+
+                                                    {/* MRP */}
+                                                    <div className="d-flex">
+                                                        <div className="box-1"><p>MRP</p></div>
+                                                        <div className="flex-fill"><p>{product.mrp}</p></div>
+                                                    </div>
+
+                                                    {/* Colours */}
+                                                    {product.color ?
+                                                        <div className="d-flex">
+                                                            <div className="box-1"><p>Colors</p></div>
+                                                            <div className="flex-fill">
+
+                                                                {product.color.map((color, i) =>
+                                                                    <p className="color-box py-1 mr-1" key={i} style={{ background: color }}></p>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                        : null}
+
+                                                    {/* Sizes */}
+                                                    <div className="d-flex">
+                                                        <div className="box-1"><p>Sizes</p></div>
+                                                        <div className="flex-fill">
+                                                            {product.size ?
+                                                                product.size.map((size, i) =>
+                                                                    <p className="size-box border px-2 py-1 mr-1" key={i}>{size}</p>
+                                                                ) : null}
+                                                        </div>
+                                                    </div>
+
+                                                    {/* Available */}
+                                                    <div className="d-flex">
+                                                        <div className="box-1"><p>Available</p></div>
+                                                        <div className="flex-fill"><p>{product.quantity}</p></div>
+                                                    </div>
+
+                                                    {/* Selling Price */}
+                                                    <div className="d-flex">
+                                                        <div className="box-1"><p>Selling Price</p></div>
+                                                        <div className="flex-fill"><p>{product.selling_price} tk.</p></div>
+                                                    </div>
+
+                                                    {/* Tags */}
+                                                    <div className="d-flex">
+                                                        <div className="box-1"><p>Tags</p></div>
+                                                        <div className="flex-fill">
+                                                            {tags && tags.length > 0 ?
+                                                                tags.map((tag, i) =>
+                                                                    <div className="tags" key={i}>
+                                                                        <button
+                                                                            type="button"
+                                                                            className="btn btn-sm shadow-none text-dark"
+                                                                            onClick={() => searchByTag(tag)}
+                                                                        >
+                                                                            <p>{tag}</p>
+                                                                        </button>
+                                                                    </div>
+                                                                ) : null}
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </Tab>
 
@@ -572,7 +606,7 @@ const Index = () => {
                     </div>
 
                     <FooterComponent />
-                </div>
+                </div >
             }
         </div >
     );
