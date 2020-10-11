@@ -164,7 +164,10 @@ $danger-color: brown;
     }
 
     @media (min-width: 576px) {
-        padding: 15px;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 20px;
         width: 33.33%;
     }
 
@@ -183,22 +186,31 @@ $danger-color: brown;
 
 .topselling-card {
     @media (min-width: 1150px) {
-        padding: 15px;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 20px;
         width: 25%;
     }
 }
 
 .related-product-card {
     @media (min-width: 1450px) {
-        padding: 10px;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 20px;
         width: 25%;
     }
 }
 
 .search-product-card {
     @media (min-width: 1450px) {
-        padding: 15px;
         width: 25%;
+        padding-top: 10px;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 20px;
     }
 }
 

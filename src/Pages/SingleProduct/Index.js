@@ -72,6 +72,7 @@ const Index = () => {
     const addToCart = data => {
         const newData = {
             id: data.id,
+            cartId: Date.now(),
             name: data.name,
             rating: rating,
             price: data.selling_price,

@@ -53,6 +53,7 @@ const Index = (props) => {
     const addToCart = data => {
         const newData = {
             id: data.id,
+            cartId: Date.now(),
             name: data.name,
             price: data.selling_price,
             stock: data.stock,

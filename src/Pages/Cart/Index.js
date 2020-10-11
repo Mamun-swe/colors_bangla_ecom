@@ -36,6 +36,7 @@ const Index = () => {
     const removeFromCart = data => {
         const newData = {
             id: data.id,
+            cartId: data.cartId,
             name: data.name,
             price: data.selling_price,
             stock: data.stock,
@@ -94,6 +95,8 @@ const Index = () => {
                                     <tr>
                                         <td>product</td>
                                         <td></td>
+                                        <td className="text-center">size</td>
+                                        <td className="text-center">colour</td>
                                         <td className="text-center">price</td>
                                         <td className="text-center">quantity</td>
                                         <td className="text-center">sub total</td>
@@ -113,6 +116,12 @@ const Index = () => {
                                                 <p className="mb-1">{product.name}</p>
                                                 <small onClick={() => removeFromCart(product)}>Remove</small>
                                             </td>
+                                            {/* Size */}
+                                            <td className="text-center font-weight-bold text-dark">{product.size}</td>
+                                            {/* Colour */}
+                                            <td className="text-center">
+                                                <div style={{ width: 25, height: 20, margin: 'auto', background: product.colour }}></div>
+                                            </td>
                                             {/* Price */}
                                             <td className="text-center">Tk. {product.price}</td>
                                             <td
@@ -123,7 +132,7 @@ const Index = () => {
                                                 <button
                                                     type="button"
                                                     className="btn shadow-none"
-                                                    onClick={() => dispatch(decrementQuantity(product.id))}
+                                                    onClick={() => dispatch(decrementQuantity(product.cartId))}
                                                     disabled={product.quantity <= 1 ? true : false}
                                                 >
                                                     <Icon icon={minus} />
@@ -136,7 +145,7 @@ const Index = () => {
                                                 <button
                                                     type="button"
                                                     className="btn shadow-none"
-                                                    onClick={() => dispatch(incrementQuantity(product.id))}
+                                                    onClick={() => dispatch(incrementQuantity(product.cartId))}
                                                     disabled={product.quantity >= 5 ? true : false}
                                                 >
                                                     <Icon icon={plus} />

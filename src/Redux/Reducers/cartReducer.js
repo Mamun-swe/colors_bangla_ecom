@@ -44,12 +44,23 @@ export default function (state = initialState, action) {
 
         // Product Add To Cart
         case PRODUCT_ADD_CART_REQUEST:
-            let productAlreadyExists = state.cartProducts.find(x => x.id === action.payload.id);
+            let productAlreadyExists = state.cartProducts.find(x =>
+                x.id === action.payload.id &&
+                x.size === action.payload.size &&
+                x.colour === action.payload.colour
+            )
             if (productAlreadyExists) {
-                toast.warn('Already added into cart')
+                toast.success('One product added into cart')
                 return {
                     ...state,
-                    add_success: false,
+                    cartProducts: state.cartProducts.map((product) => {
+                        if (product.id === action.payload.id) {
+                            product.quantity += action.payload.quantity || 1
+                            localStorage.setItem('products', JSON.stringify(state.cartProducts))
+                        }
+                        return product
+                    }),
+                    add_success: true
                 }
             } else {
                 let products = []
@@ -73,12 +84,12 @@ export default function (state = initialState, action) {
         // Product remove
         case PRODUCT_REMOVE_FROM_CART:
             const items = JSON.parse(localStorage.getItem('products'))
-            const filtered = items.filter(item => item.id !== action.payload.id)
+            const filtered = items.filter(item => item.cartId !== action.payload.cartId)
             localStorage.setItem('products', JSON.stringify(filtered))
 
             return {
                 ...state,
-                cartProducts: state.cartProducts.filter((product) => product.id !== action.payload.id),
+                cartProducts: state.cartProducts.filter((product) => product.cartId !== action.payload.cartId),
                 add_success: true
             }
 
@@ -87,13 +98,13 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 cartProducts: state.cartProducts.map((product) => {
-                    if (product.id === action.payload) {
+                    if (product.cartId === action.payload) {
                         product.quantity += 1
                         localStorage.setItem('products', JSON.stringify(state.cartProducts))
                     }
                     return product
                 }),
-                
+
                 add_success: true
             }
 
@@ -102,7 +113,7 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 cartProducts: state.cartProducts.map((product) => {
-                    if (product.id === action.payload) {
+                    if (product.cartId === action.payload) {
                         product.quantity -= 1
                         localStorage.setItem('products', JSON.stringify(state.cartProducts))
                     }
