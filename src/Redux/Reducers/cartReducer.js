@@ -54,7 +54,11 @@ export default function (state = initialState, action) {
                 return {
                     ...state,
                     cartProducts: state.cartProducts.map((product) => {
-                        if (product.id === action.payload.id) {
+                        if (
+                            product.id === action.payload.id &&
+                            product.size === action.payload.size &&
+                            product.color === action.payload.color
+                        ) {
                             product.quantity += action.payload.quantity || 1
                             localStorage.setItem('products', JSON.stringify(state.cartProducts))
                         }
