@@ -44,21 +44,20 @@ export default function (state = initialState, action) {
 
         // Product Add To Cart
         case PRODUCT_ADD_CART_REQUEST:
-            let productAlreadyExists = state.cartProducts.find(x =>
+            let exists = state.cartProducts.find(x =>
                 x.id === action.payload.id &&
                 x.size === action.payload.size &&
                 x.color === action.payload.color
             )
-            if (productAlreadyExists) {
+
+            if (exists) {
                 toast.success('One product added into cart')
                 return {
                     ...state,
                     cartProducts: state.cartProducts.map((product) => {
-                        if (
-                            product.id === action.payload.id &&
+                        if (product.id === action.payload.id &&
                             product.size === action.payload.size &&
-                            product.color === action.payload.color &&
-                            product.quantity < product.available_quantity
+                            product.color === action.payload.color
                         ) {
                             product.quantity += action.payload.quantity || 1
                             localStorage.setItem('products', JSON.stringify(state.cartProducts))
@@ -68,36 +67,21 @@ export default function (state = initialState, action) {
                     add_success: true
                 }
             } else {
+                let products = []
 
-                let noAvailable = state.cartProducts.find(x =>
-                    x.id === action.payload.id &&
-                    x.size !== action.payload.size &&
-                    x.color !== action.payload.color &&
-                    product.quantity < product.available_quantity
-                )
-
-                if (!noAvailable) {
-                    let products = []
-
-                    if (localStorage.getItem('products')) {
-                        products = JSON.parse(localStorage.getItem('products'))
-                    }
-
-                    products.push(action.payload)
-                    localStorage.setItem('products', JSON.stringify(products))
-                    toast.success('One product added into cart')
-
-                    return {
-                        ...state,
-                        cartProducts: [...state.cartProducts, action.payload],
-                        add_success: true
-                    }
+                if (localStorage.getItem('products')) {
+                    products = JSON.parse(localStorage.getItem('products'))
                 }
+
+                products.push(action.payload)
+                localStorage.setItem('products', JSON.stringify(products))
+                toast.success('One product added into cart')
 
                 return {
-                    ...state
+                    ...state,
+                    cartProducts: [...state.cartProducts, action.payload],
+                    add_success: true
                 }
-
             }
 
 
