@@ -11,6 +11,7 @@ import SingleProductIndex from './Pages/SingleProduct/Index';
 import SearchResultIndex from './Pages/SearchResult/Index';
 
 import ContactIndex from './Pages/Contact/Index';
+import ShowroomIndex from './Pages/Showroom/Index'; 
 
 import CartIndex from './Pages/Cart/Index';
 import CheckoutIndex from './Pages/Checkout/Index';
@@ -37,6 +38,7 @@ function App() {
             <Route exact path="/search-results" component={SearchResultIndex} />
 
             <Route exact path="/contact" component={ContactIndex} />
+            <Route exact path="/showroom" component={ShowroomIndex} />
 
             <Route exact path="/shopping-cart" component={CartIndex} />
             <Route exact path="/checkout" component={CheckoutIndex} />

@@ -11,6 +11,7 @@ import { user, earth, twitter, facebook, instagram } from 'react-icons-kit/icomo
 import { ic_add_shopping_cart, ic_dehaze, ic_close } from 'react-icons-kit/md';
 
 import SearchComponent from '../Search/Index';
+import MegaMenuComponent from '../MegaMenu/Index';
 import Logo from '../../assets/static/logo.png';
 
 const NavBar = () => {
@@ -93,7 +94,7 @@ const NavBar = () => {
                         <Link to={`/category/${singleCatId}`}>shop</Link>
                         {/* <Link to={`/category/${singleCatId}`}>new arrival</Link> */}
                         <Link to="/contact">contact</Link>
-                        <Link to="/contact">showroom</Link>
+                        <Link to="/showroom">showroom</Link>
                         <Link to="/sign-in">my account</Link>
                     </div>
                 </div>
@@ -172,11 +173,7 @@ const NavBar = () => {
                                                 <Icon icon={text_left} size={18} className="mr-2" />Categories
                                             </button>
                                             {isShow ?
-                                                <div className="category-dialog shadow-sm">
-                                                    {categories.length > 0 && categories.map((category, i) =>
-                                                        <Link to={`/category/${category.id}`} key={i}>{category.name}</Link>
-                                                    )}
-                                                </div>
+                                                <MegaMenuComponent items={categories} />
                                                 : null}
                                         </div>
 
