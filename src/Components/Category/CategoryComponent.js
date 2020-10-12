@@ -9,7 +9,7 @@ const CategoryComponent = ({ categories }) => {
                 <div className="row">
 
                     {categories.length > 0 && categories.slice(0, 6).map((category, i) =>
-                        <div className="col-6 col-lg-4" key={i}>
+                        <div className="col-6" key={i}>
                             <Link to={`/category/${category.id}`}>
                                 <div className="card border-0 rounded-0 category-card">
                                     <img src={category.image} className="img-fluid" alt="..." />
