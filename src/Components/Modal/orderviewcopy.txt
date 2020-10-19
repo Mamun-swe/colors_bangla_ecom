@@ -1,49 +1,4 @@
-import React from 'react';
-import '../../styles/view-order.scss';
-import { Icon } from 'react-icons-kit';
-import { ic_close, ic_info_outline } from 'react-icons-kit/md';
-import moment from 'moment';
-
-
-const OrderView = ({ data, hidemodal }) => {
-
-    // const printBarcode = (e) => {
-
-    //     domtoimage.toBlob(document.getElementById('barcodeDiv'))
-    //         .then(function (blob) {
-    //             saveAs(blob, 'my-barcode.png');
-    //         });
-
-    // }
-
-
-    return (
-        <div className="order-view-modal">
-            <div className="backdrop">
-                <div className="custom-dialog">
-                    <div className="card border-0 shadow">
-                        <div className="card-header bg-white">
-                            <div className="d-flex">
-                                <div className="flex-fill text-right">
-                                    <h6 className="mb-3">your order has been {data.status}</h6>
-                                </div>
-                                <div className="flex-fill text-right">
-                                    <button
-                                        type="button"
-                                        className="btn rounded-circle shadow-none"
-                                        onClick={hidemodal}
-                                    >
-                                        <Icon icon={ic_close} size={25} />
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card-body">
-
-                            <div className="row">
-                                <div className="col-12 ">
-
-                                    {/* Short Info */}
+{/* Short Info */}
                                     <div className="short-info mb-4">
                                         <p>Order number: <span>{data.order_code}</span></p>
                                         <p>Date: <span>{moment(data.created_at).format('d MMM, YYYY')}</span></p>
@@ -204,17 +159,3 @@ const OrderView = ({ data, hidemodal }) => {
                                             </div>
                                         </div>
                                     </div>
-
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-export default OrderView;
