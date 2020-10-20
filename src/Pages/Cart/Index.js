@@ -81,7 +81,7 @@ const Index = () => {
                             <div className="cart-header">
                                 <h5 className="mb-0">
                                     <span className="text-black">shopping cart</span>
-                                    <span className="text-muted">/ceckout</span>
+                                    <span className="text-muted">/checkout</span>
                                 </h5>
                             </div>
                         </div>
@@ -211,7 +211,7 @@ const Index = () => {
                                         type="button"
                                         className="btn btn-block rounded-0 shadow-none"
                                         onClick={() => history.push('/checkout')}
-                                    >procced to checkout</button>
+                                    >proceed to checkout</button>
                                 </div>
                             </div>
 
