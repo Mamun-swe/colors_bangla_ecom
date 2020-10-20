@@ -103,6 +103,19 @@
                         }
                     }
                 }
+
+                .card-footer {
+                    padding-bottom: 20px;
+
+                    .btn {
+                        color: #000;
+                        font-size: 16px;
+                        font-weight: 700;
+                        border-radius: 3px;
+                        background: #dfdfdf;
+                        font-family: 'Roboto', sans-serif;
+                    }
+                }
             }
 
             @media (min-width: 576px) {
@@ -115,5 +128,21 @@
                 margin: 20px auto;
             }
         }
+    }
+}
+
+@media print {
+    body {
+        -webkit-print-color-adjust: exact;
+    }
+}
+
+@media print {
+    body * {
+        visibility: hidden;
+    }
+
+    #section-to-print, #section-to-print * {
+        visibility: visible;
     }
 }

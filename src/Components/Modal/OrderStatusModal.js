@@ -4,6 +4,11 @@ import { Icon } from 'react-icons-kit';
 import { ic_close, ic_done_all } from 'react-icons-kit/md';
 
 const OrderStatusModal = ({ data, orderCode, hidemodal }) => {
+
+    const downloadOrder = () => {
+        window.print()
+    }
+
     return (
         <div className="order-status-modal">
             <div className="backdrop">
@@ -27,7 +32,7 @@ const OrderStatusModal = ({ data, orderCode, hidemodal }) => {
                             </div>
                             <div className="boder"></div>
                         </div>
-                        <div className="card-body pt-0">
+                        <div className="card-body pt-0" id="section-to-print">
                             <div className="text-center">
                                 <Icon icon={ic_done_all} className="text-success" size={30} />
                                 <h6>thank you, your order has been recived</h6>
@@ -93,11 +98,15 @@ const OrderStatusModal = ({ data, orderCode, hidemodal }) => {
                                     </table>
                                 </div>
                             </div>
+                        </div>
 
-                            <div className="message text-center mt-2">
-                                <h5 className="text-success mb-0">Take a screenshot before leave.</h5>
-                            </div>
-
+                        <div className="card-footer bg-white border-0">
+                            <button
+                                type="button"
+                                className="btn btn-block shadow-none text-black"
+                                onClick={downloadOrder}
+                            >Download Boucher
+                            </button>
                         </div>
                     </div>
 

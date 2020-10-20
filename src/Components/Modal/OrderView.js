@@ -4,18 +4,9 @@ import { Icon } from 'react-icons-kit';
 import { ic_close, ic_info_outline } from 'react-icons-kit/md';
 import moment from 'moment';
 
-
 const OrderView = ({ data, hidemodal }) => {
 
-    // const printBarcode = (e) => {
-
-    //     domtoimage.toBlob(document.getElementById('barcodeDiv'))
-    //         .then(function (blob) {
-    //             saveAs(blob, 'my-barcode.png');
-    //         });
-
-    // }
-
+    
 
     return (
         <div className="order-view-modal">
@@ -53,14 +44,14 @@ const OrderView = ({ data, hidemodal }) => {
                                     </div>
 
                                     {/* Messages */}
-                                    <div className="message bg-primary">
+                                    <div className="message" style={{ background: '#007bff' }}>
                                         <div className="d-flex">
                                             <div><Icon icon={ic_info_outline} style={{ color: '#fff' }} /></div>
                                             <div className="pl-2"><p>***ঢাকার বাহিরে ক্যাশ ও ডেলিভারিতে অর্ডার কনফার্ম করতে হলে কুরিয়ার চার্র্জ ১০০ টাকা অগ্রিম প্রদান করতে হবে </p></div>
                                         </div>
                                     </div>
 
-                                    <div className="message bg-primary">
+                                    <div className="message" style={{ background: '#007bff' }}>
                                         <div className="d-flex">
                                             <div><Icon icon={ic_info_outline} style={{ color: '#fff' }} /></div>
                                             <div className="pl-2">
@@ -70,14 +61,14 @@ const OrderView = ({ data, hidemodal }) => {
                                         </div>
                                     </div>
 
-                                    <div className="message bg-primary">
+                                    <div className="message" style={{ background: '#007bff' }}>
                                         <div className="d-flex">
                                             <div><Icon icon={ic_info_outline} style={{ color: '#fff' }} /></div>
                                             <div className="pl-2"><p>*Send Money করতে হবে</p></div>
                                         </div>
                                     </div>
 
-                                    <div className="message bg-primary">
+                                    <div className="message" style={{ background: '#007bff' }}>
                                         <div className="d-flex">
                                             <div><Icon icon={ic_info_outline} style={{ color: '#fff' }} /></div>
                                             <div className="pl-2"><p>*Reference এ আপনার নাম্বার দিতে হবে</p></div>
@@ -205,7 +196,6 @@ const OrderView = ({ data, hidemodal }) => {
                                         </div>
                                     </div>
 
-
                                 </div>
                             </div>
 
@@ -218,3 +208,4 @@ const OrderView = ({ data, hidemodal }) => {
 };
 
 export default OrderView;
+
