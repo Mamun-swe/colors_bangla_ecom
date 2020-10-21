@@ -35,6 +35,7 @@ const Index = () => {
     const [checkResponseOutData, setCheckOutResponseData] = useState()
     const [orderCode, setOrderCode] = useState()
     const [couponInfo, setCouponInfo] = useState({})
+    const [loggedUser, setLoggedUser] = useState({})
 
 
     useEffect(() => {
@@ -43,6 +44,9 @@ const Index = () => {
             const coupon = await JSON.parse(localStorage.getItem('couponData'))
             setCouponInfo(coupon)
         }
+
+        let user = JSON.parse(localStorage.getItem('user'))
+        setLoggedUser(user)
 
         getCoupon()
     }, [dispatch])
@@ -168,6 +172,7 @@ const Index = () => {
                                                 <input
                                                     type="text"
                                                     name="name"
+                                                    defaultValue={loggedUser ? loggedUser.name : null}
                                                     className="form-control shadow-none"
                                                     ref={register({
                                                         required: "Name is required*"
@@ -185,6 +190,7 @@ const Index = () => {
                                                 <input
                                                     type="text"
                                                     name="phone"
+                                                    defaultValue={loggedUser ? loggedUser.phone_number : null}
                                                     className="form-control shadow-none"
                                                     ref={register({
                                                         required: "Phone is required*"
@@ -259,6 +265,7 @@ const Index = () => {
                                                 <input
                                                     type="text"
                                                     name="email"
+                                                    defaultValue={loggedUser ? loggedUser.email : null}
                                                     className="form-control shadow-none"
                                                     placeholder="example@gmail.com"
                                                     ref={register({

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Route, NavLink, useHistory } from 'react-router-dom';
 import '../../styles/Account/master.scss';
 import axios from 'axios';
+import { apiURL } from '../../utils/apiURL';
 
 import NavBarComponent from '../../Components/NavBar/NavBar';
 import FooterComponent from '../../Components/Footer/Index';
@@ -14,8 +15,33 @@ import OrderIndex from './Orders/Index';
 import AccountDetails from './Account-details/Index';
 import PasswordChange from './Account-details/PasswordChange';
 
+
 const Master = () => {
     const history = useHistory()
+
+    useEffect(() => {
+        const header = {
+            headers: { Authorization: "Bearer " + localStorage.getItem("token") }
+        }
+
+        const fetchLoggedUser = async () => {
+            try {
+                const response = await axios.get(`${apiURL}user`, header)
+                let user = {
+                    name: response.data.result.name,
+                    phone_number: response.data.result.phone_number,
+                    email: response.data.result.email,
+                }
+                localStorage.setItem('user', JSON.stringify(user))
+            } catch (error) {
+                if (error) {
+                    console.log(error);
+                }
+            }
+        }
+
+        fetchLoggedUser()
+    }, [])
 
     const doLogout = () => {
         // Header 
@@ -23,10 +49,11 @@ const Master = () => {
             headers: { Authorization: "Bearer " + localStorage.getItem("token") }
         }
 
-        axios.get("https://colourbangladev.xyz/api/logout", header)
+        axios.get(`${apiURL}logout`, header)
             .then(res => {
                 if (res.status === 200) {
                     localStorage.removeItem('token')
+                    localStorage.removeItem('user')
                     history.push('/')
                 }
             })
