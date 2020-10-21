@@ -8,7 +8,7 @@ import CategoryComponent from '../Components/Category/CategoryComponent';
 import LatestProductsComponent from '../Components/LatestProducts/LatestProductComponent';
 import TopSellingProductsComponent from '../Components/TopSellingProducts/TopSellingProductsComponent';
 import FooterComponent from '../Components/Footer/Index';
-import LoadingComponent from '../Components/Loader';
+import LoadingBannerComponent from '../Components/Modal/HomeLoadingModal';
 
 const Index = () => {
     const [loading, setLoading] = useState(false)
@@ -47,7 +47,7 @@ const Index = () => {
 
     return (
         <div>
-            {loading ? <LoadingComponent /> :
+            {loading ? <LoadingBannerComponent /> :
                 <div>
                     <NavbarComponent />
                     <SliderComponent sliders={sliders} />
