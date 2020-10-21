@@ -143,23 +143,19 @@
     height: 100vh;
     z-index: 9999;
     overflow-y: auto;
-    background: rgba(0, 0, 0, 0.267);
+    background: #fff;
 
     .card {
+        img {
+            max-width: 400px;
+            margin: auto;
+        }
         @media (max-width: 576px) {
             width: 93vw;
             max-width: 100%;
         }
         @media (min-width: 576px) {
             width: 550px;
-            max-width: 100%;
-        }
-        @media (min-width: 768px) {
-            width: 750px;
-            max-width: 100%;
-        }
-        @media (min-width: 992px) {
-            width: 800px;
             max-width: 100%;
         }
     }
