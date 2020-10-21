@@ -3,6 +3,8 @@ import '../../styles/order-status-modal.scss';
 import { Icon } from 'react-icons-kit';
 import { ic_close, ic_done_all } from 'react-icons-kit/md';
 
+import Logo from '../../assets/static/logo.png';
+
 const OrderStatusModal = ({ data, orderCode, hidemodal }) => {
 
     const downloadOrder = () => {
@@ -34,6 +36,8 @@ const OrderStatusModal = ({ data, orderCode, hidemodal }) => {
                         </div>
                         <div className="card-body pt-0" id="section-to-print">
                             <div className="text-center">
+                                <img src={Logo} className="img-fluid" alt="..." />
+                                <br />
                                 <Icon icon={ic_done_all} className="text-success" size={30} />
                                 <h6>thank you, your order has been recived</h6>
                             </div>

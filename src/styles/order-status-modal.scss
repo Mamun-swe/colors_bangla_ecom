@@ -31,7 +31,7 @@
                         margin-top: 5px;
                         margin-bottom: 10px;
                         font-weight: 900;
-                        font-family: 'Roboto', sans-serif;
+                        font-family: "Roboto", sans-serif;
                     }
 
                     .btn {
@@ -48,11 +48,16 @@
                 }
 
                 .card-body {
+                    img {
+                        margin: auto;
+                        width: 40px !important;
+                        height: 40px !important;
+                    }
                     h6 {
                         font-size: 13px;
                         font-weight: 500;
                         text-transform: uppercase;
-                        font-family: 'Roboto', sans-serif;
+                        font-family: "Roboto", sans-serif;
                     }
 
                     .order-details {
@@ -60,14 +65,14 @@
                             font-size: 16px;
                             font-weight: 700;
                             text-transform: capitalize;
-                            font-family: 'Roboto', sans-serif;
+                            font-family: "Roboto", sans-serif;
                         }
 
                         p {
                             font-size: 14px;
                             margin-bottom: 3px;
                             text-transform: capitalize;
-                            font-family: 'Roboto', sans-serif;
+                            font-family: "Roboto", sans-serif;
                         }
                     }
 
@@ -83,7 +88,7 @@
                                             font-weight: 700;
                                             margin-bottom: 0;
                                             text-transform: capitalize;
-                                            font-family: 'Roboto', sans-serif;
+                                            font-family: "Roboto", sans-serif;
                                         }
                                     }
                                 }
@@ -95,7 +100,7 @@
                                         p {
                                             font-size: 13px;
                                             margin-bottom: 0;
-                                            font-family: 'Roboto', sans-serif;
+                                            font-family: "Roboto", sans-serif;
                                         }
                                     }
                                 }
@@ -113,7 +118,7 @@
                         font-weight: 700;
                         border-radius: 3px;
                         background: #dfdfdf;
-                        font-family: 'Roboto', sans-serif;
+                        font-family: "Roboto", sans-serif;
                     }
                 }
             }
@@ -142,7 +147,8 @@
         visibility: hidden;
     }
 
-    #section-to-print, #section-to-print * {
+    #section-to-print,
+    #section-to-print * {
         visibility: visible;
     }
 }

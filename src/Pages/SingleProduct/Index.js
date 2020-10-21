@@ -130,6 +130,7 @@ const Index = () => {
                     <NavBarComponent />
 
                     <div className="container py-4">
+
                         {isError ?
                             <div className="row">
                                 <div className="col-12 py-4 text-center four-o-four">

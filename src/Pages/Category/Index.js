@@ -105,6 +105,13 @@ const Index = () => {
         dispatch(addProduct(newData))
     }
 
+    // Replace white space with (_)
+    const replaceWhiteSpace = (data) => {
+        let productName = data
+        productName = productName.replace(/ /g, "_")
+        return productName
+    }
+
     return (
         <div className="category-index">
             {loading ? <LoadingComponent /> :
@@ -241,7 +248,7 @@ const Index = () => {
 
                                                                 <div className="card rounded-0 product-card" key={i}>
                                                                     <div className="card-body">
-                                                                        <Link to={`/product/${product.id}/${product.name}`}>
+                                                                        <Link to={`/product/${product.id}/${replaceWhiteSpace(product.name)}`}>
                                                                             <div className="img-box">
                                                                                 <img src={product.image} className="img-fluid" alt="..." />
                                                                             </div>
@@ -275,7 +282,7 @@ const Index = () => {
                                                                                 </button>
                                                                             </div>
 
-                                                                            <Link to={`/product/${product.id}/${product.name}`}>
+                                                                            <Link to={`/product/${product.id}/${replaceWhiteSpace(product.name)}`}>
                                                                                 <div className="d-sm-flex">
                                                                                     <div>
                                                                                         <p className="name">{product.name.slice(0, 15)}</p>

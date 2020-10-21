@@ -66,6 +66,13 @@ const Index = (props) => {
         dispatch(addProduct(newData))
     }
 
+    // Replace white space with (_)
+    const replaceWhiteSpace = (data) => {
+        let productName = data
+        productName = productName.replace(/ /g, "_")
+        return productName
+    }
+
     return (
         <div className="search-result">
             {isLoading ? <LoadingComponent /> :
@@ -84,7 +91,7 @@ const Index = (props) => {
                                     {products.map((product, i) =>
                                         <div className="card rounded-0 product-card search-product-card" key={i}>
                                             <div className="card-body">
-                                                <Link to={`/product/${product.id}/${product.name}`}>
+                                                <Link to={`/product/${product.id}/${replaceWhiteSpace(product.name)}`}>
                                                     <div className="img-box">
                                                         <img src={product.image} className="img-fluid" alt="..." />
                                                     </div>

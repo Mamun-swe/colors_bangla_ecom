@@ -63,6 +63,13 @@ const LatestProductComponent = ({ latestProducts }) => {
         setModalShow(false)
     }
 
+    // Replace white space with (_)
+    const replaceWhiteSpace = (data) => {
+        let productName = data
+        productName = productName.replace(/ /g, "_")
+        return productName
+    }
+
     return (
         <div className="latest-product">
             <div className="container">
@@ -77,7 +84,7 @@ const LatestProductComponent = ({ latestProducts }) => {
                             {latestProducts.length > 0 && latestProducts.map((product, i) =>
                                 <div className="card rounded-0 border-0" key={i}>
                                     <div className="card-body">
-                                        <Link to={`/product/${product.id}/${product.name}`}>
+                                        <Link to={`/product/${product.id}/${replaceWhiteSpace(product.name)}`}>
                                             <div className="img-box">
                                                 <img src={product.image} className="img-fluid" alt="..." />
                                             </div>
@@ -92,7 +99,7 @@ const LatestProductComponent = ({ latestProducts }) => {
                                                     >Quick View</button>
                                                 </div>
                                             </div>
-                                            <Link to={`/product/${product.id}/${product.name}`}>
+                                            <Link to={`/product/${product.id}/${replaceWhiteSpace(product.name)}`}>
                                                 <div className="d-sm-flex">
                                                     <div>
                                                         <p className="name">{product.name}</p>

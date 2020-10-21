@@ -65,6 +65,14 @@ const TopSellingProductsComponent = ({ categories }) => {
     }
 
 
+    // Replace white space with (_)
+    const replaceWhiteSpace = (data) => {
+        let productName = data
+        productName = productName.replace(/ /g, "_")
+        return productName
+    }
+
+
     return (
         <div className="top-selling">
             <div className="container">
@@ -101,7 +109,7 @@ const TopSellingProductsComponent = ({ categories }) => {
                                 <div className="card rounded-0 product-card topselling-card" key={i}>
 
                                     <div className="card-body">
-                                        <Link to={`/product/${product.id}/${product.name}`}>
+                                        <Link to={`/product/${product.id}/${replaceWhiteSpace(product.name)}`}>
                                             <div className="img-box">
                                                 <img src={product.image} className="img-fluid" alt="..." />
                                             </div>
@@ -135,7 +143,7 @@ const TopSellingProductsComponent = ({ categories }) => {
                                                 </button>
                                             </div>
 
-                                            <Link to={`/product/${product.id}/${product.name}`}>
+                                            <Link to={`/product/${product.id}/${replaceWhiteSpace(product.name)}`}>
                                                 <div className="d-sm-flex">
                                                     <div>
                                                         <p className="name">{product.name.slice(0, 15)}</p>
