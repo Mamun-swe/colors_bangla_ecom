@@ -18,7 +18,7 @@ const TopSellingProductsComponent = ({ categories }) => {
     const [limit, setLimit] = useState(10)
     const [products, setProducts] = useState([])
     const [id, setId] = useState(1)
-    const productsPerPage = 10
+    const productsPerPage = 12
     const dispatch = useDispatch()
 
     useEffect(() => {
