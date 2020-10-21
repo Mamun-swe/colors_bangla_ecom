@@ -31,8 +31,8 @@ const Index = () => {
     const [categories, setCategories] = useState([])
     const [categoryProducts, setCategoryProducts] = useState([])
     const [filteredData, setFilteredData] = useState(categoryProducts)
-    const [limit, setLimit] = useState(8)
-    const productsPerPage = 8
+    const [limit, setLimit] = useState(12)
+    const productsPerPage = 12
     const dispatch = useDispatch()
     const [subMenu, setSubMenu] = useState()
     const [isChecked, setChecked] = useState()
@@ -49,7 +49,7 @@ const Index = () => {
                         setCategories(categoryResponse.data.result)
                         setCategoryProducts(categoryProducts.data.result)
                         setFilteredData(categoryProducts.data.result)
-                        setLimit(8)
+                        setLimit(12)
                         setLoading(false)
                     } else {
                         setLoading(false)
