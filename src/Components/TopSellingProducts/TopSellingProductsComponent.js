@@ -30,12 +30,12 @@ const TopSellingProductsComponent = ({ categories }) => {
                 setLimit(12)
                 setLoading(false)
             } catch (error) {
-                console.log(error);
+                console.log(error.message);
             }
         }
 
         fetchProducts()
-    }, [id])
+    }, [id, categories])
 
 
     const handleModal = data => {
