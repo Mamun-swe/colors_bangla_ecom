@@ -15,7 +15,7 @@ const TopSellingProductsComponent = ({ categories }) => {
     const [modalShow, setModalShow] = useState(false)
     const [modalData, setModalData] = useState({})
     const [loading, setLoading] = useState(false)
-    const [limit, setLimit] = useState(10)
+    const [limit, setLimit] = useState(12)
     const [products, setProducts] = useState([])
     const [id, setId] = useState(1)
     const productsPerPage = 12
@@ -27,7 +27,7 @@ const TopSellingProductsComponent = ({ categories }) => {
                 setLoading(true)
                 const response = await axios.get(`${apiURL}categoryProducts/${categories[0].id || id}`)
                 setProducts(response.data.result)
-                setLimit(10)
+                setLimit(12)
                 setLoading(false)
             } catch (error) {
                 console.log(error);
