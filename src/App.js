@@ -9,6 +9,7 @@ import Index from './Pages/Index';
 import CategoryIndex from './Pages/Category/Index';
 import SingleProductIndex from './Pages/SingleProduct/Index';
 import SearchResultIndex from './Pages/SearchResult/Index';
+import CampaignIndex from './Pages/Campaign/Index';
 
 import ContactIndex from './Pages/Contact/Index';
 import ShowroomIndex from './Pages/Showroom/Index'; 
@@ -36,6 +37,7 @@ function App() {
             <Route exact path="/category/:categoryId" component={CategoryIndex} />
             <Route exact path="/product/:id/:name" component={SingleProductIndex} />
             <Route exact path="/search-results" component={SearchResultIndex} />
+            <Route exact path="/campaign/:id/:name" component={CampaignIndex} />
 
             <Route exact path="/contact" component={ContactIndex} />
             <Route exact path="/showroom" component={ShowroomIndex} />

@@ -105,10 +105,10 @@ const Index = () => {
         dispatch(addProduct(newData))
     }
 
-    // Replace white space with (_)
+    // Replace white space with (-)
     const replaceWhiteSpace = (data) => {
         let productName = data
-        productName = productName.replace(/ /g, "_")
+        productName = productName.replace(/ /g, "-")
         return productName
     }
 

@@ -66,7 +66,7 @@ const LatestProductComponent = ({ latestProducts }) => {
     // Replace white space with (_)
     const replaceWhiteSpace = (data) => {
         let productName = data
-        productName = productName.replace(/ /g, "_")
+        productName = productName.replace(/ /g, "-")
         return productName
     }
 

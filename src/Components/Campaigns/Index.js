@@ -46,35 +46,44 @@ const Index = ({ campaigns }) => {
         customeSlider.current.slickPrev()
     }
 
+    // Replace white space with (_)
+    const replaceWhiteSpace = (data) => {
+        let productName = data
+        productName = productName.replace(/ /g, "-")
+        return productName
+    }
+
     return (
         <div className="campaigns-slider">
             <div className="container">
                 <div className="row">
-                    <div className="col-12 campaign-column">
+                    {campaigns.length > 0 ?
+                        <div className="col-12 campaign-column">
 
-                        <Slider ref={customeSlider} {...settings}>
-                            {campaigns.length > 0 && campaigns.map((campaign, i) =>
-                                <div className="card campaign-card" key={i}>
-                                    <Link to="/">
-                                        <div className="card-body">
-                                            <img src={campaign.image} className="img-fluid" alt="..." />
-                                        </div>
-                                    </Link>
-                                </div>
-                            )}
-                        </Slider>
+                            <Slider ref={customeSlider} {...settings}>
+                                {campaigns && campaigns.map((campaign, i) =>
+                                    <div className="card campaign-card" key={i}>
+                                        <Link to={`/campaign/${campaign.id}/${replaceWhiteSpace(campaign.name)}`}>
+                                            <div className="card-body">
+                                                <img src={campaign.image} className="img-fluid" alt="..." />
+                                            </div>
+                                        </Link>
+                                    </div>
+                                )}
+                            </Slider>
 
-                        {/* Left direction */}
-                        <div className="left-direction" onClick={prev}>
-                            <Icon icon={ic_keyboard_arrow_left} size={25} style={{ color: '#fff' }} />
+                            {/* Left direction */}
+                            <div className="left-direction" onClick={prev}>
+                                <Icon icon={ic_keyboard_arrow_left} size={25} style={{ color: '#fff' }} />
+                            </div>
+
+                            {/* Right direction */}
+                            <div className="right-direction" onClick={next}>
+                                <Icon icon={ic_keyboard_arrow_right} size={25} style={{ color: '#fff' }} />
+                            </div>
+
                         </div>
-
-                        {/* Right direction */}
-                        <div className="right-direction" onClick={next}>
-                            <Icon icon={ic_keyboard_arrow_right} size={25} style={{ color: '#fff' }} />
-                        </div>
-
-                    </div>
+                        : null}
                 </div>
             </div>
         </div>
