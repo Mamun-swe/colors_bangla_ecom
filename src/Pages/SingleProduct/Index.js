@@ -151,7 +151,7 @@ const Index = () => {
                                                     smallImage: {
                                                         alt: 'Product',
                                                         src: productImage,
-                                                        width: window.innerWidth > 992 ? 480 : 300,
+                                                        width: window.innerWidth > 992 ? 400 : 300,
                                                         height: window.innerWidth > 992 ? 520 : 350
                                                     },
                                                     style: { margin: 'auto' },
