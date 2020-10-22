@@ -1,7 +1,7 @@
 @import "../App.scss";
 
 .category-component {
-    padding-top: 60px;
+    padding-top: 20px;
     padding-bottom: 20px;
 
     a {
@@ -29,7 +29,7 @@
                     font-weight: 700;
                     font-size: 20px;
                     text-transform: uppercase;
-                    font-family: 'Roboto', sans-serif;
+                    font-family: "Roboto", sans-serif;
 
                     @media (min-width: 576px) {
                         font-size: 30px;
@@ -44,7 +44,7 @@
     }
 
     @media (min-width: 576px) {
-        padding-top: 100px;
+        padding-top: 50px;
         padding-bottom: 50px;
     }
 }

@@ -4,6 +4,7 @@ import { apiURL } from '../utils/apiURL';
 
 import NavbarComponent from '../Components/NavBar/NavBar';
 import SliderComponent from '../Components/Slider/SliderComponent';
+import CampaignComponent from '../Components/Campaigns/Index';
 import CategoryComponent from '../Components/Category/CategoryComponent';
 import LatestProductsComponent from '../Components/LatestProducts/LatestProductComponent';
 import TopSellingProductsComponent from '../Components/TopSellingProducts/TopSellingProductsComponent';
@@ -51,6 +52,7 @@ const Index = () => {
                 <div>
                     <NavbarComponent />
                     <SliderComponent sliders={sliders} />
+                    <CampaignComponent campaigns={sliders} />
                     <CategoryComponent categories={categories} />
                     <LatestProductsComponent latestProducts={latestProducts} />
                     <TopSellingProductsComponent categories={categories} />
