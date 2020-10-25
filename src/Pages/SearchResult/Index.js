@@ -131,7 +131,7 @@ const Index = (props) => {
                                                                 <p className="name">{product.name.slice(0, 15)}</p>
                                                             </div>
                                                             <div className="ml-auto">
-                                                                <p className="price">৳{product.selling_price}</p>
+                                                                <p className="price">৳ {product.selling_price}</p>
                                                             </div>
                                                         </div>
                                                     </Link>
