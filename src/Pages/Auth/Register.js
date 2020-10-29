@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../../styles/auth.scss';
 import axios from 'axios';
-// import { apiURL } from '../../utils/apiURL';
+import { apiURL } from '../../utils/apiURL';
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -18,7 +18,7 @@ const Register = () => {
     const onSubmit = async (data) => {
         try {
             setLoading(true)
-            const response = await axios.post("https://colourbangladev.xyz/api/register", data)
+            const response = await axios.post(`${apiURL}register`, data)
             if (response.status === 200) {
                 toast.success("Successfully account created")
                 setLoading(false)
