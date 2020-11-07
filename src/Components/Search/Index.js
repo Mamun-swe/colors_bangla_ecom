@@ -15,27 +15,23 @@ const Index = () => {
     const [results, setResults] = useState([]);
 
     // onChange Search
-    const onChnageSearch = event => {
-        if (event.target.value) {
-            setSuggestBox(true)
-            setIsSearchLoading(true)
-            axios.get(`${apiURL}searchProducts/${event.target.value}`)
-                .then(res => {
-                    if (res.data) {
-                        setResults(res.data.result)
-                        setSuggestBox(true)
-                        setIsSearchLoading(false)
-                        // console.log(res.data.result);
-                    }
-                })
-                .catch(err => {
-                    if (err) {
-                        console.log(err.response)
-                    }
-                })
-        } else {
-            setSuggestBox(false)
-            setIsSearchLoading(false)
+    const onChnageSearch = async (event) => {
+        try {
+            if (event.target.value) {
+                setSuggestBox(true)
+                setIsSearchLoading(true)
+                const response = await axios.get(`${apiURL}home/search/${event.target.value}`)
+                setResults(response.data)
+                setSuggestBox(true)
+                setIsSearchLoading(false)
+            } else {
+                setSuggestBox(false)
+                setIsSearchLoading(false)
+            }
+        } catch (error) {
+            if (error) {
+                console.log(error.response)
+            }
         }
     }
 

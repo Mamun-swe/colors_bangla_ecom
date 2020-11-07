@@ -52,13 +52,13 @@ const Index = () => {
         const fetchProduct = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get(`${apiURL}viewProduct/${id}/name`)
-                setProduct(response.data.result)
-                setProductImage(response.data.result.image)
-                setSelectedSize(response.data.result.size[0])
-                setSelectedColor(response.data.result.color[0])
+                const response = await axios.get(`${apiURL}home/product/${id}/show`)
+                setProduct(response.data)
+                setProductImage(response.data.image)
+                setSelectedSize(response.data.size[0])
+                setSelectedColor(response.data.color[0])
                 setLoading(false)
-                setTags(response.data.result.tags.split(','))
+                setTags(response.data.tags.split(','))
             } catch (error) {
                 if (error.response) {
                     setLoading(false)
@@ -169,7 +169,7 @@ const Index = () => {
                                                             product.images.length > 0 ?
                                                             product.images.map((image, i) =>
                                                                 <li key={i}>
-                                                                    <img src={image.path} className="img-fluid" onClick={magnifiyHandeller} alt="..." />
+                                                                    <img src={image.image} className="img-fluid" onClick={magnifiyHandeller} alt="..." />
                                                                 </li>
                                                             ) : null}
                                                     </ul>

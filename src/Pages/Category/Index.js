@@ -42,21 +42,18 @@ const Index = () => {
         const fetchData = async () => {
             try {
                 setLoading(true)
-                const categoryResponse = await axios.get(`${apiURL}getCategory`)
-                const categoryProducts = await axios.get(`${apiURL}categoryProducts/${categoryId}`)
-                if (categoryResponse.status === 200 && categoryProducts.status === 200) {
-                    if (categoryResponse.data.result && categoryProducts.data.result) {
-                        setCategories(categoryResponse.data.result)
-                        setCategoryProducts(categoryProducts.data.result)
-                        setFilteredData(categoryProducts.data.result)
-                        setLimit(12)
-                        setLoading(false)
-                    } else {
-                        setLoading(false)
-                        setNullProduct(true)
-                    }
+                const categoryResponse = await axios.get(`${apiURL}home/categories`)
+                const categoryProducts = await axios.get(`${apiURL}home/category/${categoryId}/products`)
+                if (categoryResponse.data.categories && categoryProducts.data) {
+                    setCategories(categoryResponse.data.categories)
+                    setCategoryProducts(categoryProducts.data)
+                    setFilteredData(categoryProducts.data)
+                    setLimit(12)
+                    setLoading(false)
+                } else {
+                    setLoading(false)
+                    setNullProduct(true)
                 }
-
             } catch (error) {
                 if (error) console.log(error)
             }
@@ -77,7 +74,9 @@ const Index = () => {
     // On change price handeller
     const priceFilter = data => {
         setChecked(data)
-        if (data === 1) {
+        if (data === 0) {
+            return setFilteredData(categoryProducts)
+        } else if (data === 1) {
             const filtereData = categoryProducts.filter(x => x.selling_price < 1000)
             return setFilteredData(filtereData)
         } else if (data === 2) {
@@ -207,6 +206,10 @@ const Index = () => {
                                                 <Collapse in={showPrice}>
                                                     <div className="dropdown-body mb-3">
                                                         <div className="form-check mb-3">
+                                                            <input type="checkbox" className="form-check-input" id="price-ckeck-all" checked={isChecked === 0} onChange={() => priceFilter(0)} />
+                                                            <label className="form-check-label" htmlFor="price-ckeck-all">All</label>
+                                                        </div>
+                                                        <div className="form-check mb-3">
                                                             <input type="checkbox" className="form-check-input" id="price-ckeck-1" checked={isChecked === 1} onChange={() => priceFilter(1)} />
                                                             <label className="form-check-label" htmlFor="price-ckeck-1">0 - 1000</label>
                                                         </div>
@@ -334,12 +337,14 @@ const Index = () => {
                     <Footer />
 
                     {/* Product Modal */}
-                    <ProductModalComponent
-                        productinfo={modalData}
-                        show={modalShow}
-                        hidemodal={hideModal}
-                        onHide={() => setModalShow(false)}
-                    />
+                    {modalShow ?
+                        <ProductModalComponent
+                            productinfo={modalData}
+                            show={modalShow}
+                            hidemodal={hideModal}
+                            onHide={() => setModalShow(false)}
+                        />
+                        : null}
                 </div>
             }
         </div>

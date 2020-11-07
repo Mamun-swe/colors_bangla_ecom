@@ -4,7 +4,7 @@ import { apiURL } from '../utils/apiURL';
 
 import NavbarComponent from '../Components/NavBar/NavBar';
 import SliderComponent from '../Components/Slider/SliderComponent';
-import CampaignComponent from '../Components/Campaigns/Index';
+// import CampaignComponent from '../Components/Campaigns/Index';
 import CategoryComponent from '../Components/Category/CategoryComponent';
 import LatestProductsComponent from '../Components/LatestProducts/LatestProductComponent';
 import TopSellingProductsComponent from '../Components/TopSellingProducts/TopSellingProductsComponent';
@@ -16,26 +16,16 @@ const Index = () => {
     const [sliders, setSliders] = useState([])
     const [categories, setCategories] = useState([])
     const [latestProducts, setLatestProducts] = useState([])
-    // const [topSellingProducts, setTopSellingProducts] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
             try {
                 setLoading(true)
-                const sliderResponse = await axios.get(`${apiURL}getSliders`)
-                const categoryResponse = await axios.get(`${apiURL}getCategory`)
-                const latestProductResponse = await axios.get(`${apiURL}getLatestProducts`)
-                // const topSellingProductResponse = await axios.get(`${apiURL}getTopSellingProducts`)
-                if (
-                    sliderResponse.status === 200 &&
-                    categoryResponse.status === 200 &&
-                    latestProductResponse.status === 200
-                    // && topSellingProductResponse.status === 200
-                ) {
-                    setSliders(sliderResponse.data.result)
-                    setCategories(categoryResponse.data.result)
-                    setLatestProducts(latestProductResponse.data.result)
-                    // setTopSellingProducts(topSellingProductResponse.data.result)
+                const response = await axios.get(`${apiURL}home`)
+                if (response.status === 200) {
+                    setSliders(response.data.sliders)
+                    setCategories(response.data.categories)
+                    setLatestProducts(response.data.latestProducts)
                     setLoading(false)
                 }
             } catch (error) {
@@ -52,10 +42,10 @@ const Index = () => {
                 <div>
                     <NavbarComponent />
                     <SliderComponent sliders={sliders} />
-                    <CampaignComponent campaigns={sliders} />
+                    {/* <CampaignComponent campaigns={sliders} /> */}
                     <CategoryComponent categories={categories} />
                     <LatestProductsComponent latestProducts={latestProducts} />
-                    <TopSellingProductsComponent categories={categories} />
+                    {categories.length > 0 ? <TopSellingProductsComponent categories={categories} /> : null}
                     <FooterComponent />
                 </div>
             }
