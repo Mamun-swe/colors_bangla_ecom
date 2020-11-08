@@ -98,7 +98,7 @@ const Index = () => {
             phone: data.phone,
             district: data.district,
             delivery_address: data.delivery_address,
-            courier: data.courier,
+            courier_name: data.courier_name,
             email: data.email,
             shipping_area: shippingArea,
             delivery_method: 'Cash on delivery',
@@ -111,10 +111,10 @@ const Index = () => {
 
         try {
             setLoading(true)
-            const response = await axios.post(`${apiURL}confirmOrder`, checkOutData, header)
-            if (response.data.success === true) {
+            const response = await axios.post(`${apiURL}home/confirmorder`, checkOutData, header)
+            if (response.status === 200) {
                 setCheckOutResponseData(checkOutData)
-                setOrderCode(response.data.result.order_code)
+                setOrderCode(response.data)
                 setShow(true)
                 localStorage.removeItem('couponData')
                 localStorage.removeItem('products')
@@ -234,13 +234,13 @@ const Index = () => {
 
                                             {/* Courier */}
                                             <div className="form-group mb-3">
-                                                {errors.courier && errors.courier.message ? (
-                                                    <p className="text-danger">{errors.courier && errors.courier.message}</p>
+                                                {errors.courier_name && errors.courier_name.message ? (
+                                                    <p className="text-danger">{errors.courier_name && errors.courier_name.message}</p>
                                                 ) : <p className="text-muted">Courier*</p>
                                                 }
 
                                                 <select
-                                                    name="courier"
+                                                    name="courier_name"
                                                     className="form-control shadow-none pl-1"
                                                     ref={register({
                                                         required: "Courier is required*"
@@ -269,7 +269,6 @@ const Index = () => {
                                                     className="form-control shadow-none"
                                                     placeholder="example@gmail.com"
                                                     ref={register({
-                                                        required: "E-mail is required*",
                                                         pattern: {
                                                             value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                                                             message: "Invalid email address"
