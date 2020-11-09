@@ -32,7 +32,7 @@ const Index = () => {
         } catch (error) {
             if (error) {
                 setLoading(false)
-                toast.warn(error.response.data.errors.email[0])
+                toast.warn(error.response.data.message)
             }
         }
     }

@@ -42,23 +42,25 @@ const Index = () => {
     const [ratingErr, setRatingErr] = useState(false)
     const [tags, setTags] = useState([])
     const dispatch = useDispatch()
-
+    const [loggedUser, setLoggedUser] = useState({})
 
     const magnifiyHandeller = event => {
         setProductImage(event.target.src)
     }
 
     useEffect(() => {
+        const user = JSON.parse(localStorage.getItem('user'))
+        setLoggedUser(user)
         const fetchProduct = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get(`${apiURL}viewProduct/${id}/name`)
-                setProduct(response.data.result)
-                setProductImage(response.data.result.image)
-                setSelectedSize(response.data.result.size[0])
-                setSelectedColor(response.data.result.color[0])
+                const response = await axios.get(`${apiURL}home/product/${id}/show`)
+                setProduct(response.data)
+                setProductImage(response.data.image)
+                setSelectedSize(response.data.size[0])
+                setSelectedColor(response.data.color[0])
                 setLoading(false)
-                setTags(response.data.result.tags.split(','))
+                setTags(response.data.tags.split(','))
             } catch (error) {
                 if (error.response) {
                     setLoading(false)
@@ -96,18 +98,18 @@ const Index = () => {
 
         const reviewData = {
             product_id: id,
-            rating: rating,
             name: data.name,
             email: data.email,
-            details: data.review
+            rating: rating,
+            comment: data.review
         }
 
         try {
             setReviewLoading(true)
-            const response = await axios.post(`${apiURL}review`, reviewData)
-            if (response.status === 200) {
+            const response = await axios.post(`${apiURL}home/review`, reviewData)
+            if (response) {
                 setReviewLoading(false)
-                toast.success('Your review submitted.')
+                toast.success(response.data.message)
             }
         } catch (error) {
             setReviewLoading(false)
@@ -169,7 +171,7 @@ const Index = () => {
                                                             product.images.length > 0 ?
                                                             product.images.map((image, i) =>
                                                                 <li key={i}>
-                                                                    <img src={image.path} className="img-fluid" onClick={magnifiyHandeller} alt="..." />
+                                                                    <img src={image.image} className="img-fluid" onClick={magnifiyHandeller} alt="..." />
                                                                 </li>
                                                             ) : null}
                                                     </ul>
@@ -385,7 +387,7 @@ const Index = () => {
                                                         {product.reviews &&
                                                             product.reviews.length > 0 ?
                                                             product.reviews.map((review, i) =>
-                                                                <div className="d-flex mb-4" key={i}>
+                                                                <div className="d-flex mb-4 pb-2 border-bottom" key={i}>
                                                                     <div><Icon icon={user_circle} size={30} className="text-muted" /></div>
                                                                     <div className="pl-3">
                                                                         <h5 className="text-capitalize mb-0">{review.name}</h5>
@@ -418,7 +420,7 @@ const Index = () => {
                                                                                                 <Icon icon={star} size={16} className="yellow" />
                                                                                             </div>
                                                                                             : null}
-                                                                        <p className="mb-0">{review.details}</p>
+                                                                        <p className="mb-0">{review.comment}</p>
                                                                     </div>
                                                                 </div>
                                                             ) : null}
@@ -489,6 +491,7 @@ const Index = () => {
                                                                 <input
                                                                     type="text"
                                                                     name="name"
+                                                                    defaultValue={loggedUser ? loggedUser.name : null}
                                                                     className="form-control shadow-none"
                                                                     ref={register({
                                                                         required: "Name is required",
@@ -505,6 +508,7 @@ const Index = () => {
                                                                 <input
                                                                     type="text"
                                                                     name="email"
+                                                                    defaultValue={loggedUser ? loggedUser.email : null}
                                                                     className="form-control shadow-none"
                                                                     ref={register({
                                                                         required: "E-mail is required",

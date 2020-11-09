@@ -25,12 +25,12 @@ const TopSellingProductsComponent = ({ categories }) => {
         const fetchProducts = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get(`${apiURL}categoryProducts/${id || categories[0].id}`)
-                setProducts(response.data.result)
+                const response = await axios.get(`${apiURL}home/category/${id || categories[0].id}/products`)
+                setProducts(response.data)
                 setLimit(12)
                 setLoading(false)
             } catch (error) {
-                console.log(error.message);
+                console.log(error.response);
             }
         }
 
@@ -90,7 +90,7 @@ const TopSellingProductsComponent = ({ categories }) => {
                                     key={i}
                                     onClick={() => setId(category.id)}
                                 >
-                                    {category.name.slice(0, 10)}
+                                    {category.name}
                                 </button>
                             )}
                         </div>
@@ -169,12 +169,14 @@ const TopSellingProductsComponent = ({ categories }) => {
             </div>
 
             {/* Product Modal */}
-            <ProductModalComponent
-                productinfo={modalData}
-                show={modalShow}
-                hidemodal={hideModal}
-                onHide={() => setModalShow(false)}
-            />
+            {modalShow ?
+                <ProductModalComponent
+                    productinfo={modalData}
+                    show={modalShow}
+                    hidemodal={hideModal}
+                    onHide={() => setModalShow(false)}
+                />
+                : null}
         </div>
     );
 };

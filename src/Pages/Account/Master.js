@@ -26,13 +26,8 @@ const Master = () => {
 
         const fetchLoggedUser = async () => {
             try {
-                const response = await axios.get(`${apiURL}user`, header)
-                let user = {
-                    name: response.data.result.name,
-                    phone_number: response.data.result.phone_number,
-                    email: response.data.result.email,
-                }
-                localStorage.setItem('user', JSON.stringify(user))
+                const response = await axios.get(`${apiURL}me`, header)
+                localStorage.setItem('user', JSON.stringify(response.data))
             } catch (error) {
                 if (error) {
                     console.log(error);
@@ -43,26 +38,24 @@ const Master = () => {
         fetchLoggedUser()
     }, [])
 
-    const doLogout = () => {
+    const doLogout = async () => {
         // Header 
         const header = {
             headers: { Authorization: "Bearer " + localStorage.getItem("token") }
         }
 
-        axios.get(`${apiURL}logout`, header)
-            .then(res => {
-                if (res.status === 200) {
-                    localStorage.removeItem('token')
-                    localStorage.removeItem('user')
-                    history.push('/')
-                }
-            })
-            .catch(err => {
-                if (err && err.response.status !== 200) {
-                    localStorage.removeItem('token')
-                    history.push('/')
-                }
-            })
+        try {
+            const response = await axios.get(`${apiURL}logout`, header)
+            if (response.status === 200) {
+                localStorage.removeItem('token')
+                localStorage.removeItem('user')
+                history.push('/')
+            }
+        } catch (error) {
+            if (error) {
+                console.log(error.response);
+            }
+        }
     }
 
     return (

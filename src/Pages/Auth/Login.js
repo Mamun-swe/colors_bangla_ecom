@@ -20,25 +20,25 @@ const Login = () => {
     }
 
     const onSubmit = async (data) => {
-        const loginData = {
-            username: data.email,
-            password: data.password
-        }
-
         try {
             setLoading(true)
-            const response = await axios.post(`${apiURL}login`, loginData)
+            const response = await axios.post(`${apiURL}login`, data)
             if (response.status === 200) {
-                localStorage.setItem('token', response.data.access_token)
-                history.push('/account')
-                setLoading(false)
-                console.log(response)
+                const user = response.data.token.split('.')[0]
+                if (user === 'user') {
+                    localStorage.setItem('token', response.data.token)
+                    history.push('/account')
+                    setLoading(false)
+                } else {
+                    toast.warn('Opps ! You are admin.')
+                }
             }
         } catch (error) {
             if (error && error.response.status !== 200) {
                 setLoading(false)
-                toast.warn(error.response.data)
+                toast.warn(error.response.data.message)
             }
+            console.log(error.response);
         }
     }
 

@@ -26,10 +26,10 @@ const NavBar = () => {
         dispatch(productsList())
         const fetchCategories = async () => {
             try {
-                const categoryResponse = await axios.get(`${apiURL}getCategory`)
+                const categoryResponse = await axios.get(`${apiURL}home/categories`)
                 if (categoryResponse.status === 200) {
-                    setCategories(categoryResponse.data.result)
-                    setSingleCatId(categoryResponse.data.result[0].id)
+                    setCategories(categoryResponse.data.categories)
+                    setSingleCatId(categoryResponse.data.categories[0].id)
                 }
             } catch (error) {
                 if (error) console.log(error)

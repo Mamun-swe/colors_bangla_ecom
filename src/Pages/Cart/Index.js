@@ -49,20 +49,20 @@ const Index = () => {
     // Apply coupon
     const onSubmit = async (data) => {
         try {
-            const response = await axios.get(`${apiURL}getCoupon/${data.code}`)
+            const response = await axios.get(`${apiURL}home/coupon/${data.code}`)
             if (response.status === 200) {
                 const couponData = {
-                    code: response.data.result.code,
-                    type: response.data.result.type,
-                    amount: parseInt(response.data.result.discount_amount),
-                    percent: parseInt(response.data.result.discount_percent)
+                    code: response.data.code,
+                    type: response.data.type,
+                    amount: parseInt(response.data.discount_amount),
+                    percent: parseInt(response.data.discount_percent)
                 }
 
                 localStorage.setItem('couponData', JSON.stringify(couponData))
                 toast.info('Coupon applied in you total amount')
             }
         } catch (error) {
-            if (error && error.response.status !== 200) {
+            if (error) {
                 toast.warn('Coupon not found')
                 localStorage.removeItem('couponData')
             }

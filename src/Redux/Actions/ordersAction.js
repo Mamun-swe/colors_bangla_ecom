@@ -15,11 +15,13 @@ export const ordersList = () => {
                     Authorization: "Bearer " + localStorage.getItem("token")
                 }
             }
+
+            const user = JSON.parse(localStorage.getItem('user'))
             dispatch({ type: GET_ORDERS_REQUEST })
-            const response = await axios.get(`${apiURL}getUserOrders`, header)
+            const response = await axios.get(`${apiURL}user/orders/${user.id}/${user.email}`, header)
             dispatch({
                 type: GET_ORDERS_SUCCESS,
-                payload: response.data.result
+                payload: response.data
             })
         } catch (error) {
             dispatch({

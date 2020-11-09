@@ -29,8 +29,8 @@ const Index = (props) => {
         const filterProducts = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get(`${apiURL}searchProducts/${value}`)
-                setProducts(response.data.result)
+                const response = await axios.get(`${apiURL}home/search/${value}`)
+                setProducts(response.data)
                 setLoading(false)
             } catch (error) {
                 if (error) console.log(error.response)
@@ -152,12 +152,14 @@ const Index = (props) => {
                     </div>
 
                     {/* Product Modal */}
-                    <ProductModalComponent
-                        productinfo={modalData}
-                        show={modalShow}
-                        hidemodal={hideModal}
-                        onHide={() => setModalShow(false)}
-                    />
+                    {modalShow ?
+                        <ProductModalComponent
+                            productinfo={modalData}
+                            show={modalShow}
+                            hidemodal={hideModal}
+                            onHide={() => setModalShow(false)}
+                        />
+                        : null}
 
 
                     <FooterComponent />

@@ -20,9 +20,10 @@ const PasswordChange = () => {
     }
 
     const onSubmit = async (data) => {
+        const loggedUser = JSON.parse(localStorage.getItem('user'))
         try {
             setLoading(true)
-            const response = await axios.post(`${apiURL}updatePassword`, data, header)
+            const response = await axios.post(`${apiURL}user/update/${loggedUser.id}/password`, data, header)
             if (response.status === 200) {
                 setLoading(false)
                 toast.success('Password successfully updated.')
@@ -53,14 +54,14 @@ const PasswordChange = () => {
 
                                     {/* old Password */}
                                     <div className="form-group mb-3">
-                                        {errors.oldPassword && errors.oldPassword.message ? (
-                                            <p className="text-danger">{errors.oldPassword && errors.oldPassword.message}</p>
+                                        {errors.old_password && errors.old_password.message ? (
+                                            <p className="text-danger">{errors.old_password && errors.old_password.message}</p>
                                         ) : <p className="text-muted">Old password*</p>
                                         }
 
                                         <input
                                             type="password"
-                                            name="oldPassword"
+                                            name="old_password"
                                             className="form-control rounded-0 shadow-none"
                                             ref={register({
                                                 required: "Old password is required"
@@ -70,14 +71,14 @@ const PasswordChange = () => {
 
                                     {/* New Password */}
                                     <div className="form-group mb-3">
-                                        {errors.password && errors.password.message ? (
-                                            <p className="text-danger">{errors.password && errors.password.message}</p>
+                                        {errors.new_password && errors.new_password.message ? (
+                                            <p className="text-danger">{errors.new_password && errors.new_password.message}</p>
                                         ) : <p className="text-muted">New password*</p>
                                         }
 
                                         <input
                                             type="password"
-                                            name="password"
+                                            name="new_password"
                                             className="form-control rounded-0 shadow-none"
                                             ref={register({
                                                 required: "New password is required",

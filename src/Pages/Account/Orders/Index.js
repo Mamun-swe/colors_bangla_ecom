@@ -58,8 +58,8 @@ const Index = () => {
                                 {orders.length > 0 && orders.map((order, i) =>
                                     <tr key={i}>
                                         <td><p>{order.order_code}</p></td>
-                                        <td><p>{moment(order.created_at).format('d MMM, YYYY')}</p></td>
-                                        <td><p>{order.status}</p></td>
+                                        <td><p>{moment(order.created_at).format('DD MMM, YYYY')}</p></td>
+                                        <td><p className="text-capitalize">{order.status}</p></td>
                                         <td><p>{order.total_price} tk.</p></td>
                                         <td className="text-right">
                                             <button

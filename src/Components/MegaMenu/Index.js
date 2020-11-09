@@ -15,7 +15,7 @@ const Index = ({ items }) => {
                                     <img src={item.image} className="img-fluid" alt="..." />
                                 </div>
                                 <div className="pl-3">
-                                    <h4>{item.name}</h4>
+                                    <h5>{item.name}</h5>
                                     {item.children && item.children.map((child, x) =>
                                         <Link
                                             key={x}

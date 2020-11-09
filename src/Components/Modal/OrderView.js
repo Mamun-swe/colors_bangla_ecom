@@ -6,8 +6,6 @@ import moment from 'moment';
 
 const OrderView = ({ data, hidemodal }) => {
 
-    
-
     return (
         <div className="order-view-modal">
             <div className="backdrop">
@@ -79,12 +77,14 @@ const OrderView = ({ data, hidemodal }) => {
                                     <div className="order-details my-4">
                                         <h6 className="text-capitalize">Order details</h6>
 
-                                        <table className="table table-sm table-borderless">
+                                        <table className="table table-sm table-responsive-sm table-borderless">
                                             <thead>
                                                 <tr>
                                                     <td><p>product</p></td>
+                                                    <td className="text-center"><p>image</p></td>
                                                     <td className="text-center"><p>size</p></td>
                                                     <td className="text-center"><p>color</p></td>
+                                                    <td className="text-right"><p>price</p></td>
                                                     <td className="text-right"><p>quantity</p></td>
                                                     <td className="text-right"><p>total</p></td>
                                                 </tr>
@@ -94,16 +94,20 @@ const OrderView = ({ data, hidemodal }) => {
                                                     data.products.length > 0 &&
                                                     data.products.map((product, i) =>
                                                         <tr className="boder" key={i}>
-                                                            <td><p>{product.name}</p></td>
+                                                            <td><p>{product.product.name}</p></td>
                                                             <td className="text-center">
-                                                                <p className="size">{product.pivot.size}</p>
+                                                                <img src={product.product.image} className="img-fluid" style={{ height: 30 }} alt="..." />
+                                                            </td>
+                                                            <td className="text-center">
+                                                                <p className="size">{product.size}</p>
                                                             </td>
                                                             <td className="text-center">
                                                                 <div className="colour-box"
-                                                                    style={{ background: product.pivot.colour, width: 20, height: 20, margin: 'auto' }}></div>
+                                                                    style={{ background: product.color, width: 20, height: 20, margin: 'auto' }}></div>
                                                             </td>
-                                                            <td className="text-right"><p>{product.pivot.quantity}</p></td>
-                                                            <td className="text-right"><p>{product.pivot.total} tk.</p></td>
+                                                            <td className="text-right"><p>{product.price} tk.</p></td>
+                                                            <td className="text-right"><p>{product.quantity}</p></td>
+                                                            <td className="text-right"><p>{product.price * product.quantity} tk.</p></td>
                                                         </tr>
                                                     ) : null}
                                             </tbody>
