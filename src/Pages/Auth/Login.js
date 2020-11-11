@@ -30,7 +30,8 @@ const Login = () => {
                     history.push('/account')
                     setLoading(false)
                 } else {
-                    toast.warn('Opps ! You are admin.')
+                    setLoading(false)
+                    toast.warn('Invalid e-mail or password.')
                 }
             }
         } catch (error) {
@@ -38,7 +39,6 @@ const Login = () => {
                 setLoading(false)
                 toast.warn(error.response.data.message)
             }
-            console.log(error.response);
         }
     }
 

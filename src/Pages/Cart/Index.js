@@ -49,7 +49,7 @@ const Index = () => {
     // Apply coupon
     const onSubmit = async (data) => {
         try {
-            const response = await axios.get(`${apiURL}home/coupon/${data.code}`)
+            const response = await axios.get(`${apiURL}website/coupon/${data.code}`)
             if (response.status === 200) {
                 const couponData = {
                     code: response.data.code,

@@ -24,7 +24,7 @@ const Index = () => {
     const onSubmit = async (data) => {
         try {
             setLoading(true)
-            const response = await axios.post(`${apiURL}subscribe`, data)
+            const response = await axios.post(`${apiURL}website/subscribe`, data)
             if (response.status === 200) {
                 toast.success(response.data.message)
                 setLoading(false)

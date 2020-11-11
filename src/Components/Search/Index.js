@@ -20,7 +20,7 @@ const Index = () => {
             if (event.target.value) {
                 setSuggestBox(true)
                 setIsSearchLoading(true)
-                const response = await axios.get(`${apiURL}home/search/${event.target.value}`)
+                const response = await axios.get(`${apiURL}website/search/${event.target.value}`)
                 setResults(response.data)
                 setSuggestBox(true)
                 setIsSearchLoading(false)

@@ -20,11 +20,13 @@ const Index = () => {
     const onSubmit = async (data) => {
         try {
             setLoading(true)
-            const response = await axios.post(`${apiURL}contactAuthority`, data)
-            if (response.status === 200) {
-                setLoading(false)
-                toast.success(response.data.message)
-            }
+            toast.success("message sent")
+            setLoading(false)
+            // const response = await axios.post(`${apiURL}contactAuthority`, data)
+            // if (response.status === 200) {
+            //     setLoading(false)
+            //     toast.success(response.data.message)
+            // }
         } catch (error) {
             if (error) {
                 setLoading(false)

@@ -29,7 +29,7 @@ const Index = (props) => {
         const filterProducts = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get(`${apiURL}home/search/${value}`)
+                const response = await axios.get(`${apiURL}website/search/${value}`)
                 setProducts(response.data)
                 setLoading(false)
             } catch (error) {

@@ -42,8 +42,8 @@ const Index = () => {
         const fetchData = async () => {
             try {
                 setLoading(true)
-                const categoryResponse = await axios.get(`${apiURL}home/categories`)
-                const categoryProducts = await axios.get(`${apiURL}home/category/${categoryId}/products`)
+                const categoryResponse = await axios.get(`${apiURL}website/categories`)
+                const categoryProducts = await axios.get(`${apiURL}website/category/${categoryId}/products`)
                 if (categoryResponse.data.categories && categoryProducts.data) {
                     setCategories(categoryResponse.data.categories)
                     setCategoryProducts(categoryProducts.data)

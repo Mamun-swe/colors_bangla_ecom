@@ -21,7 +21,7 @@ const Index = () => {
         const fetchData = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get(`${apiURL}home`)
+                const response = await axios.get(`${apiURL}website`)
                 if (response.status === 200) {
                     setSliders(response.data.sliders)
                     setCategories(response.data.categories)
@@ -29,7 +29,9 @@ const Index = () => {
                     setLoading(false)
                 }
             } catch (error) {
-                console.log(error)
+                if (error) {
+                    console.log(error.response)
+                }
             }
         }
 
@@ -45,7 +47,7 @@ const Index = () => {
                     {/* <CampaignComponent campaigns={sliders} /> */}
                     <CategoryComponent categories={categories} />
                     <LatestProductsComponent latestProducts={latestProducts} />
-                    {categories.length > 0 ? <TopSellingProductsComponent categories={categories} /> : null}
+                    {categories ? <TopSellingProductsComponent categories={categories} /> : null}
                     <FooterComponent />
                 </div>
             }

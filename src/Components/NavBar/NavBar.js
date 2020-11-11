@@ -26,7 +26,7 @@ const NavBar = () => {
         dispatch(productsList())
         const fetchCategories = async () => {
             try {
-                const categoryResponse = await axios.get(`${apiURL}home/categories`)
+                const categoryResponse = await axios.get(`${apiURL}website/categories`)
                 if (categoryResponse.status === 200) {
                     setCategories(categoryResponse.data.categories)
                     setSingleCatId(categoryResponse.data.categories[0].id)

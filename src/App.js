@@ -12,7 +12,7 @@ import SearchResultIndex from './Pages/SearchResult/Index';
 import CampaignIndex from './Pages/Campaign/Index';
 
 import ContactIndex from './Pages/Contact/Index';
-import ShowroomIndex from './Pages/Showroom/Index'; 
+import ShowroomIndex from './Pages/Showroom/Index';
 
 import CartIndex from './Pages/Cart/Index';
 import CheckoutIndex from './Pages/Checkout/Index';

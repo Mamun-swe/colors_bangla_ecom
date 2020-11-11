@@ -54,7 +54,7 @@ const Index = () => {
         const fetchProduct = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get(`${apiURL}home/product/${id}/show`)
+                const response = await axios.get(`${apiURL}website/product/${id}/show`)
                 setProduct(response.data)
                 setProductImage(response.data.image)
                 setSelectedSize(response.data.size[0])
@@ -106,7 +106,7 @@ const Index = () => {
 
         try {
             setReviewLoading(true)
-            const response = await axios.post(`${apiURL}home/review`, reviewData)
+            const response = await axios.post(`${apiURL}/review`, reviewData)
             if (response) {
                 setReviewLoading(false)
                 toast.success(response.data.message)

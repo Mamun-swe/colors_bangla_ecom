@@ -25,12 +25,14 @@ const TopSellingProductsComponent = ({ categories }) => {
         const fetchProducts = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get(`${apiURL}home/category/${id || categories[0].id}/products`)
+                const response = await axios.get(`${apiURL}website/category/${id || categories[0].id}/products`)
                 setProducts(response.data)
                 setLimit(12)
                 setLoading(false)
             } catch (error) {
-                console.log(error.response);
+                if (error) {
+                    console.log(error.response);
+                }
             }
         }
 

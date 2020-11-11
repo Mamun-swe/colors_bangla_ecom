@@ -110,7 +110,7 @@ const Index = () => {
 
         try {
             setLoading(true)
-            const response = await axios.post(`${apiURL}home/confirmorder`, checkOutData, header)
+            const response = await axios.post(`${apiURL}website/confirmorder`, checkOutData, header)
             if (response.status === 200) {
                 setCheckOutResponseData(checkOutData)
                 setOrderCode(response.data)

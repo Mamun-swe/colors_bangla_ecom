@@ -14,20 +14,25 @@ const Register = () => {
     const history = useHistory()
     const { register, handleSubmit, errors } = useForm()
     const [isLoading, setLoading] = useState(false)
+    const [serverErrors, setServerErrors] = useState({})
 
     const onSubmit = async (data) => {
         try {
             setLoading(true)
             const response = await axios.post(`${apiURL}register`, data)
-            if (response.status === 200) {
-                toast.success("Successfully account created")
+            if (response.data.status === true) {
+                toast.success(response.data.message)
                 setLoading(false)
                 history.push('/sign-in')
             }
-        } catch (error) {
-            if (error && error.response.status !== 200) {
+            if (response.data.status === false) {
+                toast.warn(response.data.message)
                 setLoading(false)
-                toast.warn(error.response.data.message)
+            }
+        } catch (error) {
+            setLoading(false)
+            if (error && error.response.status === 422) {
+                setServerErrors(error.response.data.message)
             }
         }
     }
@@ -45,7 +50,11 @@ const Register = () => {
 
                 <div className="card shadow border-0">
                     <div className="card-header text-center bg-white">
-                        <h4 className="mb-0">Sign-Up</h4>
+                        <h4 className="mb-1">Sign-Up</h4>
+                        <p className="text-danger mb-0">
+                            {serverErrors.email ? serverErrors.email[0] : null}
+                            {serverErrors.phone_number ? serverErrors.phone_number[0] : null}
+                        </p>
                     </div>
                     <div className="card-body">
                         <form onSubmit={handleSubmit(onSubmit)}>

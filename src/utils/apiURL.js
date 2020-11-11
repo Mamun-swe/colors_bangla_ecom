@@ -1,3 +1,3 @@
 
-export const apiURL = "https://api.urfashionsbd.com/public/api/";
+export const apiURL = "https://api.urfashionsbd.com/api/";
 
