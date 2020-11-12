@@ -74,8 +74,8 @@ const Register = () => {
                                     ref={register({
                                         required: "Name is required",
                                         minLength: {
-                                            value: 5,
-                                            message: "Minimun length 5 character"
+                                            value: 8,
+                                            message: "Minimun length 8 character"
                                         }
                                     })}
                                 />

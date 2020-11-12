@@ -23,6 +23,7 @@ const Login = () => {
         try {
             setLoading(true)
             const response = await axios.post(`${apiURL}login`, data)
+            console.log(response);
             if (response.status === 200) {
                 const user = response.data.token.split('.')[0]
                 if (user === 'user') {
@@ -95,6 +96,10 @@ const Login = () => {
                                     placeholder="*****"
                                     ref={register({
                                         required: "Please enter password",
+                                        minLength: {
+                                            value: 8,
+                                            message: "Minimun length 8 character"
+                                        }
                                     })}
                                 />
                             </div>
