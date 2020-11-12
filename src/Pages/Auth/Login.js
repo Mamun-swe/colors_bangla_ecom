@@ -23,7 +23,6 @@ const Login = () => {
         try {
             setLoading(true)
             const response = await axios.post(`${apiURL}login`, data)
-            console.log(response);
             if (response.status === 200) {
                 const user = response.data.token.split('.')[0]
                 if (user === 'user') {
