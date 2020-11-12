@@ -73,6 +73,13 @@ const Index = (props) => {
         return productName
     }
 
+    // Discount Percent
+    const discount = (mrp, selling_price) => {
+        let subtraction = mrp - selling_price
+        let percenteg = parseInt((subtraction * 100) / mrp)
+        return percenteg
+    }
+
     return (
         <div className="search-result">
             {isLoading ? <LoadingComponent /> :
@@ -94,6 +101,15 @@ const Index = (props) => {
                                                 <Link to={`/product/${product.id}/${replaceWhiteSpace(product.name)}`}>
                                                     <div className="img-box">
                                                         <img src={product.image} className="img-fluid" alt="..." />
+                                                        {/* Discount */}
+                                                        {product.selling_price < product.mrp ?
+                                                            <div className="discount rounded-circle">
+                                                                <div className="flex-center flex-column">
+                                                                    <p>{discount(product.mrp, product.selling_price)}%</p>
+                                                                    <p style={{ fontSize: 14 }}>OFF</p>
+                                                                </div>
+                                                            </div>
+                                                            : null}
                                                     </div>
                                                 </Link>
 
@@ -126,12 +142,17 @@ const Index = (props) => {
                                                     </div>
 
                                                     <Link to={`/product/${product.id}/${product.name}`}>
-                                                        <div className="d-sm-flex">
-                                                            <div>
-                                                                <p className="name">{product.name.slice(0, 15)}</p>
-                                                            </div>
-                                                            <div className="ml-auto">
-                                                                <p className="price">৳ {product.selling_price}</p>
+                                                        <div className="product-info">
+                                                            <p className="name">{product.name.slice(0, 25)}</p>
+                                                            <div className="d-flex pricing">
+                                                                <div>
+                                                                    <h4>৳ {product.selling_price}</h4>
+                                                                </div>
+                                                                {product.selling_price < product.mrp ?
+                                                                    <div className="ml-auto">
+                                                                        <del>৳ {product.mrp}</del>
+                                                                    </div>
+                                                                    : null}
                                                             </div>
                                                         </div>
                                                     </Link>

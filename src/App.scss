@@ -45,10 +45,29 @@ $danger-color: brown;
             width: 100%;
             overflow: hidden;
             height: 200px;
+            position: relative;
 
             img {
                 min-width: 100%;
                 min-height: 100%;
+            }
+
+            .discount {
+                width: 60px;
+                height: 60px;
+                background: $primary-color;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+
+                p {
+                    font-size: 16px;
+                    margin-bottom: 0;
+                    font-weight: 900;
+                    line-height: 17px;
+                    color: $secondary-color;
+                    font-family: 'Roboto', sans-serif;
+                }
             }
 
             @media (min-width: 576px) {
@@ -126,25 +145,34 @@ $danger-color: brown;
             }
 
             a {
-                padding: 8px;
+                padding: 12px;
                 display: block;
                 text-decoration: none;
 
-                .name {
-                    color: #555555;
-                    font-size: 14px;
-                    font-weight: 300;
-                    margin-bottom: 0;
-                    transition: 0.4s all;
-                    font-family: 'Roboto', sans-serif;
-                }
+                .product-info {
+                    p {
+                        color: #555555;
+                        font-size: 17px;
+                        font-weight: 300;
+                        margin-bottom: 0;
+                        transition: 0.4s all;
+                        font-family: 'Roboto', sans-serif;
+                    }
 
-                .price {
-                    color: #000;
-                    font-size: 14px;
-                    font-weight: 900;
-                    margin-bottom: 0;
-                    font-family: 'Roboto', sans-serif;
+                    .pricing {
+                        h4 {
+                            color: #000;
+                            font-size: 20px;
+                            font-weight: 900;
+                            margin-bottom: 0;
+                            font-family: 'Roboto', sans-serif;
+                        }
+
+                        del {
+                            color: #000;
+                            font-size: 14px;
+                        }
+                    }
                 }
             }
 

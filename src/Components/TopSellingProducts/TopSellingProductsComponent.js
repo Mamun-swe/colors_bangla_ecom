@@ -146,12 +146,17 @@ const TopSellingProductsComponent = ({ categories }) => {
                                             </div>
 
                                             <Link to={`/product/${product.id}/${replaceWhiteSpace(product.name)}`}>
-                                                <div className="d-sm-flex">
-                                                    <div>
-                                                        <p className="name">{product.name.slice(0, 15)}</p>
-                                                    </div>
-                                                    <div className="ml-auto">
-                                                        <p className="price">৳ {product.selling_price}</p>
+                                                <div className="product-info">
+                                                    <p className="name">{product.name.slice(0, 25)}</p>
+                                                    <div className="d-flex pricing">
+                                                        <div>
+                                                            <h4>৳ {product.selling_price}</h4>
+                                                        </div>
+                                                        {product.selling_price < product.mrp ?
+                                                            <div className="ml-auto">
+                                                                <del>৳ {product.mrp}</del>
+                                                            </div>
+                                                            : null}
                                                     </div>
                                                 </div>
                                             </Link>
