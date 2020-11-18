@@ -102,7 +102,7 @@ const LatestProductComponent = ({ latestProducts }) => {
                                             <Link to={`/product/${product.id}/${replaceWhiteSpace(product.name)}`}>
                                                 <div className="d-sm-flex">
                                                     <div>
-                                                        <p className="name">{product.name}</p>
+                                                        <p className="name">{product.name.slice(0, 20)}</p>
                                                     </div>
                                                     <div className="ml-auto">
                                                         <p className="price">৳ {product.selling_price}</p>

@@ -49,6 +49,7 @@ const Index = () => {
                     <LatestProductsComponent latestProducts={latestProducts} />
                     {categories ? <TopSellingProductsComponent categories={categories} /> : null}
                     <FooterComponent />
+
                 </div>
             }
         </div>
