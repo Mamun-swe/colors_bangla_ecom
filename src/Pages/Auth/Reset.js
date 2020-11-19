@@ -17,7 +17,7 @@ const Reset = () => {
     const onSubmit = async (data) => {
         try {
             setLoading(true)
-            const response = await axios.post(`${apiURL}passwordReset`, data)
+            const response = await axios.post(`${apiURL}reset/password`, data)
             if (response.status === 200) {
                 setLoading(false)
                 toast.success(response.data.message)
