@@ -24,10 +24,6 @@ const SliderComponent = ({ sliders }) => {
                             {sliders.length > 0 && sliders.map((slider, i) =>
                                 <div className="slider-card" key={i}>
                                     <img src={slider.image} className="img-fluid" alt="..." />
-                                    <div className="overlay">
-                                        <h1 className="text-uppercase">{slider.name}</h1>
-                                        <button type="button" className="btn rounded-0 shadow-none">Shop Now</button>
-                                    </div>
                                 </div>
                             )}
                         </Slider>
