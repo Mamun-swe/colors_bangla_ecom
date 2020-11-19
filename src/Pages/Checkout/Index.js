@@ -144,7 +144,7 @@ const Index = () => {
                             <div className="checkout-header">
                                 <h5 className="mb-0">
                                     <span className="text-muted">shopping cart/</span>
-                                    <span className="text-black">ceckout</span>
+                                    <span className="text-black">checkout</span>
                                 </h5>
                             </div>
                         </div>
