@@ -239,7 +239,7 @@ const Index = () => {
 
 
                                     {/* Main Menu */}
-                                    <div className="flex-fill flex-main-menu p-lg-3">
+                                    <div className="flex-fill flex-main-menu p-lg-3 mt-lg-3">
                                         {nullProduct ?
                                             <div className="null-content rounded-circle">
                                                 <div className="flex-center flex-column">
