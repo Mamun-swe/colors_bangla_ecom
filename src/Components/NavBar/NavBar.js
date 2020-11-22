@@ -182,11 +182,11 @@ const NavBar = () => {
                                 </div>
                                 <div className="ml-auto">
                                     <ul>
-                                        <li><a href="https://www.facebook.com/"><Icon icon={user} size={15} /></a></li>
+                                        {/* <li><a href="https://www.facebook.com/"><Icon icon={user} size={15} /></a></li>
                                         <li><a href="https://www.facebook.com/"><Icon icon={earth} size={15} /></a></li>
-                                        <li><a href="https://www.facebook.com/"><Icon icon={twitter} size={15} /></a></li>
-                                        <li><a href="https://www.facebook.com/"><Icon icon={facebook} size={15} /></a></li>
-                                        <li><a href="https://www.facebook.com/"><Icon icon={instagram} size={15} /></a></li>
+                                        <li><a href="https://www.facebook.com/"><Icon icon={twitter} size={15} /></a></li> */}
+                                        <li><a href="https://www.facebook.com/urfashion21"><Icon icon={facebook} size={15} /></a></li>
+                                        <li><a href="#"><Icon icon={instagram} size={15} /></a></li>
                                     </ul>
                                 </div>
                             </div>

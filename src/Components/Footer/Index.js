@@ -43,30 +43,32 @@ const Index = () => {
                 <div className="row">
                     <div className="col-12 col-lg-3 text-center text-lg-left pr-lg-5">
                         <img src={Logo} className="img-fluid" alt="..." />
-                        <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter</p>
+                        <p>UR Fashion is committed to provide best quality product for customers and keep fast delivery service.</p>
                         <ul>
-                            <li><a href="https://www.facebook.com/"><Icon icon={user} size={20} /></a></li>
+                            {/* <li><a href="https://www.facebook.com/"><Icon icon={user} size={20} /></a></li>
                             <li><a href="https://www.facebook.com/"><Icon icon={earth} size={20} /></a></li>
-                            <li><a href="https://www.facebook.com/"><Icon icon={twitter} size={20} /></a></li>
-                            <li><a href="https://www.facebook.com/"><Icon icon={facebook} size={20} /></a></li>
-                            <li><a href="https://www.facebook.com/"><Icon icon={instagram} size={19} /></a></li>
+                            <li><a href="https://www.facebook.com/"><Icon icon={twitter} size={20} /></a></li> */}
+                            <li><a href="https://www.facebook.com/urfashion21"><Icon icon={facebook} size={20} /></a></li>
+                            <li><a href="#"><Icon icon={instagram} size={19} /></a></li>
                         </ul>
                     </div>
                     <div className="col-12 col-lg-3 text-center text-lg-left">
                         <h5>my account</h5>
                         <div><Link to="/sign-in" type="button" className="btn shadow-none rounded-0">my account</Link></div>
                         <div><Link to="/checkout" type="button" className="btn shadow-none rounded-0">checkout</Link></div>
-                        <div><Link to="/sign-in" type="button" className="btn shadow-none rounded-0">login</Link></div>
+                        <div><Link to="/terms-conditions" type="button" className="btn shadow-none rounded-0">Terms & Conditions</Link></div>
+                        <div><Link to="/privacy-policy" type="button" className="btn shadow-none rounded-0">Privacy Policy</Link></div>
                     </div>
                     <div className="col-12 col-lg-3 text-center text-lg-left">
                         <h5>customer service</h5>
                         <div><Link to="/showroom" type="button" className="btn shadow-none rounded-0">showroom</Link></div>
                         <div><Link to="/about-us" type="button" className="btn shadow-none rounded-0">about us</Link></div>
+                        <div><Link to="/returns-policy" type="button" className="btn shadow-none rounded-0">Returns Policy</Link></div>
                         <div><Link to="/faq" type="button" className="btn shadow-none rounded-0">faq</Link></div>
                     </div>
                     <div className="col-12 col-lg-3 text-center text-lg-left mb-0">
                         <h5>stay connected</h5>
-                        <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print.</p>
+                        <p>Subscribe to our Newsletter and get our best offers update.</p>
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <div className="form-group mb-2">
                                 <input

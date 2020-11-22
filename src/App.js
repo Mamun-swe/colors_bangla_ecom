@@ -26,6 +26,9 @@ import AccountMaster from './Pages/Account/Master';
 import faqIndex from './Pages/FAQ/Index';
 import AboutIndex from './Pages/About/Index';
 import FourOFour from './Pages/FourOFour/Index';
+import TermsAndConditionsIndex from './Pages/Terms&Conditions/Index';
+import PrivacyPolicyIndex from './Pages/PrivacyPolicy/Index';
+import ReturnsPolicyIndex from './Pages/ReturnsPolicy/Index';
 
 function App() {
   return (
@@ -50,7 +53,10 @@ function App() {
             <Route exact path="/reset" component={ResetPage} />
 
             <Route exact path="/faq" component={faqIndex} />
-            <Route exact path="/about-us" component={AboutIndex} />
+            <Route exact path="/about-us" component={AboutIndex } />
+            <Route exact path="/terms-conditions" component={TermsAndConditionsIndex} />
+            <Route exact path="/privacy-policy" component={PrivacyPolicyIndex} />
+            <Route exact path="/returns-policy" component={ReturnsPolicyIndex} />
 
             <PrivateRoute>
               <Route path="/account" component={AccountMaster} />

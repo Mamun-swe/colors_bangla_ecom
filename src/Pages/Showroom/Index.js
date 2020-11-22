@@ -14,7 +14,7 @@ const Index = () => {
                 <div className="overlay">
                     <div className="flex-center flex-column text-center">
                         <h1>Showroom</h1>
-                        <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print.</p>
+                        {/* <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print.</p> */}
                     </div>
                 </div>
             </div>
@@ -24,13 +24,13 @@ const Index = () => {
                     <div className="row">
                         <div className="col-12 col-lg-8 mb-4 mb-lg-5">
                             <h2>Our Showrooms</h2>
-                            <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.</p>
+                            <p>Find Our Showrooms on Google Map.</p>
                         </div>
 
                         <div className="col-12 map-column mb-4 mb-lg-5">
                             <iframe
                                 title="Our locatin find in google map"
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.592234257487!2d90.32280281543704!3d23.8686092901661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9a9e728879b7600d!2sAshulia%20Model%20Town%20Park!5e0!3m2!1sen!2sbd!4v1600719678565!5m2!1sen!2sbd" width="100%"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.257081318259!2d90.40502811489523!3d23.73821019515897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x816956b392ce3069!2sUR%20Fashion!5e0!3m2!1sen!2sbd!4v1605769872590!5m2!1sen!2sbd" width="100%"
                                 height="450"
                                 frameBorder="0"
                                 allowFullScreen=""

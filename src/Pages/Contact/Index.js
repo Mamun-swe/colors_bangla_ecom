@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import '../../styles/contact.scss';
 import { Icon } from 'react-icons-kit';
 import { ic_phone, ic_markunread, ic_location_on } from 'react-icons-kit/md';
-import { printer } from 'react-icons-kit/icomoon';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
 import { apiURL } from '../../utils/apiURL';
@@ -62,7 +61,8 @@ const Index = () => {
                                         </div>
                                         <div className="pl-3">
                                             <p>phone number</p>
-                                            <small>+0123 4567 9876</small>
+                                            <small>+8801918836801 </small>
+                                            <small>+8801886455239 </small>
                                         </div>
                                     </div>
                                 </div>
@@ -76,13 +76,13 @@ const Index = () => {
                                         </div>
                                         <div className="pl-3">
                                             <p>email address</p>
-                                            <small>example@gmail.com</small>
+                                            <small>urfashionbd@gmail.com</small>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="card border-0 mb-3">
+                            {/* <div className="card border-0 mb-3">
                                 <div className="card-body p-4">
                                     <div className="d-flex">
                                         <div>
@@ -94,7 +94,7 @@ const Index = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div className="card border-0 mb-3">
                                 <div className="card-body p-4">
@@ -104,7 +104,8 @@ const Index = () => {
                                         </div>
                                         <div className="pl-3">
                                             <p>location</p>
-                                            <small>123 Buisness Avenue, NYC</small>
+                                            <small>
+                                            35/A Purana Palton Line (V I P Road, Opposite of Ananda Bhoban- near City Bank), 1000 Dhaka, Dhaka Division, Bangladesh</small>
                                         </div>
                                     </div>
                                 </div>
@@ -117,7 +118,7 @@ const Index = () => {
                             <div className="card border-0">
                                 <div className="card-header border-0 bg-white p-4 pb-0">
                                     <h4 className="pt-2">Send Message</h4>
-                                    <p className="text-muted mb-0">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. </p>
+                                    <p className="text-muted mb-0">if you have any query, feel free to contact with us. </p>
                                 </div>
                                 <div className="card-body p-4">
 
@@ -221,13 +222,13 @@ const Index = () => {
                     <div className="row">
                         <div className="col-12 text-center mb-5">
                             <h1>Find Us on Google Maps</h1>
-                            <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.</p>
+                            {/* <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs.</p> */}
                         </div>
 
                         <div className="col-12 map-column">
                             <iframe
                                 title="Our locatin find in google map"
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3648.592234257487!2d90.32280281543704!3d23.8686092901661!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9a9e728879b7600d!2sAshulia%20Model%20Town%20Park!5e0!3m2!1sen!2sbd!4v1600719678565!5m2!1sen!2sbd" width="100%"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3652.257081318259!2d90.40502811489523!3d23.73821019515897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x816956b392ce3069!2sUR%20Fashion!5e0!3m2!1sen!2sbd!4v1605769872590!5m2!1sen!2sbd" width="100%"
                                 height="450"
                                 frameBorder="0"
                                 allowFullScreen=""

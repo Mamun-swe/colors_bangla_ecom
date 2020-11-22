@@ -16,7 +16,6 @@ import OrderStatusModal from '../../Components/Modal/OrderStatusModal';
 import EmptyShoppingCartImg from '../../assets/static/empty_shopping_cart.png';
 
 
-
 toast.configure({ autoClose: 2000 })
 const Index = () => {
     let subTotal = 0
@@ -54,7 +53,7 @@ const Index = () => {
         setOutSideDhaka(value)
         setInSideDhaka(false)
         setShippingArea(event.target.name)
-        setDelivery_charge(100)
+        setDelivery_charge(120)
     }
 
     const onChangeInSideDhaka = event => {
@@ -62,7 +61,7 @@ const Index = () => {
         setOutSideDhaka(false)
         setInSideDhaka(value)
         setShippingArea(event.target.name)
-        setDelivery_charge(80)
+        setDelivery_charge(60)
     }
 
     const countTotal = () => {
@@ -361,7 +360,7 @@ const Index = () => {
                                                             className="form-check-input"
                                                             id="out-side-dhaka"
                                                             name="Outside Dhaka"
-                                                            value="100"
+                                                            value="120"
                                                             checked={outSideDhaka}
                                                             onChange={onChangeOutSideDhaka}
                                                         />
@@ -369,7 +368,7 @@ const Index = () => {
                                                     </div>
                                                 </div>
                                                 <div className="ml-auto">
-                                                    <p className="mb-2">Tk. 100</p>
+                                                    <p className="mb-2">Tk. 120</p>
                                                 </div>
                                             </div>
 
@@ -381,7 +380,7 @@ const Index = () => {
                                                             className="form-check-input"
                                                             id="in-side-dhaka"
                                                             name="Inside Dhaka"
-                                                            value="80"
+                                                            value="60"
                                                             checked={inSideDhaka}
                                                             onChange={onChangeInSideDhaka}
                                                         />
@@ -389,7 +388,7 @@ const Index = () => {
                                                     </div>
                                                 </div>
                                                 <div className="ml-auto">
-                                                    <p>Tk. 80</p>
+                                                    <p>Tk. 60</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -417,9 +416,8 @@ const Index = () => {
                                                 <label className="form-check-label" htmlFor="cash-on-delivery">Cash on delivery</label>
                                                 <p>***ঢাকার বাহিরে ক্যাশ ও ডেলিভারি অর্ডার কনফার্ম করতে হলে ক্যারিয়ার চার্র্জ ১০০ টাকা অগ্রিম প্রদান করতে হবে***
                                             <br />
-                                                বিকাশ নাম্বার : ০১৯৯৭-৩৩৫৫০০
-                                                <br />
-                                                রকেট নাম্বার : ০১৯৯৭-৩৩৫৫০০
+                                                বিকাশ নাম্বার : 01532979139
+                                               
                                             <br />
                                                 *Send Money* করতে হবে।
                                             </p>
