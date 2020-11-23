@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../styles/latest-products.scss';
+import '../../styles/featerd-products.scss';
 import Slider from 'react-slick';
 import { Icon } from 'react-icons-kit';
 import {
@@ -9,7 +9,7 @@ import {
 import ProductModalComponent from '../Modal/ProductModal';
 import { Link } from 'react-router-dom';
 
-const LatestProductComponent = ({ latestProducts }) => {
+const LatestProductComponent = ({ products }) => {
     const [modalShow, setModalShow] = useState(false)
     const [modalData, setModalData] = useState({})
     const customeSlider = React.useRef()
@@ -71,17 +71,17 @@ const LatestProductComponent = ({ latestProducts }) => {
     }
 
     return (
-        <div className="latest-product">
+        <div className="featured-product">
             <div className="container">
                 <div className="row">
                     <div className="col-12 text-center mb-4">
-                        <h1 className="text-upperrcase">latest products</h1>
+                        <h1 className="text-upperrcase">Featured Products</h1>
                     </div>
 
                     {/* Product Slider */}
                     <div className="col-12 product-slider">
                         <Slider ref={customeSlider} {...settings}>
-                            {latestProducts.length > 0 && latestProducts.map((product, i) =>
+                            {products.length > 0 && products.map((product, i) =>
                                 <div className="card rounded-0 border-0" key={i}>
                                     <div className="card-body">
                                         <Link to={`/product/${product.id}/${replaceWhiteSpace(product.name)}`}>

@@ -10,7 +10,7 @@ const CategoryComponent = ({ categories }) => {
                     <div className="col-12 p-2 p-sm-0">
 
                         {categories.length > 0 && categories.slice(0, 6).map((category, i) =>
-                            <Link to={`/category/${category.id}`} key={i}>
+                            <Link to={`/shop/${category.id}`} key={i}>
                                 <div className="card border-0 rounded-0 category-card">
                                     <img src={category.image} className="img-fluid" alt="..." />
                                     {/* <div className="overlay">

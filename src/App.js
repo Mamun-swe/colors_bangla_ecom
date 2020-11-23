@@ -6,7 +6,7 @@ import PrivateRoute from './Components/PrivateRoute';
 import ScrollToTop from './Components/ScrollToTop/Index';
 
 import Index from './Pages/Index';
-import CategoryIndex from './Pages/Category/Index';
+import ShopIndex from './Pages/Shop/Index';
 import SingleProductIndex from './Pages/SingleProduct/Index';
 import SearchResultIndex from './Pages/SearchResult/Index';
 import CampaignIndex from './Pages/Campaign/Index';
@@ -37,7 +37,7 @@ function App() {
         <ScrollToTop>
           <Switch>
             <Route exact path="/" component={Index} />
-            <Route exact path="/category/:categoryId" component={CategoryIndex} />
+            <Route exact path="/shop/:id?" component={ShopIndex} />
             <Route exact path="/product/:id/:name" component={SingleProductIndex} />
             <Route exact path="/search-results" component={SearchResultIndex} />
             <Route exact path="/campaign/:id/:name" component={CampaignIndex} />
@@ -53,7 +53,7 @@ function App() {
             <Route exact path="/reset" component={ResetPage} />
 
             <Route exact path="/faq" component={faqIndex} />
-            <Route exact path="/about-us" component={AboutIndex } />
+            <Route exact path="/about-us" component={AboutIndex} />
             <Route exact path="/terms-conditions" component={TermsAndConditionsIndex} />
             <Route exact path="/privacy-policy" component={PrivacyPolicyIndex} />
             <Route exact path="/returns-policy" component={ReturnsPolicyIndex} />

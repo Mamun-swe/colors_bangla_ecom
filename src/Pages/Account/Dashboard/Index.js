@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import '../../../styles/Account/dashboard.scss';
 import axios from 'axios';
 import { apiURL } from '../../../utils/apiURL';
@@ -35,9 +35,22 @@ const Index = () => {
         fetchLoggedUser()
     }, [])
 
-    const doLogout = () => {
-        localStorage.removeItem('token')
-        history.push('/')
+    const doLogout = async () => {
+        try {
+            const response = await axios.get(`${apiURL}logout`, header)
+            if (response.status === 200) {
+                localStorage.removeItem('token')
+                localStorage.removeItem('user')
+                history.push('/')
+            }
+        } catch (error) {
+            if (error) {
+                localStorage.removeItem('token')
+                localStorage.removeItem('user')
+                history.push('/')
+                console.log(error.response)
+            }
+        }
     }
 
     return (
@@ -49,8 +62,15 @@ const Index = () => {
                 </div>
                 {user ?
                     <div className="body mb-4">
-                        <p className="mb-4">Hello <span className="text-info">{user.email}</span> (not <span className="text-info">{user.email}</span> ? <span onClick={() => doLogout}>Log out )</span></p>
-                        <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought to have scrambled parts of Cicero's De Finibus Bonorum et Malorum for use in a type specimen book.</p>
+                        <p className="mb-4">Hello <span className="text-info">{user.email}</span> (not <span className="text-info">{user.email}</span> ? <span onClick={doLogout}>Log out )</span></p>
+                        <p>From your account dashboard you can view your recent orders, manage your shipping and billing addresses, and edit your password and account details.</p>
+                        <div className="text-center my-4">
+                            <Link
+                                to="/"
+                                type="button"
+                                className="btn shadow-none text-white"
+                            >Return to shop</Link>
+                        </div>
                     </div>
                     : null}
             </div>

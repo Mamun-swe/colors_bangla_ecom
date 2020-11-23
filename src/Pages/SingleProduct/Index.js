@@ -194,7 +194,7 @@ const Index = () => {
                                                         <div><h3>{product.selling_price}<span>TK</span></h3></div>
                                                         <div className="pl-4">
                                                             <p><Icon icon={ic_access_time} size={20} className="mr-2" />30 days return*</p>
-                                                            <p><Icon icon={ic_directions_car} size={20} className="mr-2" />Delivary anywhere in banglades</p>
+                                                            <p><Icon icon={ic_directions_car} size={20} className="mr-2" />Delivery anywhere in bangladesh</p>
                                                         </div>
                                                     </div>
                                                 </div>

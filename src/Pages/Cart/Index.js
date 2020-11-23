@@ -220,7 +220,7 @@ const Index = () => {
                                 <div className="border-bottom title mb-3">
                                     <h6 className="mb-2">payment security</h6>
                                 </div>
-                                <p className="mb-4">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in the 15th century who is thought.</p>
+                                <p className="mb-4">Encryption ensures increased transaction security. SSL technology protects data linked to personal and payment info.</p>
 
                                 <ul>
                                     <li>

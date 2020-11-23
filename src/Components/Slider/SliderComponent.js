@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../styles/slider.scss';
 import Slider from 'react-slick';
+import { Link } from 'react-router-dom';
 
 const SliderComponent = ({ sliders }) => {
     const customeSlider = React.useRef()
@@ -23,7 +24,11 @@ const SliderComponent = ({ sliders }) => {
                         <Slider ref={customeSlider} {...settings}>
                             {sliders.length > 0 && sliders.map((slider, i) =>
                                 <div className="slider-card" key={i}>
-                                    <img src={slider.image} className="img-fluid" alt="..." />
+                                    <Link
+                                        to={`/shop/${slider.category_id}`}
+                                    >
+                                        <img src={slider.image} className="img-fluid" alt="..." />
+                                    </Link>
                                 </div>
                             )}
                         </Slider>

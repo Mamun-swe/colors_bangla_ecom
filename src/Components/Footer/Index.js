@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 import '../../styles/footer.scss';
 import { Icon } from 'react-icons-kit';
 import {
-    user,
-    earth,
-    twitter,
     facebook,
     instagram
 } from 'react-icons-kit/icomoon'

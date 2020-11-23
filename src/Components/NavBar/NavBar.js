@@ -7,7 +7,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { text_left } from 'react-icons-kit/ikons';
 import { useSelector, useDispatch } from 'react-redux';
 import { productsList } from '../../Redux/Actions/cartAction';
-import { user, earth, twitter, facebook, instagram } from 'react-icons-kit/icomoon'
+import { user, facebook, instagram } from 'react-icons-kit/icomoon'
 import { ic_add_shopping_cart, ic_dehaze, ic_close } from 'react-icons-kit/md';
 
 import SearchComponent from '../Search/Index';
@@ -91,7 +91,7 @@ const NavBar = () => {
                     </div>
                     <div className="content-body px-4">
                         <Link to="/">home</Link>
-                        <Link to={`/category/${singleCatId}`}>shop</Link>
+                        <Link to={`/shop/${singleCatId}`}>shop</Link>
                         {/* <Link to={`/category/${singleCatId}`}>new arrival</Link> */}
                         <Link to="/contact">contact</Link>
                         <Link to="/sign-in">my account</Link>
@@ -113,7 +113,7 @@ const NavBar = () => {
                                             </Link>
                                         </li>
                                         <li><NavLink exact activeClassName="is-active" to="/">home</NavLink></li>
-                                        <li><NavLink exact activeClassName="is-active" to={`/category/${singleCatId}`}>shop</NavLink></li>
+                                        <li><NavLink exact activeClassName="is-active" to="/shop">shop</NavLink></li>
                                         {/* <li><NavLink exact activeClassName="is-active" to={`/category/${singleCatId}`}>new arrival</NavLink></li> */}
                                         <li><NavLink exact activeClassName="is-active" to="/contact">contact</NavLink></li>
                                     </ul>

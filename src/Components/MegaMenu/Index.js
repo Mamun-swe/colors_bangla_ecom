@@ -19,7 +19,7 @@ const Index = ({ items }) => {
                                     {item.children && item.children.map((child, x) =>
                                         <Link
                                             key={x}
-                                            to={`/category/${child.id}`}
+                                            to={`/shop/${child.id}`}
                                         >
                                             {child.name}
                                         </Link>

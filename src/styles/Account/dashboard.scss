@@ -23,5 +23,11 @@
                 text-decoration: underline;
             }
         }
+
+        .btn {
+            font-size: 15px;
+            font-weight: 900;
+            background: $secondary-color;
+        }
     }
 }

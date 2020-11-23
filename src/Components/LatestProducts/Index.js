@@ -11,7 +11,7 @@ import { addProduct } from '../../Redux/Actions/cartAction';
 import ProductModalComponent from '../Modal/ProductModal';
 import { Link } from 'react-router-dom';
 
-const TopSellingProductsComponent = ({ categories }) => {
+const Index = ({ categories }) => {
     const [modalShow, setModalShow] = useState(false)
     const [modalData, setModalData] = useState({})
     const [loading, setLoading] = useState(false)
@@ -25,7 +25,7 @@ const TopSellingProductsComponent = ({ categories }) => {
         const fetchProducts = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get(`${apiURL}website/category/${id || categories[0].id}/products`)
+                const response = await axios.get(`${apiURL}website/shop/${id ? id : ""}`)
                 setProducts(response.data)
                 setLimit(12)
                 setLoading(false)
@@ -80,11 +80,16 @@ const TopSellingProductsComponent = ({ categories }) => {
             <div className="container">
                 <div className="row">
                     <div className="col-12 text-center">
-                        <h1 className="text-upperrcase">browse top selling products</h1>
+                        <h1 className="text-upperrcase">latest products</h1>
                     </div>
 
                     <div className="col-12 text-center">
                         <div className="top-selling-buttons">
+                            <button
+                                type="button"
+                                className="btn shadow-none"
+                                onClick={() => setId(null)}
+                            >All</button>
                             {categories.length > 0 && categories.map((category, i) =>
                                 <button
                                     type="button"
@@ -188,4 +193,4 @@ const TopSellingProductsComponent = ({ categories }) => {
     );
 };
 
-export default TopSellingProductsComponent;
+export default Index;

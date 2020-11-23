@@ -21,7 +21,7 @@ import EmptyProductsImg from '../../assets/static/empty_shopping_cart.png';
 
 const Index = () => {
     const history = useHistory()
-    const { categoryId } = useParams()
+    const { id } = useParams()
     const [loading, setLoading] = useState(false)
     const [modalShow, setModalShow] = useState(false)
     const [modalData, setModalData] = useState({})
@@ -43,7 +43,7 @@ const Index = () => {
             try {
                 setLoading(true)
                 const categoryResponse = await axios.get(`${apiURL}website/categories`)
-                const categoryProducts = await axios.get(`${apiURL}website/category/${categoryId}/products`)
+                const categoryProducts = await axios.get(`${apiURL}website/shop/${id ? id : ""}`)
                 if (categoryResponse.data.categories && categoryProducts.data) {
                     setCategories(categoryResponse.data.categories)
                     setCategoryProducts(categoryProducts.data)
@@ -55,12 +55,12 @@ const Index = () => {
                     setNullProduct(true)
                 }
             } catch (error) {
-                if (error) console.log(error)
+                if (error) console.log(error.response)
             }
         }
 
         fetchData()
-    }, [categoryId, history])
+    }, [id, history])
 
     const handleModal = data => {
         setModalShow(true)
@@ -176,7 +176,7 @@ const Index = () => {
                                                                         {category.children.map((child, k) =>
                                                                             <NavLink
                                                                                 exact
-                                                                                to={`/category/${child.id}`}
+                                                                                to={`/shop/${child.id}`}
                                                                                 activeClassName="is-active"
                                                                                 key={k}
                                                                             >

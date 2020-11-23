@@ -6,8 +6,8 @@ import NavbarComponent from '../Components/NavBar/NavBar';
 import SliderComponent from '../Components/Slider/SliderComponent';
 // import CampaignComponent from '../Components/Campaigns/Index';
 import CategoryComponent from '../Components/Category/CategoryComponent';
-import LatestProductsComponent from '../Components/LatestProducts/LatestProductComponent';
-import TopSellingProductsComponent from '../Components/TopSellingProducts/TopSellingProductsComponent';
+import FeaturedProductsComponent from '../Components/FeaturedProducts/Index';
+import LatestProductsComponent from '../Components/LatestProducts/Index';
 import FooterComponent from '../Components/Footer/Index';
 import LoadingBannerComponent from '../Components/Modal/HomeLoadingModal';
 
@@ -15,7 +15,7 @@ const Index = () => {
     const [loading, setLoading] = useState(false)
     const [sliders, setSliders] = useState([])
     const [categories, setCategories] = useState([])
-    const [latestProducts, setLatestProducts] = useState([])
+    const [featuredProducts, setFeaturedProducts] = useState([])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,7 +25,7 @@ const Index = () => {
                 if (response.status === 200) {
                     setSliders(response.data.sliders)
                     setCategories(response.data.categories)
-                    setLatestProducts(response.data.latestProducts)
+                    setFeaturedProducts(response.data.featuredProducts)
                     setLoading(false)
                 }
             } catch (error) {
@@ -43,11 +43,32 @@ const Index = () => {
             {loading ? <LoadingBannerComponent /> :
                 <div>
                     <NavbarComponent />
-                    <SliderComponent sliders={sliders} />
+
+                    {/* Slider */}
+                    {sliders && sliders ?
+                        <SliderComponent sliders={sliders} />
+                        : null}
+
                     {/* <CampaignComponent campaigns={sliders} /> */}
-                    <CategoryComponent categories={categories} />
-                    <LatestProductsComponent latestProducts={latestProducts} />
-                    {categories ? <TopSellingProductsComponent categories={categories} /> : null}
+
+                    {/* Category */}
+                    {categories &&
+                        categories.length > 0 ?
+                        <CategoryComponent categories={categories} />
+                        : null}
+
+                    {/* Featured Products */}
+                    {featuredProducts &&
+                        featuredProducts.length > 0 ?
+                        <FeaturedProductsComponent products={featuredProducts} />
+                        : null}
+
+                    {/* Latest Products */}
+                    {categories ?
+                        <LatestProductsComponent categories={categories} />
+                        : null}
+
+                    {/* Footer */}
                     <FooterComponent />
 
                 </div>
