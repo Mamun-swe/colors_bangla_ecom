@@ -91,7 +91,7 @@ const NavBar = () => {
                     </div>
                     <div className="content-body px-4">
                         <Link to="/">home</Link>
-                        <Link to={`/shop/${singleCatId}`}>shop</Link>
+                        <Link to="/shop">shop</Link>
                         {/* <Link to={`/category/${singleCatId}`}>new arrival</Link> */}
                         <Link to="/contact">contact</Link>
                         <Link to="/sign-in">my account</Link>
