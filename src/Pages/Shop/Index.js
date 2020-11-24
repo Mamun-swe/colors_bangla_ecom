@@ -43,7 +43,13 @@ const Index = () => {
             try {
                 setLoading(true)
                 const categoryResponse = await axios.get(`${apiURL}website/categories`)
-                const categoryProducts = await axios.get(`${apiURL}website/shop/${id ? id : ""}`)
+                let categoryProducts
+                if (id) {
+                    categoryProducts = await axios.get(`${apiURL}website/shop/${id}`)
+                } else {
+                    categoryProducts = await axios.get(`${apiURL}website/shop`)
+                }
+
                 if (categoryResponse.data.categories && categoryProducts.data) {
                     setCategories(categoryResponse.data.categories)
                     setCategoryProducts(categoryProducts.data)

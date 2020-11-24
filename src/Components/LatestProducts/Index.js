@@ -25,7 +25,12 @@ const Index = ({ categories }) => {
         const fetchProducts = async () => {
             try {
                 setLoading(true)
-                const response = await axios.get(`${apiURL}website/shop/${id ? id : ""}`)
+                let response
+                if (id) {
+                    response = await axios.get(`${apiURL}website/shop/${id}`)
+                } else {
+                    response = await axios.get(`${apiURL}website/shop`)
+                }
                 setProducts(response.data)
                 setLimit(12)
                 setLoading(false)
