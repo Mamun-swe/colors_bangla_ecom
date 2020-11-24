@@ -41,7 +41,6 @@ const Index = () => {
                 <div className="overlay">
                     <div className="flex-center flex-column text-center">
                         <h1>contact informations</h1>
-                        <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print.</p>
                     </div>
                 </div>
             </div>
@@ -62,6 +61,7 @@ const Index = () => {
                                         <div className="pl-3">
                                             <p>phone number</p>
                                             <small>+8801918836801 </small>
+                                            <br />
                                             <small>+8801886455239 </small>
                                         </div>
                                     </div>
@@ -105,7 +105,7 @@ const Index = () => {
                                         <div className="pl-3">
                                             <p>location</p>
                                             <small>
-                                            35/A Purana Palton Line (V I P Road, Opposite of Ananda Bhoban- near City Bank), 1000 Dhaka, Dhaka Division, Bangladesh</small>
+                                                35/A Purana Palton Line (V I P Road, Opposite of Ananda Bhoban- near City Bank), 1000 Dhaka, Dhaka Division, Bangladesh</small>
                                         </div>
                                     </div>
                                 </div>
