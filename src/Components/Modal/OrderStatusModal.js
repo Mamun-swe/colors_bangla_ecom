@@ -51,21 +51,19 @@ const OrderStatusModal = ({ data, orderCode, hidemodal }) => {
                                 </div>
                                 <div className="col-12 col-lg-6 mt-3 mt-lg-0">
                                     <h6>Delivery info</h6>
-                                    <p>Total price: {data.total_price ?? null}</p>
-                                    <p>delivery charge: {data.delivery_charge ?? null}</p>
                                     <p>delivery method: {data.delivery_method ?? null}</p>
                                     <p>delivery address: {data.delivery_address ?? null}</p>
                                     <p>shipping area: {data.shipping_area ?? null}</p>
                                     <p>courier: {
-                                        data.courier && data.courier === 'sundarban_courier' ?
+                                        data.courier_name && data.courier_name === 'sundarban_courier' ?
                                             <span>সুন্দরবন কুরিয়ার</span>
-                                            : data.courier && data.courier === 'kartua_courier' ?
+                                            : data.courier_name && data.courier_name === 'kartua_courier' ?
                                                 <span>করতোয়া কুরিয়ার</span>
-                                                : data.courier && data.courier === 'janani_courier' ?
+                                                : data.courier_name && data.courier_name === 'janani_courier' ?
                                                     <span>জননী কুরিয়ার</span>
-                                                    : data.courier && data.courier === 'dhaka_home_delivery' ?
+                                                    : data.courier_name && data.courier_name === 'dhaka_home_delivery' ?
                                                         <span>ঢাকা হোম ডেলিভারি</span>
-                                                        : data.courier && data.courier === 's_a_paribahan' ?
+                                                        : data.courier_name && data.courier_name === 's_a_paribahan' ?
                                                             <span>এস এ পরিবহন</span>
                                                             : null
                                     }</p>
@@ -101,6 +99,13 @@ const OrderStatusModal = ({ data, orderCode, hidemodal }) => {
                                         </tbody>
                                     </table>
                                 </div>
+                                <div className="col-12 text-right">
+                                    <p style={styles.text}>Discount: {data.discount ?? null}
+                                        {data.discount_type === 'percent' ? ' %' : data.discount_type === 'fixed' ? ' tk.' : null}</p>
+                                    <p style={styles.text}>Sub-total: {data.total_price ? data.total_price - data.delivery_charge : null} tk.</p>
+                                    <p style={styles.text}>Delivery charge: {data.delivery_charge ?? null} tk.</p>
+                                    <p style={styles.text}>Total price: {data.total_price ?? null} tk.</p>
+                                </div>
                             </div>
                         </div>
 
@@ -122,3 +127,12 @@ const OrderStatusModal = ({ data, orderCode, hidemodal }) => {
 };
 
 export default OrderStatusModal;
+
+const styles = {
+    text: {
+        fontSize: 14,
+        color: '#000',
+        marginBottom: 0,
+        fontWeight: 500
+    }
+}

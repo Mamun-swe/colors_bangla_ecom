@@ -29,7 +29,7 @@ const Index = () => {
     const [cashOnDelivery, setCashOnDelivery] = useState(true)
     const [loading, setLoading] = useState(false)
     const [shippingErr, setShippingErr] = useState(false)
-    const [delivery_charge, setDelivery_charge] = useState()
+    const [delivery_charge, setDelivery_charge] = useState('')
     const [isShow, setShow] = useState(false)
     const [checkResponseOutData, setCheckOutResponseData] = useState()
     const [orderCode, setOrderCode] = useState()
@@ -66,13 +66,13 @@ const Index = () => {
 
     const countTotal = () => {
         if (couponInfo && couponInfo.type === 'percent') {
-            const total = subTotal - (subTotal * (couponInfo.percent) / 100)
+            const total = subTotal - (subTotal * (couponInfo.percent) / 100) + delivery_charge
             return total
         } else if (couponInfo && couponInfo.type === 'fixed') {
-            const total = subTotal - couponInfo.amount
+            const total = subTotal - couponInfo.amount + delivery_charge
             return total
         } else {
-            return subTotal
+            return subTotal + delivery_charge
         }
 
     }
@@ -104,13 +104,13 @@ const Index = () => {
             delivery_charge: delivery_charge,
             coupon_code: couponInfo ? couponInfo.code : null,
             discount: couponInfo && couponInfo.type === 'percent' ? couponInfo.percent : couponInfo && couponInfo.type === 'fixed' ? couponInfo.amount : null,
+            discount_type: couponInfo ? couponInfo.type : null,
             products: cartProducts
         }
 
         try {
             setLoading(true)
             const response = await axios.post(`${apiURL}website/confirmorder`, checkOutData, header)
-            console.log(response)
             if (response.status === 200) {
                 setCheckOutResponseData(checkOutData)
                 setOrderCode(response.data)
@@ -317,36 +317,7 @@ const Index = () => {
                                             </div>
                                         </div>
 
-                                        {/* Discount */}
-                                        {couponInfo ?
-                                            <div className="sub-total d-flex mt-0">
-                                                <div>
-                                                    <p>Discount</p>
-                                                </div>
-                                                <div className="ml-auto pl-2">
-                                                    {
-                                                        couponInfo.type === 'percent' ?
-                                                            <p>{couponInfo.percent} %</p>
-                                                            : couponInfo.type === 'fixed' ?
-                                                                <p>{couponInfo.amount} tk.</p>
-                                                                : null
-
-                                                    }
-                                                </div>
-                                            </div>
-                                            : null}
-
-                                        {/* Total */}
-                                        <div className="sub-total border-top d-flex mt-0">
-                                            <div>
-                                                <p className="text-black">Total</p>
-                                            </div>
-                                            <div className="ml-auto pl-2">
-                                                <p>{countTotal()} tk.</p>
-                                            </div>
-                                        </div>
-
-                                        {/* Shipping */}
+                                        {/* Shipping Area */}
                                         <div className="shipping mt-3">
                                             {shippingErr ? <p className="text-danger">Shipping area required*</p> :
                                                 <p>Shipping area</p>
@@ -393,6 +364,37 @@ const Index = () => {
                                             </div>
                                         </div>
 
+                                        {/* Discount */}
+                                        {couponInfo ?
+                                            <div className="sub-total d-flex mt-0">
+                                                <div>
+                                                    <p>Discount</p>
+                                                </div>
+                                                <div className="ml-auto pl-2">
+                                                    {
+                                                        couponInfo.type === 'percent' ?
+                                                            <p>{couponInfo.percent} %</p>
+                                                            : couponInfo.type === 'fixed' ?
+                                                                <p>{couponInfo.amount} tk.</p>
+                                                                : null
+
+                                                    }
+                                                </div>
+                                            </div>
+                                            : null}
+
+                                        {/* Total */}
+                                        <div className="sub-total border-top d-flex mt-0">
+                                            <div>
+                                                <p className="text-black">Total</p>
+                                            </div>
+                                            <div className="ml-auto pl-2">
+                                                <p>{countTotal()} tk.</p>
+                                            </div>
+                                        </div>
+
+
+
                                         {/* Total */}
                                         {/* <div className="sub-total border-bottom d-flex">
                                             <div>
@@ -417,7 +419,7 @@ const Index = () => {
                                                 <p>***ঢাকার বাহিরে ক্যাশ ও ডেলিভারি অর্ডার কনফার্ম করতে হলে ক্যারিয়ার চার্র্জ ১০০ টাকা অগ্রিম প্রদান করতে হবে***
                                             <br />
                                                 বিকাশ নাম্বার : 01532979139
-                                               
+
                                             <br />
                                                 *Send Money* করতে হবে।
                                             </p>
