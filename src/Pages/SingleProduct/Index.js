@@ -106,7 +106,7 @@ const Index = () => {
 
         try {
             setReviewLoading(true)
-            const response = await axios.post(`${apiURL}review`, reviewData)
+            const response = await axios.post(`${apiURL}website/review`, reviewData)
             if (response) {
                 setReviewLoading(false)
                 toast.success(response.data.message)
