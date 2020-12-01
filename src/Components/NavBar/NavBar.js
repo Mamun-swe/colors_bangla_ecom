@@ -16,18 +16,15 @@ import Logo from '../../assets/static/logo.png';
 
 const NavBar = () => {
     const dispatch = useDispatch()
-    // const [open, setOpen] = useState(false)
     const [show, setShow] = useState(false)
+    const [isOpen, setOpen] = useState(false)
     const [categories, setCategories] = useState([])
     let { cartProducts } = useSelector((state => state.products))
-
-
-    const [isOpen, setOpen] = useState(false)
     const [scrolled, setScrolled] = useState(true)
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
-            let isTop = window.scrollY < 150;
+            let isTop = window.scrollY < 150
             if (isTop !== true) {
                 setScrolled(false);
             } else {
@@ -48,72 +45,83 @@ const NavBar = () => {
         }
 
         fetchCategories()
-    }, [dispatch])
+    }, [dispatch, categories])
 
 
     return (
-        <div className={scrolled ? "custom-navbar border-bottom" : "custom-navbar scrolled shadow"}>
-            <div className="container">
-                <div className="row">
-                    <div className="col-12">
-                        <div className="d-flex">
-                            <div>
-                                <Link to="/">
-                                    <img src={Logo} className="img-fluid" alt="..." />
-                                </Link>
-                            </div>
-                            <div className="page-links d-none d-lg-block px-2">
-                                <ul>
-                                    <li><NavLink exact activeClassName="is-Active" to="/">home</NavLink></li>
-                                    <li><NavLink exact activeClassName="is-Active" to="/shop">shop</NavLink></li>
-                                    <li>
-                                        <button
-                                            type="button"
-                                            className="btn shadow-none"
-                                            onClick={() => setShow(!show)}
-                                        >
-                                            categories
-                                            <Icon icon={ic_keyboard_arrow_right} size={23} />
-                                        </button>
-                                    </li>
-                                    <li><NavLink exact activeClassName="is-Active" to="/contact">contact</NavLink></li>
-                                    <li><NavLink exact activeClassName="is-Active" to="/sign-in">my account</NavLink></li>
-                                </ul>
-                                {/* Mega Menu */}
-                                <div className={show ? "custom-mega-menu shadow open" : "custom-mega-menu shadow"}></div>
-                            </div>
-                            {/* Cart Button */}
-                            <div className="pr-2 ml-auto">
-                                <div className="cart-box">
-                                    <Link to="/shopping-cart"
-                                        type="button"
-                                        className="btn rounded-circle shadow-none cart-btn">
-                                        <Icon icon={ic_add_shopping_cart} size={22} />
+        <div>
+            <div className={scrolled ? "custom-navbar border-bottom" : "custom-navbar scrolled shadow"}>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="d-flex">
+                                <div>
+                                    <Link to="/">
+                                        <img src={Logo} className="img-fluid" alt="..." />
                                     </Link>
-                                    {
-                                        cartProducts ?
-                                            <small>{cartProducts.length}</small>
-                                            : <small>0</small>
-                                    }
                                 </div>
-                            </div>
-                            {/* Bar Button */}
-                            <div className="d-lg-none">
-                                <button
-                                    type="button"
-                                    className="btn rounded-circle shadow-none p-1 bar-btn"
-                                    onClick={() => setOpen(true)}>
-                                    <Icon icon={ic_dehaze} size={25} />
-                                </button>
+
+                                {/* Desktop Menu Items */}
+                                <div className="page-links d-none d-lg-block px-2">
+                                    <ul>
+                                        <li><NavLink exact activeClassName="is-Active" to="/">home</NavLink></li>
+                                        <li><NavLink exact activeClassName="is-Active" to="/shop">shop</NavLink></li>
+                                        <li>
+                                            <button
+                                                type="button"
+                                                className="btn shadow-none"
+                                                onMouseOver={() => setShow(true)}
+                                                onClick={() => setShow(!show)}
+                                            >
+                                                categories
+                                            <Icon
+                                                    className={show ? "rotate-down" : "rotate-right"}
+                                                    icon={ic_keyboard_arrow_right}
+                                                    size={20}
+                                                />
+                                            </button>
+                                        </li>
+                                        <li><NavLink exact activeClassName="is-Active" to="/contact">contact</NavLink></li>
+                                        <li><NavLink exact activeClassName="is-Active" to="/sign-in">my account</NavLink></li>
+                                    </ul>
+                                    {/* Mega Menu */}
+                                    <div
+                                        className={show ? "custom-mega-menu shadow open" : "custom-mega-menu shadow"}
+                                        onMouseLeave={() => setShow(false)}
+                                    ></div>
+                                </div>
+                                {/* Cart Button */}
+                                <div className="pr-2 ml-auto">
+                                    <div className="cart-box">
+                                        <Link to="/shopping-cart"
+                                            type="button"
+                                            className="btn rounded-circle shadow-none cart-btn">
+                                            <Icon icon={ic_add_shopping_cart} size={22} />
+                                        </Link>
+                                        {
+                                            cartProducts ?
+                                                <small>{cartProducts.length}</small>
+                                                : <small>0</small>
+                                        }
+                                    </div>
+                                </div>
+                                {/* Bar Button */}
+                                <div className="d-lg-none">
+                                    <button
+                                        type="button"
+                                        className="btn rounded-circle shadow-none p-1 bar-btn"
+                                        onClick={() => setOpen(true)}>
+                                        <Icon icon={ic_dehaze} size={25} />
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
 
-            </div>
-
-            {/* Mobile Navbar */}
-            {/* <div className="mobile-nav d-lg-none">
+                {/* Mobile Navbar */}
+                {/* <div className="mobile-nav d-lg-none">
                 <div className="top-nav p-3">
                     <div className="d-flex">
                         <div>
@@ -150,8 +158,8 @@ const NavBar = () => {
                 </div>
                 <div className="top-nav-break d-lg-none"></div> */}
 
-            {/* Menu */}
-            {/* <div className={open ? "mobile-menu open-menu" : "mobile-menu"}>
+                {/* Menu */}
+                {/* <div className={open ? "mobile-menu open-menu" : "mobile-menu"}>
                     <div className="content-header p-3 text-right">
                         <button
                             type="button"
@@ -169,8 +177,8 @@ const NavBar = () => {
                 </div>
             </div> */}
 
-            {/* Desktop Nav One */}
-            {/* <div className="desktop-nav-one d-none d-lg-block">
+                {/* Desktop Nav One */}
+                {/* <div className="desktop-nav-one d-none d-lg-block">
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
@@ -223,8 +231,8 @@ const NavBar = () => {
                 </div>
             </div> */}
 
-            {/* Desktop Nav Black */}
-            {/* <div className="desktop-nav-black d-none d-lg-block py-3">
+                {/* Desktop Nav Black */}
+                {/* <div className="desktop-nav-black d-none d-lg-block py-3">
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
@@ -261,6 +269,34 @@ const NavBar = () => {
                 </div>
             </div>
          */}
+
+            </div>
+            {/* Mobile Menu Items */}
+            <div
+                className={isOpen ? "backdrop d-lg-none show-backdrop" : "backdrop d-lg-none"}
+                onClick={() => setOpen(!isOpen)}>
+            </div>
+            <div className={isOpen ? "mobile-menu d-lg-none open-mobile-menu" : "mobile-menu d-lg-none hide-mobile-menu"}>
+                {/* Menu Body */}
+
+                <div className="menu-body p-3">
+                    <ul>
+                        <li><NavLink exact activeClassName="is-Active" to="/">home<Icon icon={ic_keyboard_arrow_right} className="float-right" size={20} /></NavLink></li>
+                        <li><NavLink exact activeClassName="is-Active" to="/shop">shop<Icon icon={ic_keyboard_arrow_right} className="float-right" size={20} /></NavLink></li>
+                        <li>
+                            <button
+                                type="button"
+                                className="btn shadow-none"
+                            >
+                                categories
+                                <Icon icon={ic_keyboard_arrow_right} className="float-right" size={20} />
+                            </button>
+                        </li>
+                        <li><NavLink exact activeClassName="is-Active" to="/contact">contact<Icon icon={ic_keyboard_arrow_right} className="float-right" size={20} /></NavLink></li>
+                        <li><NavLink exact activeClassName="is-Active" to="/sign-in">my account<Icon icon={ic_keyboard_arrow_right} className="float-right" size={20} /></NavLink></li>
+                    </ul>
+                </div>
+            </div>
 
         </div>
     );

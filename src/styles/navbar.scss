@@ -12,7 +12,7 @@
         height: 40px !important;
     }
 
-    // Page Links
+    // Desktop Menu / Page Links
     .page-links {
         position: relative;
 
@@ -28,7 +28,7 @@
                 a, .btn {
                     color: #000;
                     font-weight: 700;
-                    font-size: 14px;
+                    font-size: 13px;
                     padding: 6px 10px;
                     margin: 0px 10px;
                     transition: 0.4s all;
@@ -68,8 +68,21 @@
             }
         }
 
+        // Open Mega Menu
         .open {
             display: block !important;
+        }
+
+        // Rotate arrow Icon down
+        .rotate-down {
+            transition: 0.4s all;
+            transform: rotate(90deg);
+        }
+
+        // Rotate Arrow icon right
+        .rotate-right {
+            transition: 0.4s all;
+            transform: rotate(0deg);
         }
     }
 
@@ -131,6 +144,75 @@
 }
 
 /* End Navbar fixed after scroll */
+
+// Mobile Menu
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: 9;
+    background: rgba(0, 0, 0, 0.575);
+}
+
+.show-backdrop {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 280px;
+    height: 100vh;
+    background: #fff;
+    overflow-y: auto;
+    transition: 0.4s all;
+    z-index: 99;
+
+    .menu-body {
+        ul {
+            padding: 0;
+            margin: 0;
+
+            li {
+                list-style: none;
+
+                a, .btn {
+                    color: #000;
+                    font-weight: 700;
+                    font-size: 13px;
+                    padding: 6px 10px;
+                    transition: 0.4s all;
+                    text-decoration: none;
+                    text-transform: uppercase;
+                    font-family: 'Roboto', sans-serif;
+                    display: block;
+                    text-align: left;
+                    width: 100%;
+                }
+
+                .is-Active {
+                    color: $secondary-color;
+                }
+            }
+        }
+    }
+}
+
+.open-mobile-menu {
+    left: 0 !important;
+}
+
+.hide-mobile-menu {
+    left: -100% !important;
+}
 
 // Mobile Nab
 // .mobile-nav {
