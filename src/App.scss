@@ -292,3 +292,11 @@ $danger-color: brown;
         padding-bottom: 100px;
     }
 }
+
+
+// Custom Container
+.container {
+    @media (min-width: 1500px) {
+        max-width: 1450px;
+    }
+}

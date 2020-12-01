@@ -33,7 +33,7 @@ const Index = () => {
             }
         }
         fetchLoggedUser()
-    }, [])
+    }, [header])
 
     const doLogout = async () => {
         try {
