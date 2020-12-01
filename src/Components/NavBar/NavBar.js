@@ -19,7 +19,6 @@ const NavBar = () => {
     const [open, setOpen] = useState(false)
     const [isShow, setIsShow] = useState(false)
     const [categories, setCategories] = useState([])
-    const [singleCatId, setSingleCatId] = useState()
     let { cartProducts } = useSelector((state => state.products))
 
     useEffect(() => {
@@ -29,7 +28,6 @@ const NavBar = () => {
                 const categoryResponse = await axios.get(`${apiURL}website/categories`)
                 if (categoryResponse.status === 200) {
                     setCategories(categoryResponse.data.categories)
-                    setSingleCatId(categoryResponse.data.categories[0].id)
                 }
             } catch (error) {
                 if (error) console.log(error)
@@ -78,6 +76,7 @@ const NavBar = () => {
                         </div>
                     </div>
                 </div>
+                <div className="top-nav-break d-lg-none"></div>
 
                 {/* Menu */}
                 <div className={open ? "mobile-menu open-menu" : "mobile-menu"}>
@@ -92,7 +91,6 @@ const NavBar = () => {
                     <div className="content-body px-4">
                         <Link to="/">home</Link>
                         <Link to="/shop">shop</Link>
-                        {/* <Link to={`/category/${singleCatId}`}>new arrival</Link> */}
                         <Link to="/contact">contact</Link>
                         <Link to="/sign-in">my account</Link>
                     </div>
@@ -114,7 +112,6 @@ const NavBar = () => {
                                         </li>
                                         <li><NavLink exact activeClassName="is-active" to="/">home</NavLink></li>
                                         <li><NavLink exact activeClassName="is-active" to="/shop">shop</NavLink></li>
-                                        {/* <li><NavLink exact activeClassName="is-active" to={`/category/${singleCatId}`}>new arrival</NavLink></li> */}
                                         <li><NavLink exact activeClassName="is-active" to="/contact">contact</NavLink></li>
                                     </ul>
                                 </div>
@@ -186,7 +183,7 @@ const NavBar = () => {
                                         <li><a href="https://www.facebook.com/"><Icon icon={earth} size={15} /></a></li>
                                         <li><a href="https://www.facebook.com/"><Icon icon={twitter} size={15} /></a></li> */}
                                         <li><a href="https://www.facebook.com/urfashion21"><Icon icon={facebook} size={15} /></a></li>
-                                        <li><a href="#"><Icon icon={instagram} size={15} /></a></li>
+                                        <li><a href="https://www.instagram.com/urfasshion21"><Icon icon={instagram} size={15} /></a></li>
                                     </ul>
                                 </div>
                             </div>
