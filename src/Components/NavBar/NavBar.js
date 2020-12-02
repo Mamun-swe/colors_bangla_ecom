@@ -18,6 +18,8 @@ const NavBar = () => {
     const dispatch = useDispatch()
     const [show, setShow] = useState(false)
     const [isOpen, setOpen] = useState(false)
+    const [subMenu, setSubMenu] = useState(false)
+    const [treeMenu, setTreeMenu] = useState()
     const [categories, setCategories] = useState([])
     let { cartProducts } = useSelector((state => state.products))
     const [scrolled, setScrolled] = useState(true)
@@ -45,7 +47,45 @@ const NavBar = () => {
         }
 
         fetchCategories()
-    }, [dispatch, categories])
+    }, [dispatch])
+
+
+    // Tree View
+    const treeView = (treeData) => {
+        return (
+            treeData.map((data, i) =>
+                <div key={i}>
+                    {data.children ?
+                        <button
+                            type="button"
+                            className="btn btn-sm btn-block shadow-none btn-white rounded-0 text-left border-bottom px-2 m-0"
+                            onClick={() => setTreeMenu(i)}
+                        >
+                            {data.name}
+                            <Icon
+                                icon={ic_keyboard_arrow_right}
+                                className={treeMenu === i | data && data.children ? "float-right rotate-down" : "float-right rotate-right"}
+                                size={20}
+                            />
+                        </button>
+                        :
+                        <Link
+                            to={`shop/${data.id}`}
+                            className="border-bottom"
+                        >
+                            {data.name}
+                            <Icon
+                                icon={ic_keyboard_arrow_right}
+                                className={treeMenu === i | data && data.children ? "float-right rotate-down" : "float-right rotate-right"}
+                                size={20}
+                            />
+                        </Link>
+                    }
+                    {treeMenu === i ? <div style={{ paddingLeft: 10 }}>{data && data.children ? treeView(data.children) : null}</div> : null}
+                </div>
+            )
+        )
+    }
 
 
     return (
@@ -88,7 +128,9 @@ const NavBar = () => {
                                     <div
                                         className={show ? "custom-mega-menu shadow open" : "custom-mega-menu shadow"}
                                         onMouseLeave={() => setShow(false)}
-                                    ></div>
+                                    >
+                                        <MegaMenuComponent items={categories} />
+                                    </div>
                                 </div>
                                 {/* Cart Button */}
                                 <div className="pr-2 ml-auto">
@@ -287,10 +329,15 @@ const NavBar = () => {
                             <button
                                 type="button"
                                 className="btn shadow-none"
+                                onClick={() => setSubMenu(!subMenu)}
                             >
                                 categories
-                                <Icon icon={ic_keyboard_arrow_right} className="float-right" size={20} />
+                                <Icon icon={ic_keyboard_arrow_right} className={subMenu ? "float-right rotate-down" : "float-right rotate-right"} size={20} />
                             </button>
+                            {/* Sub Menu */}
+                            <div className={subMenu ? "sub-menu px-3" : "sub-menu px-3 d-none"}>
+                                {treeView(categories)}
+                            </div>
                         </li>
                         <li><NavLink exact activeClassName="is-Active" to="/contact">contact<Icon icon={ic_keyboard_arrow_right} className="float-right" size={20} /></NavLink></li>
                         <li><NavLink exact activeClassName="is-Active" to="/sign-in">my account<Icon icon={ic_keyboard_arrow_right} className="float-right" size={20} /></NavLink></li>

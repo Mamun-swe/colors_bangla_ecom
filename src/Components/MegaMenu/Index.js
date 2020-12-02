@@ -4,7 +4,7 @@ import '../../styles/mega-menu.scss';
 
 const Index = ({ items }) => {
     return (
-        <div className="mega-menu d-none d-lg-block shadow">
+        <div className="mega-menu">
             <div className="container-fluid">
                 <div className="row">
 
