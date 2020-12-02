@@ -14,6 +14,10 @@
             font-family: 'Roboto', sans-serif;
             background: #dfdfdf85;
             border-radius: 0px;
+            
+            @media (max-width: 400px) {
+                width: 170px;
+            }
 
             @media (min-width: 992px) {
                 height: 35px;
