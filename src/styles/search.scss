@@ -7,25 +7,25 @@
         position: relative;
 
         .form-control {
+            border: 0;
+            height: 34px;
             font-size: 15px;
+            padding-right: 35px;
             font-family: 'Roboto', sans-serif;
             background: #dfdfdf85;
             border-radius: 0px;
-            height: 34px;
-            border: 0;
-            padding-right: 35px;
 
             @media (min-width: 992px) {
-                height: 31px;
-                color: #fff;
+                height: 35px;
+                color: #000;
                 background: none;
-                border: 1px solid #fff;
+                border: 1px solid #dfdfdf;
             }
         }
 
         ::placeholder {
             @media (min-width: 992px) {
-                color: #fff;
+                color: #000;
             }
         }
 
@@ -40,7 +40,7 @@
             color: #555;
 
             @media (min-width: 992px) {
-                color: #fff;
+                color: #000;
             }
         }
     }
