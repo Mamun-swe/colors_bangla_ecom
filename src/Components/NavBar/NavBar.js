@@ -4,11 +4,10 @@ import axios from 'axios';
 import { Icon } from 'react-icons-kit';
 import { apiURL } from '../../utils/apiURL';
 import { Link, NavLink } from 'react-router-dom';
-import { text_left } from 'react-icons-kit/ikons';
 import { useSelector, useDispatch } from 'react-redux';
 import { productsList } from '../../Redux/Actions/cartAction';
 import { user, facebook, instagram } from 'react-icons-kit/icomoon'
-import { ic_add_shopping_cart, ic_dehaze, ic_close, ic_keyboard_arrow_right } from 'react-icons-kit/md';
+import { ic_add_shopping_cart, ic_dehaze, ic_search, ic_keyboard_arrow_right } from 'react-icons-kit/md';
 
 import SearchComponent from '../Search/Index';
 import MegaMenuComponent from '../MegaMenu/Index';
@@ -16,6 +15,7 @@ import Logo from '../../assets/static/logo.png';
 
 const NavBar = () => {
     const dispatch = useDispatch()
+    const [search, setSearch] = useState(false)
     const [show, setShow] = useState(false)
     const [isOpen, setOpen] = useState(false)
     const [subMenu, setSubMenu] = useState(false)
@@ -23,6 +23,8 @@ const NavBar = () => {
     const [categories, setCategories] = useState([])
     let { cartProducts } = useSelector((state => state.products))
     const [scrolled, setScrolled] = useState(true)
+    const [facebookURL] = useState('https://www.facebook.com/urfashion21')
+    const [instagramURL] = useState('https://www.instagram.com/urfasshion21/')
 
     useEffect(() => {
         window.addEventListener('scroll', () => {
@@ -133,12 +135,53 @@ const NavBar = () => {
                                     </div>
                                 </div>
                                 {/* Search Component */}
-                                <div className="pl-2 pl-lg-0" style={{ paddingTop: 4 }}>
+                                <div className="d-none d-lg-block pl-2 pl-lg-0" style={{ paddingTop: 4 }}>
                                     <SearchComponent />
                                 </div>
 
-                                {/* Cart Button */}
+                                {/* Facebook Button */}
                                 <div className="pr-2 ml-auto">
+                                    <div className="cart-box social-box">
+                                        <a href={`${facebookURL}`}
+                                            type="button"
+                                            className="btn rounded-circle shadow-none cart-btn">
+                                            <Icon icon={facebook} size={16} />
+                                        </a>
+                                    </div>
+                                </div>
+                                {/* Instagram Button */}
+                                <div className="pr-2">
+                                    <div className="cart-box social-box">
+                                        <a href={`${instagramURL}`}
+                                            type="button"
+                                            className="btn rounded-circle shadow-none cart-btn">
+                                            <Icon icon={instagram} size={16} />
+                                        </a>
+                                    </div>
+                                </div>
+                                {/* Search Button */}
+                                <div className="pr-2 d-lg-none">
+                                    <div className="cart-box">
+                                        <button
+                                            type="button"
+                                            onClick={() => setSearch(!search)}
+                                            className="btn rounded-circle shadow-none cart-btn">
+                                            <Icon icon={ic_search} size={22} />
+                                        </button>
+                                    </div>
+                                </div>
+                                {/* Account Button */}
+                                <div className="pr-2">
+                                    <div className="cart-box">
+                                        <Link to="/sign-in"
+                                            type="button"
+                                            className="btn rounded-circle shadow-none cart-btn">
+                                            <Icon icon={user} size={22} />
+                                        </Link>
+                                    </div>
+                                </div>
+                                {/* Cart Button */}
+                                <div className="pr-2">
                                     <div className="cart-box">
                                         <Link to="/shopping-cart"
                                             type="button"
@@ -162,6 +205,13 @@ const NavBar = () => {
                                     </button>
                                 </div>
                             </div>
+
+                            {/* Search component in mobile */}
+                            {search ?
+                                <div className="pt-2 d-lg-none">
+                                    <SearchComponent />
+                                </div>
+                                : null}
                         </div>
                     </div>
 
