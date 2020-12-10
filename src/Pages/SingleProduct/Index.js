@@ -169,8 +169,10 @@ const Index = () => {
                                                             smallImage: {
                                                                 alt: 'Product',
                                                                 src: productImage,
-                                                                width: window.innerWidth > 992 ? 400 : 300,
-                                                                height: window.innerWidth > 992 ? 520 : 350
+                                                                // width: window.innerWidth > 992 ? 400 : 300,
+                                                                // height: window.innerWidth > 992 ? 520 : 350
+                                                                width: window.innerWidth > 992 ? 650 : 325,
+                                                                height: window.innerWidth > 992 ? 800 : 400
                                                             },
                                                             style: { margin: 'auto' },
                                                             imageClassName: 'magnifiySmallImage',
