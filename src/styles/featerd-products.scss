@@ -9,7 +9,7 @@
         font-size: 27px;
         margin-bottom: 20px;
         text-transform: uppercase;
-        font-family: 'Roboto', sans-serif;
+        font-family: "Roboto", sans-serif;
 
         @media (min-width: 576px) {
             font-size: 40px;
@@ -18,41 +18,42 @@
 
     .product-slider {
         .card {
+            padding: 5px;
+            background: none;
             .card-body {
                 padding: 5px;
+                background: #fff;
 
                 .img-box {
                     overflow: hidden;
-                    height: 200px;
+                    height: 160px;
                     position: relative;
+                    text-align: center;
 
                     img {
-                        min-width: 100%;
+                        width: 100% auto;
                         height: 100%;
+                        margin: auto;
                     }
 
                     @media (min-width: 576px) {
                         height: 200px;
                     }
-
-                    @media (min-width: 768px) {
-                        height: 300px;
-                    }
-
-                    @media (min-width: 992px) {
-                        height: 350px;
-                    }
                 }
 
-                .footer {
+                .custom-slider-footer {
                     position: relative;
+                    background: none;
+                    border: 0 !important;
+                    padding-left: 10px;
+                    padding-right: 10px;
 
                     .overlay {
                         .btn {
                             font-size: 13px;
                             font-weight: 700;
                             color: #000;
-                            font-family: 'Roboto', sans-serif;
+                            font-family: "Roboto", sans-serif;
                             padding: 5px 10px;
                             background: $primary-color;
                             transition: 0.2s all;
@@ -62,50 +63,52 @@
                             transform: translate(-50%, -50%);
                             left: 50%;
                             z-index: 9;
-                            top: -100px;
+                            top: -70px;
 
                             @media (min-width: 700px) {
-                                top: -120px;
-                            }
-
-                            @media (min-width: 992px) {
-                                top: -130px;
+                                top: -100px;
                             }
                         }
                     }
 
                     a {
-                        padding: 10px;
-                        display: block;
+                        padding: 0;
+                        background: none;
                         text-decoration: none;
 
                         p {
-                            margin-bottom: 0;
-                            font-size: 15px;
-                        }
-
-                        .name {
-                            color: #555;
-                            font-weight: 300;
-                            transition: 0.4s all;
-                            font-family: 'Roboto', sans-serif;
-                        }
-
-                        .price {
                             color: #000;
-                            font-weight: 700;
-                            font-family: 'Roboto', sans-serif;
+                            font-size: 14px;
+                            font-weight: 400;
+                            margin-bottom: 8px;
+                            font-family: "Roboto", sans-serif;
                         }
                     }
 
                     a:hover .name {
                         color: $secondary-color;
                     }
+
+                    @media (min-width: 576px) {
+                        padding: 0px;
+                    }
+                }
+
+                @media (min-width: 576px) {
+                    padding: 20px;
+                }
+
+                @media (min-width: 992px) {
+                    padding: 25px;
                 }
             }
 
             .card-body:hover .overlay .btn {
                 opacity: 1 !important;
+            }
+
+            @media (min-width: 576px) {
+                padding: 10px;
             }
         }
 

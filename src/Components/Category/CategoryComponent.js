@@ -11,13 +11,8 @@ const CategoryComponent = ({ categories }) => {
 
                         {categories.length > 0 && categories.slice(0, 6).map((category, i) =>
                             <Link to={`/shop/${category.id}`} key={i}>
-                                <div className="card border-0 rounded-0 category-card">
+                                <div className="card border-0 rounded-0">
                                     <img src={category.image} className="img-fluid" alt="..." />
-                                    {/* <div className="overlay">
-                                        <div className="flex-center flex-column">
-                                            <h2 className="mb-0">{category.name.slice(0, 6)}</h2>
-                                        </div>
-                                    </div> */}
                                 </div>
                             </Link>
                         )}

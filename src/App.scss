@@ -1,7 +1,5 @@
 @import "~bootstrap/scss/bootstrap";
 
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100,300,400,500,700,900&display=swap");
-
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap");
 
 $primary-color: #fde50c;
@@ -29,219 +27,6 @@ $danger-color: brown;
     -webkit-box-direction: normal !important;
     flex-direction: column !important;
 }
-
-// Global Product Card Design
-.product-card {
-    border: 0;
-    background: none;
-    float: left;
-
-    .card-body {
-        padding: 0;
-        background: #fff;
-
-        .img-box {
-            width: 100%;
-            overflow: hidden;
-            height: 200px;
-            position: relative;
-
-            img {
-                min-width: 100%;
-                min-height: 100%;
-            }
-
-            .discount {
-                width: 60px;
-                height: 60px;
-                background: $primary-color;
-                position: absolute;
-                top: 10px;
-                right: 10px;
-
-                p {
-                    font-size: 16px;
-                    margin-bottom: 0;
-                    font-weight: 900;
-                    line-height: 17px;
-                    color: $secondary-color;
-                    font-family: 'Roboto', sans-serif;
-                }
-            }
-
-            @media (min-width: 576px) {
-                height: 200px;
-            }
-
-            @media (min-width: 700px) {
-                height: 300px;
-            }
-
-            @media (min-width: 992px) {
-                height: 350px;
-            }
-        }
-
-        .product-card-footer {
-            position: relative;
-
-            .quick-view {
-                .btn {
-                    font-size: 13px;
-                    font-weight: 700;
-                    color: #000;
-                    font-family: 'Roboto', sans-serif;
-                    padding: 5px 10px;
-                    background: $primary-color;
-                    transition: 0.2s all;
-                    border-radius: 4px;
-                    opacity: 0;
-                    position: absolute;
-                    transform: translate(-50%, -50%);
-                    left: 50%;
-                    z-index: 9;
-                    top: -100px;
-
-                    @media (min-width: 700px) {
-                        top: -120px;
-                    }
-
-                    @media (min-width: 992px) {
-                        top: -180px;
-                    }
-                }
-            }
-
-            .action-buttons {
-                .shopping-bag-btn {
-                    position: absolute;
-                    top: -50px;
-                    right: 15px;
-                    width: 34px;
-                    height: 34px;
-                    z-index: 3;
-                    padding: 4px 8px;
-                    background: #fff;
-                    transition: 0.4s all;
-                }
-
-                .wish-list-btn {
-                    position: absolute;
-                    top: -50px;
-                    right: 60px;
-                    width: 34px;
-                    height: 34px;
-                    z-index: 3;
-                    padding: 4px 8px;
-                    background: #fff;
-                    transition: 0.4s all;
-                }
-
-                .btn:hover {
-                    color: $primary-color;
-                    background: #000;
-                }
-            }
-
-            a {
-                padding: 12px;
-                display: block;
-                text-decoration: none;
-
-                .product-info {
-                    p {
-                        color: #555555;
-                        font-size: 17px;
-                        font-weight: 300;
-                        margin-bottom: 0;
-                        transition: 0.4s all;
-                        font-family: 'Roboto', sans-serif;
-                    }
-
-                    .pricing {
-                        h4 {
-                            color: #000;
-                            font-size: 20px;
-                            font-weight: 900;
-                            margin-bottom: 0;
-                            font-family: 'Roboto', sans-serif;
-                        }
-
-                        del {
-                            color: #000;
-                            font-size: 14px;
-                        }
-                    }
-                }
-            }
-
-            a:hover .name {
-                color: $secondary-color;
-            }
-        }
-    }
-
-    .card-body:hover .quick-view .btn {
-        opacity: 1 !important;
-    }
-
-    @media (max-width: 576px) {
-        padding: 10px;
-        width: 50%;
-    }
-
-    @media (min-width: 576px) {
-        padding-top: 10px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-bottom: 20px;
-        width: 33.33%;
-    }
-
-    @media (min-width: 768px) {
-        width: 33.33%;
-    }
-
-    @media (min-width: 992px) {
-        width: 25%;
-    }
-
-    @media (min-width: 1450px) {
-        width: 16.66%;
-    }
-}
-
-.topselling-card {
-    @media (min-width: 1150px) {
-        padding-top: 10px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-bottom: 20px;
-        width: 25%;
-    }
-}
-
-.related-product-card {
-    @media (min-width: 1450px) {
-        padding-top: 10px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-bottom: 20px;
-        width: 25%;
-    }
-}
-
-.search-product-card {
-    @media (min-width: 1450px) {
-        width: 25%;
-        padding-top: 10px;
-        padding-left: 10px;
-        padding-right: 10px;
-        padding-bottom: 20px;
-    }
-}
-
-// End Product Crad design
 
 // Spin Icon
 .spin {
@@ -274,7 +59,7 @@ $danger-color: brown;
     h5 {
         font-weight: 700;
         color: $secondary-color;
-        font-family: 'Roboto', sans-serif;
+        font-family: "Roboto", sans-serif;
     }
 
     .btn {
@@ -283,7 +68,7 @@ $danger-color: brown;
         font-weight: 700;
         padding: 7px 20px;
         background: $secondary-color;
-        font-family: 'Roboto', sans-serif;
+        font-family: "Roboto", sans-serif;
     }
 
     @media (min-width: 992px) {

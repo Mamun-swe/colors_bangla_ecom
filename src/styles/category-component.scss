@@ -5,14 +5,14 @@
     padding-bottom: 20px;
 
     a {
-        .category-card {
-            // margin-bottom: 35px;
+        .card {
             height: 120px;
             overflow: hidden;
             position: relative;
             width: 50%;
             float: left;
             padding: 5px;
+            background: none;
 
             img {
                 min-width: 100%;

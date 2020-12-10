@@ -1,6 +1,8 @@
 @import "../App.scss";
 
 .single-product {
+    background: #f2f3f5;
+
     .magnifiySmallImage {
         @media (max-width: 576px) {
             margin: auto;
@@ -35,13 +37,13 @@
         h4 {
             font-weight: 700;
             text-transform: capitalize;
-            font-family: 'Roboto', sans-serif;
+            font-family: "Roboto", sans-serif;
         }
 
         h6 {
             font-size: 14px;
             font-weight: 700;
-            font-family: 'Roboto', sans-serif;
+            font-family: "Roboto", sans-serif;
         }
 
         .price_policy {
@@ -55,7 +57,7 @@
                 margin-bottom: 0;
                 margin-top: 5px;
                 font-weight: 900;
-                font-family: 'Roboto', sans-serif;
+                font-family: "Roboto", sans-serif;
 
                 span {
                     font-size: 14px;
@@ -65,7 +67,7 @@
             p {
                 font-size: 14px;
                 margin-bottom: 7px;
-                font-family: 'Roboto', sans-serif;
+                font-family: "Roboto", sans-serif;
             }
         }
 
@@ -94,7 +96,7 @@
                         font-size: 14px;
                         margin-right: 3px;
                         font-weight: 700;
-                        font-family: 'Roboto', sans-serif;
+                        font-family: "Roboto", sans-serif;
                     }
 
                     .overlay {
@@ -161,7 +163,7 @@
                 font-weight: 700;
                 padding: 6.5px 20px;
                 background: $secondary-color;
-                font-family: 'Roboto', sans-serif;
+                font-family: "Roboto", sans-serif;
             }
         }
     }
@@ -182,7 +184,7 @@
                 font-size: 15px;
                 font-weight: 700;
                 border: 0 !important;
-                font-family: 'Roboto', sans-serif;
+                font-family: "Roboto", sans-serif;
             }
 
             .active {
@@ -199,7 +201,7 @@
 
         .tab-content {
             padding: 15px;
-            font-family: 'Roboto', sans-serif;
+            font-family: "Roboto", sans-serif;
         }
 
         .product-feature {
@@ -207,7 +209,7 @@
                 font-size: 17px;
                 font-weight: 700;
                 margin-bottom: 10px;
-                font-family: 'Roboto', sans-serif;
+                font-family: "Roboto", sans-serif;
             }
 
             .d-flex {
@@ -221,7 +223,7 @@
                         font-size: 13px;
                         font-weight: 600;
                         margin-bottom: 0;
-                        font-family: 'Roboto', sans-serif;
+                        font-family: "Roboto", sans-serif;
                     }
                 }
 
@@ -229,7 +231,7 @@
                     p {
                         font-size: 15px;
                         margin-bottom: 5px;
-                        font-family: 'Roboto', sans-serif;
+                        font-family: "Roboto", sans-serif;
                     }
 
                     .color-box {
@@ -246,7 +248,7 @@
                         margin-bottom: 0;
                         font-weight: 900;
                         text-align: center;
-                        font-family: 'Roboto', sans-serif;
+                        font-family: "Roboto", sans-serif;
                     }
 
                     .tags {
@@ -263,7 +265,7 @@
                                 margin-bottom: 0;
                                 font-weight: 500;
                                 text-transform: capitalize;
-                                font-family: 'Roboto', sans-serif;
+                                font-family: "Roboto", sans-serif;
                             }
                         }
                     }
@@ -275,18 +277,18 @@
             h5 {
                 font-size: 15px;
                 font-weight: 700;
-                font-family: 'Roboto', sans-serif;
+                font-family: "Roboto", sans-serif;
             }
 
             h6 {
                 font-size: 14px;
-                font-family: 'Roboto', sans-serif;
+                font-family: "Roboto", sans-serif;
             }
 
             p {
                 font-size: 14px;
                 line-height: 1.8rem;
-                font-family: 'Roboto', sans-serif;
+                font-family: "Roboto", sans-serif;
             }
 
             .yellow {
@@ -308,12 +310,12 @@
 
                 small {
                     padding-left: 3px;
-                    font-family: 'Roboto', sans-serif;
+                    font-family: "Roboto", sans-serif;
                 }
 
                 .form-control {
                     font-size: 14px;
-                    font-family: 'Roboto', sans-serif;
+                    font-family: "Roboto", sans-serif;
                 }
 
                 .form-control:focus {
@@ -326,7 +328,7 @@
                     font-weight: 700;
                     padding: 7px 20px;
                     background: $secondary-color;
-                    font-family: 'Roboto', sans-serif;
+                    font-family: "Roboto", sans-serif;
                 }
             }
         }
@@ -345,7 +347,7 @@
         h5 {
             font-weight: 700;
             color: $secondary-color;
-            font-family: 'Roboto', sans-serif;
+            font-family: "Roboto", sans-serif;
         }
 
         .btn {
@@ -354,21 +356,15 @@
             font-weight: 700;
             padding: 7px 20px;
             background: $secondary-color;
-            font-family: 'Roboto', sans-serif;
+            font-family: "Roboto", sans-serif;
         }
     }
 
     // Related Products
     .related-products {
         h6 {
-            margin-bottom: 0;
             font-weight: 700;
-            margin-left: 10px;
-            font-family: 'Roboto', sans-serif;
-
-            @media (min-width: 992px) {
-                margin-left: 20px;
-            }
+            font-family: "Roboto", sans-serif;
         }
     }
 }

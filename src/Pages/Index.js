@@ -39,7 +39,7 @@ const Index = () => {
     }, [])
 
     return (
-        <div>
+        <div style={{ background: "#f2f3f5" }}>
             {loading ? <LoadingBannerComponent /> :
                 <div>
                     <NavbarComponent />

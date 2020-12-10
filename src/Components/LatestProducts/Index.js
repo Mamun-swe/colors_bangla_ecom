@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import '../../styles/top-selling.scss';
+import '../../styles/latest-product.scss';
+import '../../styles/product.scss';
 import axios from 'axios';
 import { apiURL } from '../../utils/apiURL';
 import Icon from 'react-icons-kit';
 import { shoppingBag } from 'react-icons-kit/feather';
-import { heartO } from 'react-icons-kit/fa';
+// import { heartO } from 'react-icons-kit/fa';
 import { spinner2 } from 'react-icons-kit/icomoon';
 import { useDispatch } from 'react-redux';
 import { addProduct } from '../../Redux/Actions/cartAction';
@@ -15,10 +16,10 @@ const Index = ({ categories }) => {
     const [modalShow, setModalShow] = useState(false)
     const [modalData, setModalData] = useState({})
     const [loading, setLoading] = useState(false)
-    const [limit, setLimit] = useState(12)
+    const [limit, setLimit] = useState(18)
     const [products, setProducts] = useState([])
     const [id, setId] = useState()
-    const productsPerPage = 12
+    const productsPerPage = 18
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -41,9 +42,37 @@ const Index = ({ categories }) => {
             }
         }
 
-        fetchProducts()
-    }, [id, categories])
+        // Check window width
+        const windowWidth = () => {
+            const width = window.innerWidth
+            if (width < 576) {
+                setLimit(10)
+            }
 
+            if (width > 576 && width < 768) {
+                setLimit(12)
+            }
+
+            if (width > 768 && width < 992) {
+                setLimit(16)
+            }
+
+            if (width > 992) {
+                setLimit(30)
+            }
+
+            if (width > 1280) {
+                setLimit(40)
+            }
+
+            if (width > 1500) {
+                setLimit(42)
+            }
+        }
+
+        fetchProducts()
+        windowWidth()
+    }, [id, categories])
 
     const handleModal = data => {
         setModalShow(true)
@@ -71,7 +100,6 @@ const Index = ({ categories }) => {
         dispatch(addProduct(newData))
     }
 
-
     // Replace white space with (_)
     const replaceWhiteSpace = (data) => {
         let productName = data
@@ -79,9 +107,8 @@ const Index = ({ categories }) => {
         return productName
     }
 
-
     return (
-        <div className="top-selling">
+        <div className="latest-products">
             <div className="container">
                 <div className="row">
                     <div className="col-12 text-center">
@@ -89,7 +116,7 @@ const Index = ({ categories }) => {
                     </div>
 
                     <div className="col-12 text-center">
-                        <div className="top-selling-buttons">
+                        <div className="latest-product-buttons">
                             <button
                                 type="button"
                                 className="btn shadow-none"
@@ -111,15 +138,13 @@ const Index = ({ categories }) => {
 
                 {/* Products */}
                 <div className="row products mt-4">
-
                     <div className="col-12">
                         {loading ?
                             <div className="text-center py-4">
                                 <Icon icon={spinner2} size={25} className="spin" />
                             </div>
                             : products && products.length > 0 && products.slice(0, limit).map((product, i) =>
-                                <div className="card rounded-0 product-card topselling-card" key={i}>
-
+                                <div className="card product" key={i}>
                                     <div className="card-body">
                                         <Link to={`/product/${product.id}/${replaceWhiteSpace(product.name)}`}>
                                             <div className="img-box">
@@ -127,40 +152,41 @@ const Index = ({ categories }) => {
                                             </div>
                                         </Link>
 
-                                        <div className="product-card-footer border">
+
+                                        {/* Card footer */}
+                                        <div className="custom-footer">
 
                                             {/* Quick View Button */}
-                                            <div className="quick-view">
-                                                <button
-                                                    type="button"
-                                                    className="btn shadow-none"
-                                                    onClick={() => handleModal(product)}
-                                                >Quick View</button>
-                                            </div>
+                                            <button
+                                                type="button"
+                                                className="btn shadow-none quick-view-btn"
+                                                onClick={() => handleModal(product)}
+                                            >Quick View</button>
 
-                                            {/* Action Buttons */}
-                                            <div className="action-buttons text-right">
-                                                <button
-                                                    type="button"
-                                                    className="btn rounded-circle shadow-none shopping-bag-btn"
-                                                    onClick={() => addToCart(product)}
-                                                >
-                                                    <Icon icon={shoppingBag} size={16} />
-                                                </button>
-                                                <button
+                                            {/* Cart button */}
+                                            <button
+                                                type="button"
+                                                className="btn rounded-circle shadow-none cart-add-btn"
+                                                onClick={() => addToCart(product)}
+                                            >
+                                                <Icon icon={shoppingBag} size={18} />
+                                            </button>
+
+                                            {/* Wish list button */}
+                                            {/* <button
                                                     type="button"
                                                     className="btn rounded-circle shadow-none wish-list-btn"
                                                 >
                                                     <Icon icon={heartO} size={18} />
-                                                </button>
-                                            </div>
+                                                </button> */}
 
+                                            {/* Product information */}
                                             <Link to={`/product/${product.id}/${replaceWhiteSpace(product.name)}`}>
-                                                <div className="product-info">
+                                                <div className="info">
                                                     <p className="name">{product.name.slice(0, 25)}</p>
                                                     <div className="d-flex pricing">
                                                         <div>
-                                                            <h4>৳ {product.selling_price}</h4>
+                                                            <h5>৳ {product.selling_price}</h5>
                                                         </div>
                                                         {product.selling_price < product.mrp ?
                                                             <div className="ml-auto">
@@ -172,7 +198,6 @@ const Index = ({ categories }) => {
                                             </Link>
                                         </div>
                                     </div>
-
                                 </div>
                             )}
                     </div>

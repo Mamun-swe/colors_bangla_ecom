@@ -293,7 +293,7 @@ const Index = () => {
                                         <div className="cart-products">
 
                                             {cartProducts.length > 0 && cartProducts.map((product, i) =>
-                                                <div className="product d-flex" key={i}>
+                                                <div className="product-single d-flex" key={i}>
                                                     <div>
                                                         <p>{product.name}</p>
                                                         <small>Quantity: {product.quantity}</small>
